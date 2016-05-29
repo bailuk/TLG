@@ -1,0 +1,16 @@
+
+.settings
+.metadata
+.classpath
+.project
+
+project.properties
+proguard.cfg
+
+packager
+
+bin
+gen
+
+
+/org.eclipse.swt

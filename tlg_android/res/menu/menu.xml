@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<item android:id="@+id/menu_grid"      android:title="@string/string_grid"></item>
+<item android:id="@+id/menu_pause"     android:title="@string/string_pause"></item>
+<item android:id="@+id/menu_start"     android:title="@string/string_start"></item>
+<item android:id="@+id/menu_score"     android:title="@string/string_score"></item>
+<item android:id="@+id/menu_name"      android:title="@string/string_name"></item>
+<item android:id="@+id/menu_about"     android:title="@string/string_about"></item>
+</menu>
