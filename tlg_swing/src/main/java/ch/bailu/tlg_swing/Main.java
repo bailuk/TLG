@@ -1,5 +1,6 @@
 package ch.bailu.tlg_swing;
 
+import ch.bailu.tlg_swing.Canvas;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
