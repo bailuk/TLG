@@ -12,7 +12,7 @@ import org.gnome.gtk.Window;
 
 import ch.bailu.tlg.Constants;
 
-public class Main  extends Window implements Window.DeleteEvent {
+public class Main extends Window implements Window.DeleteEvent {
 
 
     public static void main(String[] args) {

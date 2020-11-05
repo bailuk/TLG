@@ -19,6 +19,12 @@ Note: when building the swt variant an artifact will be downloaded from the grad
 3. In terminal execute `./gradlew assemble` to download artifacts and build apks.
 4. In terminal execute `adb install ./tlg_android/build/outputs/apk/debug/tlg_android-debug.apk` to install apk on connected android device.
 
+## gnome:
+1. Install [gnome java](http://java-gnome.sourceforge.net/)
+2. Adjust dependencie for `gtk.jar` in `tlg_gnome/build.gradle.kts`
+3. Execute `./gradlew assemble` to build and `./gradlew run` to run.
+Note: timer is not implemented (this task is for you).
+
 # Copyright
 (c) 2016-2020 [Lukas Bai](mailto:bailu@bailu.ch)  
 [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
