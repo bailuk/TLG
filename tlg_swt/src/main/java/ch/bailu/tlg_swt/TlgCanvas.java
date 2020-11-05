@@ -28,19 +28,19 @@ public class TlgCanvas extends Canvas implements PaintListener, KeyListener, Run
     
     private final Display display;
 
-	TlgCanvas(Display d, Composite parent) {
-		super(parent, SWT.NO_BACKGROUND);
-		addPaintListener(this);
-		addDisposeListener(this);
-		
-		display=d;
-        pContext = new Context(display, new GC(this)) {
-        	@Override
-        	public void onNewHighscore() {
-            	System.err.print("onNewHighscore()\n");
+    TlgCanvas(Display d, Composite parent) {
+        super(parent, SWT.NO_BACKGROUND);
+        addPaintListener(this);
+        addDisposeListener(this);
 
-        		iContext.setHighscoreName(pContext, "test");
-        	}
+        display=d;
+        pContext = new Context(display, new GC(this)) {
+            @Override
+            public void onNewHighscore() {
+                System.err.print("onNewHighscore()\n");
+
+                iContext.setHighscoreName(pContext, "test");
+            }
         };
         
         
@@ -48,95 +48,95 @@ public class TlgCanvas extends Canvas implements PaintListener, KeyListener, Run
 
         kickTimer();
         
-	}
-	
+    }
 
-	public void paintControl(PaintEvent e) {
+
+    public void paintControl(PaintEvent e) {
         Rectangle r = getBounds();
         
         iContext.layout(new TlgRectangle(0,0,r.width-1,r.height-1));
-		iContext.updateAll(new Context(display, e.gc));
-	}
+        iContext.updateAll(new Context(display, e.gc));
+    }
 
 
 
-	public void keyPressed(KeyEvent e) {
-		boolean update=true;
+    public void keyPressed(KeyEvent e) {
+        boolean update=true;
 
-		switch (e.keyCode) {
-		case 'n':  
-			iContext.startNewGame(pContext); 
-			break;
+        switch (e.keyCode) {
+        case 'n':
+            iContext.startNewGame(pContext);
+            break;
 
-		case ' ':
-			iContext.togglePause(pContext);
-			break;
+        case ' ':
+            iContext.togglePause(pContext);
+            break;
 
-		case 'g':
-			iContext.toggleGrid();
-			break;
+        case 'g':
+            iContext.toggleGrid();
+            break;
 
-		case SWT.ARROW_LEFT:
-			iContext.moveLeft(pContext);
-			break;
+        case SWT.ARROW_LEFT:
+            iContext.moveLeft(pContext);
+            break;
 
-		case SWT.ARROW_RIGHT:
-			iContext.moveRight(pContext);
-			break;
+        case SWT.ARROW_RIGHT:
+            iContext.moveRight(pContext);
+            break;
 
-		case SWT.ARROW_UP:
-			iContext.moveTurn(pContext);
-			break;
-		case SWT.ARROW_DOWN:  
-			iContext.moveDown(pContext);
-			break;
-		default:
-			update=false;
-		}
-		
-		if (update) {
-			updateScreen();
-		}
-	}
+        case SWT.ARROW_UP:
+            iContext.moveTurn(pContext);
+            break;
+        case SWT.ARROW_DOWN:
+            iContext.moveDown(pContext);
+            break;
+        default:
+            update=false;
+        }
+
+        if (update) {
+            updateScreen();
+        }
+    }
 
 
 
-	public void keyReleased(KeyEvent e) {}
-	
+    public void keyReleased(KeyEvent e) {}
+
 
     public void run() {
-    	if (!display.isDisposed()) {
-    		iContext.moveDown(pContext);
-    		if (!isDisposed())updateScreen();
-    		kickTimer();
-    	}
+        if (!display.isDisposed()) {
+            iContext.moveDown(pContext);
+            if (!isDisposed())updateScreen();
+            kickTimer();
+        }
     }
     
     private void updateScreen() {
-		GC gc = new GC(this);
-		iContext.update(new Context(display, gc));
-		gc.dispose();
-	}
+        GC gc = new GC(this);
+        iContext.update(new Context(display, gc));
+        gc.dispose();
+    }
 
 
 
-	private void kickTimer() {
-    	display.timerExec(iContext.getTimerInterval(), this);
+    private void kickTimer() {
+        display.timerExec(iContext.getTimerInterval(), this);
     }
     
 
-	public void widgetDisposed(DisposeEvent e) {
-		try {
-			iContext.writeState(pContext);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-	}
+    public void widgetDisposed(DisposeEvent e) {
+        try {
+            iContext.writeState(pContext);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
 
 
-	public void setHighscoreLabel(Label h) {
-		HighscoreList score = new HighscoreList(pContext);
-		h.setText("HIGHSCORE:\n"+score.getFormatedText());
-	}
-	
+    public void setHighscoreLabel(Label h) {
+        HighscoreList score = new HighscoreList(pContext);
+        h.setText(score.getFormatedText());
+    }
+
 }

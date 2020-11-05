@@ -22,7 +22,7 @@ public class Main{
 
     
     public Main() {
-    	Display display = new Display();
+        Display display = new Display();
         Shell shell = new Shell(display, SWT.SHELL_TRIM);
         TlgCanvas canvas = new TlgCanvas(display, shell);
         
@@ -43,7 +43,7 @@ public class Main{
         shell.addKeyListener(canvas);
         shell.setLayout(new GridLayout(2,false));
         shell.setText("TLG - Swt");
-		shell.pack();
+        shell.pack();
         shell.open();
         
         while (!display.isDisposed()) {
