@@ -77,14 +77,14 @@ public class Context extends PlatformContext {
         gc.drawText(text, rect.left, rect.top);
     }
 
-	@Override
-	public File getConfigDirectory() {
-		return new File(System.getProperty("user.home"), ".tlg");
-	}
+    @Override
+    public File getConfigDirectory() {
+        return new File(System.getProperty("user.home"), ".tlg");
+    }
 
-	@Override
-	public void onNewHighscore() {
-	
-	}
+    @Override
+    public void onNewHighscore() {
+    
+    }
 
 }

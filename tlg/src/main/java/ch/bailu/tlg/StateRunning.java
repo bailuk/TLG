@@ -3,25 +3,25 @@ package ch.bailu.tlg;
 import java.util.Random;
 
 public class StateRunning extends State {
-	public static final int SHAPE_PER_LEVEL = 7;
-	
-	public static final int ID=3;
-	public static final String NAME="Playing"; 
-	
-	public StateRunning(InternalContext c) {
-		super(c);
-		context.setStatusText(NAME);
-	}
+    public static final int SHAPE_PER_LEVEL = 7;
+    
+    public static final int ID=3;
+    public static final String NAME="Playing"; 
+    
+    public StateRunning(InternalContext c) {
+        super(c);
+        context.setStatusText(NAME);
+    }
 
-	
-	public State init(PlatformContext c) {
-		erase();
-		initPreview(c);
-		context.setStatusText(NAME);
-		return initMovingShape(c);
-	}
-	
-	
+    
+    public State init(PlatformContext c) {
+        erase();
+        initPreview(c);
+        context.setStatusText(NAME);
+        return initMovingShape(c);
+    }
+    
+    
     public void erase() {
         context.previewMatrix.erase();
         context.mainMatrix.erase();
@@ -61,14 +61,14 @@ public class StateRunning extends State {
     
     @Override
     public State moveRight(PlatformContext c) {
-    	context.mainMatrix.moveShapeRight();
-    	return this;
+        context.mainMatrix.moveShapeRight();
+        return this;
     }
 
     @Override
     public State moveLeft(PlatformContext c) {
-    	context.mainMatrix.moveShapeLeft();
-    	return this;
+        context.mainMatrix.moveShapeLeft();
+        return this;
     }
     
     @Override
@@ -77,14 +77,14 @@ public class StateRunning extends State {
             removeLines();
             return initMovingShape(c);
         }
-    	return this;
+        return this;
     }
 
 
     @Override
     public State moveTurn(PlatformContext c) {
-    	context.mainMatrix.moveShapeTurn();
-    	return this;
+        context.mainMatrix.moveShapeTurn();
+        return this;
     }
 
     
@@ -95,19 +95,19 @@ public class StateRunning extends State {
     }
     
     @Override
-	public State togglePause(PlatformContext c) {
-		return new StatePaused(context).init(c);
-	}
+    public State togglePause(PlatformContext c) {
+        return new StatePaused(context).init(c);
+    }
 
-	@Override
-	public int getTimerInterval() {
-		return context.currentScore.getTimerInterval();
-	}
+    @Override
+    public int getTimerInterval() {
+        return context.currentScore.getTimerInterval();
+    }
 
 
-	@Override
-	public int getID() {
-		return ID;
-	}
+    @Override
+    public int getID() {
+        return ID;
+    }
 
 }

@@ -70,7 +70,7 @@ public class FullGraphicContext extends AndroidContext {
         }
     }
 
-	@Override
-	public void onNewHighscore() {
-	}
+    @Override
+    public void onNewHighscore() {
+    }
 }

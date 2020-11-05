@@ -9,27 +9,27 @@ import ch.bailu.tlg.HighscoreList;
 import ch.bailu.tlg.PlatformContext;
 
 public class HighscoreActivity extends Activity {
-	private TextView text;
+    private TextView text;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		ScrollView scroll=new ScrollView(this);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ScrollView scroll=new ScrollView(this);
 
-		text = new TextView(this);
-		text.setTextSize(15f);
-		text.setLinkTextColor(new NoDrawContext(this).colorFrame());
-		text.setText(Html.fromHtml( getHighscoreText()) );
+        text = new TextView(this);
+        text.setTextSize(15f);
+        text.setLinkTextColor(new NoDrawContext(this).colorFrame());
+        text.setText(Html.fromHtml( getHighscoreText()) );
 
-		scroll.addView(text);
-		setContentView(scroll);
-	}
+        scroll.addView(text);
+        setContentView(scroll);
+    }
 
-	private String getHighscoreText() {
-		PlatformContext gc = new NoDrawContext(this);
-		HighscoreList list = new HighscoreList(gc);
-		return list.getFormatedHTMLText();
-	}
+    private String getHighscoreText() {
+        PlatformContext gc = new NoDrawContext(this);
+        HighscoreList list = new HighscoreList(gc);
+        return list.getFormatedHTMLText();
+    }
 
 }
 

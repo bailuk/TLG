@@ -4,16 +4,16 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 
 public class InternalContext {
-	protected static final String STATE_FILE="state";
+    protected static final String STATE_FILE="state";
     protected final static int STATE_FILE_VERSION=4;
     
     private final static int MARGIN=2;
     private final static int TEXT_HEIGHT=20;
 
-	
-	
-	protected State                 state;
-	
+    
+    
+    protected State                 state;
+    
     protected MatrixWithShape       previewMatrix;
     protected MatrixLineManipulator mainMatrix; 
     protected TextBox               textBox;
@@ -24,49 +24,49 @@ public class InternalContext {
 
     
     public InternalContext(PlatformContext c) {
-    	state = new StateInit(this).init(c);
+        state = new StateInit(this).init(c);
     }
 
     
     public  synchronized void moveLeft(PlatformContext c) {
-    	state = state.moveLeft(c);
+        state = state.moveLeft(c);
     }
 
     
     public  synchronized void moveRight(PlatformContext c) {
-    	state = state.moveRight(c);
+        state = state.moveRight(c);
     }
     
     
     public  synchronized void moveDown(PlatformContext c) {
-    	state = state.moveDown(c);
+        state = state.moveDown(c);
     }
 
     
     public  synchronized void moveTurn(PlatformContext c) {
-    	state = state.moveTurn(c);
+        state = state.moveTurn(c);
     }
     
     
     public  synchronized void toggleGrid() {
-    	mainMatrix.toggleGrid();
+        mainMatrix.toggleGrid();
     }
 
     
     public  synchronized void togglePause(PlatformContext c) {
-    	state = state.togglePause(c);
+        state = state.togglePause(c);
     }
     
     
     public  synchronized void startNewGame(PlatformContext c) {
-    	state = state.startNewGame(c);
+        state = state.startNewGame(c);
     }
     
     
     
     public void writeState(PlatformContext gc) throws IOException {
-    	BufferedOutputStream output = gc.getOutputStream(STATE_FILE);
-    	
+        BufferedOutputStream output = gc.getOutputStream(STATE_FILE);
+        
         ByteInteger.wrap(STATE_FILE_VERSION).writeState(output);
         
         previewMatrix.writeState(output);
@@ -79,18 +79,18 @@ public class InternalContext {
     }
 
     
-	protected  void setStatusText(String state) {
-		StringBuilder text = new StringBuilder();
-		text.append("Score: ");
-		text.append(currentScore.getScore());
-		text.append(" Level: ");
-		text.append(currentScore.getLevel());
-		text.append(" | ");
-		text.append(state);
-		textBox.setText(text.toString());
-	}
-	
-	
+    protected  void setStatusText(String state) {
+        StringBuilder text = new StringBuilder();
+        text.append("Score: ");
+        text.append(currentScore.getScore());
+        text.append(" Level: ");
+        text.append(currentScore.getLevel());
+        text.append(" | ");
+        text.append(state);
+        textBox.setText(text.toString());
+    }
+    
+    
     public  synchronized void layout(TlgRectangle r) {
         int mw=(r.getWidth()*3)/4;
         geometry=r;
@@ -140,13 +140,13 @@ public class InternalContext {
     }
 
     
-	public void setHighscoreName(PlatformContext c, String name) {
-		state = state.setHighscoreName(c, name);
-	}
+    public void setHighscoreName(PlatformContext c, String name) {
+        state = state.setHighscoreName(c, name);
+    }
 
     
-	public int getID() {
-		return state.getID();
-	}
+    public int getID() {
+        return state.getID();
+    }
 
 }

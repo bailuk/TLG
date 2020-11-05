@@ -39,28 +39,28 @@ public abstract class PlatformContext
     public abstract int colorGrayed();
     public abstract int colorFrame();
     public abstract int colorGrid();
-	
+    
     public abstract int countOfColor();
     public abstract int getColor(int i);
     //////
     
-	public File getConfigDirectory() {
-		return new File(System.getProperty("user.home"), ".tlg");
-	}
+    public File getConfigDirectory() {
+        return new File(System.getProperty("user.home"), ".tlg");
+    }
     public abstract void onNewHighscore();
     
     
     public BufferedInputStream  getInputStream(String fileName) throws FileNotFoundException {
-    	File file = new File(getConfigDirectory(), fileName);
-    	return new BufferedInputStream( new FileInputStream(file));
+        File file = new File(getConfigDirectory(), fileName);
+        return new BufferedInputStream( new FileInputStream(file));
     }
     
     
     public BufferedOutputStream getOutputStream(String fileName) throws FileNotFoundException {
-    	File directory = getConfigDirectory();
-    	directory.mkdirs();
-    	File file = new File(directory, fileName);
-    	return new BufferedOutputStream( new FileOutputStream(file));
+        File directory = getConfigDirectory();
+        directory.mkdirs();
+        File file = new File(directory, fileName);
+        return new BufferedOutputStream( new FileOutputStream(file));
     }
     
     

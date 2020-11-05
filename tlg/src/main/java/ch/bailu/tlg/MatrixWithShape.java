@@ -57,7 +57,7 @@ public class MatrixWithShape extends MatrixManipulator {
         TlgPoint pos = movingShape.getPos();
         pos.x += 1; 
         moveShape(movingShape,pos);
-    	
+        
     }
 
     public boolean moveShapeDown() {

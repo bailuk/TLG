@@ -7,7 +7,7 @@ import android.graphics.Color;
 import ch.bailu.tlg.PlatformContext;
 
 public abstract class AndroidContext extends PlatformContext {
-	
+    
     private static int palette[] = null;
     
     private final Context context;
@@ -16,8 +16,8 @@ public abstract class AndroidContext extends PlatformContext {
     
     
     public AndroidContext(Context c) {
-    	context = c;
-   	
+        context = c;
+    
         
         if (palette==null) {
             int color_step=360/8;
@@ -35,7 +35,7 @@ public abstract class AndroidContext extends PlatformContext {
    
     
     public Context getAndroidContext() {
-    	return context;
+        return context;
     }
     
     
@@ -84,9 +84,9 @@ public abstract class AndroidContext extends PlatformContext {
         return Color.rgb(44, 57, 77);
     }
 
-	@Override
-	public File getConfigDirectory() {
-		return context.getFilesDir();
-	}
+    @Override
+    public File getConfigDirectory() {
+        return context.getFilesDir();
+    }
 
 }

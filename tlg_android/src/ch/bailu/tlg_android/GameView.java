@@ -18,55 +18,55 @@ import ch.bailu.tlg.TlgRectangle;
 
 
 public class GameView  {
-	
-	private final AndroidContext tContext;
-	private final PaintThread paintThread;
-	private final InternalContext iContext;
+    
+    private final AndroidContext tContext;
+    private final PaintThread paintThread;
+    private final InternalContext iContext;
 
-	private class GetNameDialog  implements DialogInterface.OnClickListener{
-		private EditText edit;
+    private class GetNameDialog  implements DialogInterface.OnClickListener{
+        private EditText edit;
 
 
-		public GetNameDialog() {
-			String title = "Your name?";
-			edit = new EditText(tContext.getAndroidContext());
-			
-	    	AlertDialog.Builder builder = new AlertDialog.Builder(tContext.getAndroidContext());
-	    	Dialog dialog;
-	    	
-	    	builder.setTitle(title);
-	    	builder.setView(edit);
-	    	builder.setCancelable(true);
-	    	builder.setPositiveButton("ok", 
-	    			this);
-	    	builder.setNegativeButton("cancel", 
-	    			new DialogInterface.OnClickListener () {
-		        		@Override
-		        		public void onClick(DialogInterface dialog, int which) {}
-		    		});
-	    	
-	    	dialog = builder.create();
-	    	dialog.show();
-	    }
+        public GetNameDialog() {
+            String title = "Your name?";
+            edit = new EditText(tContext.getAndroidContext());
+            
+            AlertDialog.Builder builder = new AlertDialog.Builder(tContext.getAndroidContext());
+            Dialog dialog;
+            
+            builder.setTitle(title);
+            builder.setView(edit);
+            builder.setCancelable(true);
+            builder.setPositiveButton("ok", 
+                    this);
+            builder.setNegativeButton("cancel", 
+                    new DialogInterface.OnClickListener () {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {}
+                    });
+            
+            dialog = builder.create();
+            dialog.show();
+        }
 
-		
-		@Override
-		public void onClick(DialogInterface dialog, int which) {
-			iContext.setHighscoreName(tContext, edit.getText().toString());
-		}
+        
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            iContext.setHighscoreName(tContext, edit.getText().toString());
+        }
 
-	}
-	
+    }
+    
     public GameView(Context c) {
-    	tContext = new NoDrawContext(c) {
-    		@Override
-    		public void onNewHighscore() {
-    			Log.e("GameView", "onNewHighscore()");
-    			new GetNameDialog();
-    		}
-    	};
-    	
-    	
+        tContext = new NoDrawContext(c) {
+            @Override
+            public void onNewHighscore() {
+                Log.e("GameView", "onNewHighscore()");
+                new GetNameDialog();
+            }
+        };
+        
+        
         iContext = new InternalContext(tContext);
         paintThread=new PaintThread(iContext, tContext);
     }
@@ -102,7 +102,7 @@ public class GameView  {
     
     
     public synchronized void pauseOrResume() {
-    	iContext.togglePause(tContext);
+        iContext.togglePause(tContext);
         paintThread.update();
     }
     
@@ -129,17 +129,17 @@ public class GameView  {
     }
 
 
-	public void startPainter(Context context, SurfaceHolder surfaceHolder) {
-		paintThread.startPainter(context, surfaceHolder);
-	}
+    public void startPainter(Context context, SurfaceHolder surfaceHolder) {
+        paintThread.startPainter(context, surfaceHolder);
+    }
 
 
-	public void stopPainter() {
-		paintThread.stopPainter();
-	}
+    public void stopPainter() {
+        paintThread.stopPainter();
+    }
 
 
-	public void setHighscoreName() {
-		if (iContext.getID() == StateHighscore.ID) new GetNameDialog();
-	}
+    public void setHighscoreName() {
+        if (iContext.getID() == StateHighscore.ID) new GetNameDialog();
+    }
 }

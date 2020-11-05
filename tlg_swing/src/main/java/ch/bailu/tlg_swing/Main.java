@@ -9,41 +9,41 @@ import javax.swing.JFrame;
 
 public class Main extends JFrame {
 
-	private static final long serialVersionUID = 3390718892752728176L;
-	private final Canvas canvas;
+    private static final long serialVersionUID = 3390718892752728176L;
+    private final Canvas canvas;
 
-	public static void main(String args[]) {
-		new Main();
-	}
+    public static void main(String args[]) {
+        new Main();
+    }
 
-	Main() {
-		canvas = new Canvas();
-		
-		add(canvas);
-		addKeyListener(canvas);
-		
-	    addWindowListener(new WindowAdapter() {
-	        public void windowClosing(WindowEvent w) {
-	            try {
-					cleanUp();
-					System.exit(0);
-				} catch (IOException e) {
-					e.printStackTrace();
-					System.exit(1);
-				}
-	            
-	        }
-	    });
+    Main() {
+        canvas = new Canvas();
+        
+        add(canvas);
+        addKeyListener(canvas);
+        
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent w) {
+                try {
+                    cleanUp();
+                    System.exit(0);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.exit(1);
+                }
+                
+            }
+        });
 
-		setTitle("TLG - Swing");
-		setSize(400, 500);
-		setVisible(true);
-	}
-	
+        setTitle("TLG - Swing");
+        setSize(400, 500);
+        setVisible(true);
+    }
+    
 
-	private void cleanUp() throws IOException {
-		canvas.cleanUp();
-	}
-	
+    private void cleanUp() throws IOException {
+        canvas.cleanUp();
+    }
+    
 }
 

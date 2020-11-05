@@ -61,11 +61,11 @@ public class GameActivity extends Activity implements Runnable, SurfaceHolder.Ca
             startTimer();
             return true;
         case R.id.menu_about:
-        	start(AboutActivity.class);
-        	return true;
+            start(AboutActivity.class);
+            return true;
         case R.id.menu_score:
-        	start(HighscoreActivity.class);
-        	return true;
+            start(HighscoreActivity.class);
+            return true;
         case R.id.menu_name:
             tetris.setHighscoreName();
         default:
@@ -75,7 +75,7 @@ public class GameActivity extends Activity implements Runnable, SurfaceHolder.Ca
 
     
     private void start(Class<?> activityClass) {
-    	Intent intent = new Intent();
+        Intent intent = new Intent();
         intent.setClass(this, activityClass); 
         intent.setAction(activityClass.getName());
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

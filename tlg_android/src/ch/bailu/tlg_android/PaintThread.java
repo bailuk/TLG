@@ -15,8 +15,8 @@ public class PaintThread extends Thread {
     
         
     public PaintThread(InternalContext t, AndroidContext c) {
-    	iContext = t;
-    	tContext = c;
+        iContext = t;
+        tContext = c;
     }
     
     

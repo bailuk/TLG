@@ -15,13 +15,13 @@ public class Matrix {
         
         for (int i=0; i<squares.length; i++)
             squares[i] = new Square();
-	}
-	
+    }
+    
     public Matrix(Matrix b) {
         width=b.getWidth();
         height=b.getHeight();
         squares = new Square[b.squares.length];
-		
+        
         for (int i=0; i < squares.length; i++)
             squares[i] = new Square(b.squares[i]);
     }
@@ -29,11 +29,11 @@ public class Matrix {
     protected int count() {
         return squares.length;
     }
-	
+    
     protected Square get(int i) {
         return squares[i];
     }
-	
+    
     protected Square get(int x, int y) {
         return get((y * width) + x);
     }

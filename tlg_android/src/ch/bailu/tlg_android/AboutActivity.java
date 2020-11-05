@@ -8,22 +8,22 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class AboutActivity extends Activity {
-	private TextView text;
+    private TextView text;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		ScrollView scroll=new ScrollView(this);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ScrollView scroll=new ScrollView(this);
 
-		text = new TextView(this);
-		text.setTextSize(15f);
-		text.setAutoLinkMask(Linkify.WEB_URLS);
-		text.setLinkTextColor(new NoDrawContext(this).colorFrame());
-		text.setText(Html.fromHtml( getString(R.string.about)) );
+        text = new TextView(this);
+        text.setTextSize(15f);
+        text.setAutoLinkMask(Linkify.WEB_URLS);
+        text.setLinkTextColor(new NoDrawContext(this).colorFrame());
+        text.setText(Html.fromHtml( getString(R.string.about)) );
 
-		scroll.addView(text);
-		setContentView(scroll);
-	}
+        scroll.addView(text);
+        setContentView(scroll);
+    }
 
 
 }
