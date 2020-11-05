@@ -4,6 +4,10 @@
 .classpath
 .project
 
+
+local.properties
+.idea
+
 project.properties
 proguard.cfg
 
