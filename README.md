@@ -1,3 +1,4 @@
+![Java CI with Gradle](https://github.com/bailuk/TLG/workflows/Java%20CI%20with%20Gradle/badge.svg)
 # About
 *TLG - Tetris Like Game* is a minimalistic tetris-like Game written in Java. It supports multible GUI-platforms.
     
