@@ -11,7 +11,7 @@ Open file `settings.gradle.kts` in text editor and comment/uncomment lines to en
 
 ## awt / swing / swt:
 In terminal execute `./gradlew assemble` to build variant(s) and then execute `./gradlew run` to run variant(s).
-Note: when building the swt variant an artifact will be downloaded from the gradle maven repository.
+Note: when building the swt variant [SWT jars](https://plugins.gradle.org/plugin/com.diffplug.gradle.swt.nativedeps) will be downloaded from the gradle maven repository.
 
 ## android:
 1. Install adb and android SDK. Or install [Android Studio](https://developer.android.com/studio/).
