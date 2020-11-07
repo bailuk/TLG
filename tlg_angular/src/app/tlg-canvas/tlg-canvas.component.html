@@ -1,20 +1,25 @@
-<div (window:resize)="onResize()" (window:beforeunload)="onBeforeUnload()">
+<div class="container" (window:resize)="onResize()" (window:beforeunload)="onBeforeUnload()">
     <div>
-        <button (click)="key('KeyP')">[P]ause</button> 
-        <button (click)="key('KeyG')">Toggle [G]rid</button> 
-        <button (click)="newGame()">New game</button> 
-    </div>
-    
-    <p>
         {{WIDTH}} x {{HEIGHT}} | {{getStatusText()}}
-    </p>
+    </div>
 
-    <canvas #canvas width='400' height='600'></canvas>
+    <div class="btn-group" role="group">
+        <button class="btn btn-dark" (click)="key('KeyP')">[P]ause</button>
+        <button class="btn btn-dark" (click)="key('KeyG')">Toggle [G]rid</button>
+        <button class="btn btn-danger" (click)="newGame()">New game</button>
+    </div>
 
     <div>
-        <button (click)="key('ArrowUp')">Turn</button>
-        <button (click)="key('ArrowLeft')">Left</button> 
-        <button (click)="key('ArrowDown')">Down</button> 
-        <button (click)="key('ArrowRight')">Right</button>
+        <canvas #canvas width='400' height='600'></canvas>
+    <div>
+    <div class="btn-group" role="group">
+        <button class="btn btn-dark" (click)="key('ArrowUp')">Turn</button>
+        <button class="btn btn-dark" (click)="key('ArrowLeft')">Left</button>
+        <button class="btn btn-dark" (click)="key('ArrowDown')">Down</button>
+        <button class="btn btn-dark" (click)="key('ArrowRight')">Right</button>
+    </div>
+    <div>
+        <br>
+        <a href="https://github.com/bailuk/TLG">GitHub</a>
     </div>
 </div>
