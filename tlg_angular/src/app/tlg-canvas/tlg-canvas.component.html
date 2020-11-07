@@ -1,0 +1,20 @@
+<div (window:resize)="onResize()" (window:beforeunload)="onBeforeUnload()">
+    <div>
+        <button (click)="key('KeyP')">[P]ause</button> 
+        <button (click)="key('KeyG')">Toggle [G]rid</button> 
+        <button (click)="newGame()">New game</button> 
+    </div>
+    
+    <p>
+        {{WIDTH}} x {{HEIGHT}} | {{getStatusText()}}
+    </p>
+
+    <canvas #canvas width='400' height='600'></canvas>
+
+    <div>
+        <button (click)="key('ArrowUp')">Turn</button>
+        <button (click)="key('ArrowLeft')">Left</button> 
+        <button (click)="key('ArrowDown')">Down</button> 
+        <button (click)="key('ArrowRight')">Right</button>
+    </div>
+</div>

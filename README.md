@@ -25,6 +25,15 @@ Note: when building the swt variant an artifact will be downloaded from the grad
 3. Execute `./gradlew assemble` to build and `./gradlew run` to run.
 Note: timer is not implemented (this task is for you).
 
+## angular:
+[Angular](https://angular.io/)/[TypeScript](https://www.typescriptlang.org/) port. [Play here!](https://bailu.ch/tlg/). 
+1. Install `npm` and `node.js`: [nodejs.org](https://nodejs.org)
+2. Install `angular/cli` globaly by running `npm install -g @angular/cli`
+3. Change to directory `tlg_angular`.
+4. Run `npm install` to download and install dependencies.
+5. Run `ng serve` to start development server. Open [URL](http://localhost:4200/) in browser to run.
+See `tlg_angular/README.md` for more commands.
+
 # Copyright
 (c) 2016-2020 [Lukas Bai](mailto:bailu@bailu.ch)  
 [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
