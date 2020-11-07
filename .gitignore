@@ -24,3 +24,9 @@ gen
 
 # Ignore Gradle build output directory
 build
+
+# Ignore angular build ouput directory
+dist
+
+# Ignore local npm repository
+node_modules
