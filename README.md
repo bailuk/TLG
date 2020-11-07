@@ -10,7 +10,7 @@ TLG running on Android.
 Open file `settings.gradle.kts` in text editor and comment/uncomment lines to enable specific variants.
 
 ## awt / swing / swt:
-In terminal execute `./gradlew assemble` to build variant(s) and then execute `./gradlew run` to run variant(s).
+In terminal execute `./gradlew assemble` to build variant(s) and then execute `./gradlew run` to run variant(s).  
 Note: when building the swt variant [SWT jars](https://plugins.gradle.org/plugin/com.diffplug.gradle.swt.nativedeps) will be downloaded from the gradle maven repository.
 
 ## android:
@@ -22,7 +22,7 @@ Note: when building the swt variant [SWT jars](https://plugins.gradle.org/plugin
 ## gnome:
 1. Install [gnome java](http://java-gnome.sourceforge.net/)
 2. Adjust dependencie for `gtk.jar` in `tlg_gnome/build.gradle.kts`
-3. Execute `./gradlew assemble` to build and `./gradlew run` to run.
+3. Execute `./gradlew assemble` to build and `./gradlew run` to run.  
 Note: timer is not implemented (this task is for you).
 
 ## angular:
@@ -31,7 +31,7 @@ Note: timer is not implemented (this task is for you).
 2. Install `angular/cli` globaly by running `npm install -g @angular/cli`
 3. Change to directory `tlg_angular`.
 4. Run `npm install` to download and install dependencies.
-5. Run `ng serve` to start development server. Open [URL](http://localhost:4200/) in browser to run.
+5. Run `ng serve` to start development server. Open [URL](http://localhost:4200/) in browser to run.  
 See `tlg_angular/README.md` for more commands.
 
 # Copyright
