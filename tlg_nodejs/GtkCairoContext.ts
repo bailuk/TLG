@@ -1,8 +1,8 @@
 declare var require: any
 const convert = require('color-convert');
 
-import {TlgPoint} from './TlgPoint';
-import {TlgRectangle} from './TlgRectangle';
+import {TlgPoint} from './tlg/matrix/TlgPoint';
+import {TlgRectangle} from './tlg/matrix/TlgRectangle';
 import { GtkContext } from './GtkContext';
 
 

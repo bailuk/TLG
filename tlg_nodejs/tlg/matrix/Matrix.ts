@@ -1,5 +1,5 @@
 import { Square } from './Square';
-import { StorageContext } from './StorageContext';
+import { StorageContext } from '../context/StorageContext';
 
 export class Matrix {
     private width:number;

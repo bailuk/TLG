@@ -1,7 +1,7 @@
-import { InternalContext } from './InternalContext';
-import { PlatformContext } from './PlatformContext';
+import { InternalContext } from '../context/InternalContext';
+import { PlatformContext } from '../context/PlatformContext';
 import { StateID } from './StateID';
-import { StorageContext } from './StorageContext';
+import { StorageContext } from '../context/StorageContext';
 
 export abstract class State {
         public static readonly STATE_FILE_VERSION=1;

@@ -1,6 +1,6 @@
-import {TlgPoint} from './TlgPoint';
-import {TlgRectangle} from './TlgRectangle';
-import {PlatformContext} from './PlatformContext';
+import {TlgPoint} from './tlg/matrix/TlgPoint';
+import {TlgRectangle} from './tlg/matrix/TlgRectangle';
+import {PlatformContext} from './tlg/context/PlatformContext';
 
 
 export class GtkContext extends PlatformContext {

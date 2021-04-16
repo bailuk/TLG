@@ -1,5 +1,5 @@
-import {TlgRectangle} from './TlgRectangle'
-import {TlgPoint} from './TlgPoint'
+import {TlgRectangle} from '../matrix/TlgRectangle'
+import {TlgPoint} from '../matrix/TlgPoint'
 
 
 export abstract class PlatformContext {

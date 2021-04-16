@@ -1,5 +1,5 @@
-import { InternalContext } from './InternalContext';
-import { PlatformContext } from './PlatformContext';
+import { InternalContext } from '../context/InternalContext';
+import { PlatformContext } from '../context/PlatformContext';
 import { StateInit } from './StateInit';
 import { StateHighscore } from './StateHighscore';
 import { StateLocked } from './StateLocked';
@@ -7,7 +7,7 @@ import { StatePaused } from './StatePaused';
 import { StateRunning } from './StateRunning';
 import { StateID } from './StateID';
 import { State } from './State';
-import { StorageContext } from './StorageContext';
+import { StorageContext } from '../context/StorageContext';
 
 /**
  * State machine for game logic.

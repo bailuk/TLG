@@ -1,9 +1,9 @@
 import { State } from './State';
-import { InternalContext } from './InternalContext';
-import { PlatformContext } from './PlatformContext';
-import { HighscoreList } from './HighscoreList';
+import { InternalContext } from '../context/InternalContext';
+import { PlatformContext } from '../context/PlatformContext';
+import { HighscoreList } from '../score/HighscoreList';
 import { StateID } from './StateID';
-import { StorageContext } from './StorageContext';
+import { StorageContext } from '../context/StorageContext';
 
 export class StateRunning extends State {
     public static readonly SHAPE_PER_LEVEL = 7;

@@ -1,6 +1,6 @@
 import { MatrixManipulator } from './MatrixManipulator';
 import { MatrixShape } from './MatrixShape';
-import { StorageContext } from './StorageContext';
+import { StorageContext } from '../context/StorageContext';
 
 export class MatrixWithShape extends MatrixManipulator {
 

@@ -1,8 +1,8 @@
 import { Matrix } from './Matrix';
 import { TlgRectangle } from './TlgRectangle';
-import { PlatformContext } from './PlatformContext';
+import { PlatformContext } from '../context/PlatformContext';
 import { Square } from './Square';
-import { StorageContext } from './StorageContext';
+import { StorageContext } from '../context/StorageContext';
 
 export class MatrixVisible extends Matrix {
 

@@ -1,6 +1,6 @@
 import { State } from './State';
-import { InternalContext } from './InternalContext';
-import { StorageContext } from './StorageContext';
+import { InternalContext } from '../context/InternalContext';
+import { StorageContext } from '../context/StorageContext';
 import { StateID } from './StateID';
 
 export class StateLocked extends State {

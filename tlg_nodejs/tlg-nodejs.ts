@@ -1,54 +1,23 @@
 declare var require: any
 
-
 const gi = require('node-gtk');
 const Gtk = gi.require('Gtk', '3.0')
-const Cairo = gi.require('cairo')
 
-import { GtkCairoContext } from './tlg/GtkCairoContext';
-import {GtkContext } from './tlg/GtkContext';
-import {InternalContext} from './tlg/InternalContext';
-import { StateContext } from './tlg/StateContext';
-import { StorageContext } from './tlg/StorageContext';
-import {TlgRectangle } from './tlg/TlgRectangle';
+import { GtkCairoContext } from './GtkCairoContext';
+import { GtkContext } from './GtkContext';
+import { InternalContext} from './tlg/context/InternalContext';
+import { StateContext } from './tlg/state/StateContext';
+import { StorageContext } from './tlg/context/StorageContext';
+import { TlgRectangle } from './tlg/matrix/TlgRectangle';
 
 
 gi.startLoop()
 Gtk.init()
 
-const win = new Gtk.Window()
-
-
-win.on('destroy', () => Gtk.mainQuit())
-win.on('delete-event', () => false)
-
-win.setDefaultSize(400, 800)
-
-
-//const table = new Gtk.Table(0, 0, true);
-//const score = createLabel("Score:");
-//const help = createLabel("Constants.HELP_TEXT");
-
-
-const canvas = new Gtk.DrawingArea();
 
 const platformContext = new GtkContext()
 const internalContext = new InternalContext()
 const stateContext = new StateContext(internalContext, platformContext, new StorageContext());
-
-
-canvas.on('draw', (context) => {
-    const cairoPlatformContext = new GtkCairoContext(context);
-    internalContext.updateAll(cairoPlatformContext);
-    return true;
-})
-
-
-win.on('size-allocate', (rect) => {
-    internalContext.layout(new TlgRectangle(0, 0, rect.width, rect.height))
-    return true
-})
-
 
 const KEY_SPC   = 32
 const KEY_G     = 103
@@ -59,7 +28,16 @@ const KEY_LEFT  = 65361
 const KEY_RIGHT = 65363
 const KEY_UP    = 65362
 
+const win = new Gtk.Window()
+win.on('destroy', () => Gtk.mainQuit())
+win.on('delete-event', () => false)
+win.setTitle('TLG node.js (node-gtk)')
+win.setDefaultSize(400, 800)
 
+win.on('size-allocate', (rect) => {
+    internalContext.layout(new TlgRectangle(0, 0, rect.width, rect.height))
+    return true
+})
 
 win.on('key-press-event', (key) => {
     let update:boolean=true
@@ -89,6 +67,16 @@ win.on('key-press-event', (key) => {
 });
 
 
+const canvas = new Gtk.DrawingArea();
+canvas.on('draw', (context) => {
+    const cairoPlatformContext = new GtkCairoContext(context);
+    internalContext.updateAll(cairoPlatformContext);
+    return true;
+})
+
+win.add(canvas);
+
+
 function timeout() {
     setTimeout(onTimeout, stateContext.getTimerInterval(), 'timer')
     
@@ -100,30 +88,32 @@ function onTimeout() {
     timeout()
 }
 
-
-
-win.add(canvas);
-internalContext.layout(new TlgRectangle(0,0,400,800));
-
 timeout()
-
-
-//win.add(container)
-//container.add(new Gtk.Label({ label: 'Hello Gtk+' , angle: 25}))
-
-
-//const button = new Gtk.Button({ label: 'Hello Gtk+'})
-//container.add(button)
-//button.connect('clicked', () => {console.log('Test');
-//})
 
 win.showAll()
 Gtk.main()
 
 
+/*
+win.add(container)
+container.add(new Gtk.Label({ label: 'Hello Gtk+' , angle: 25}))
+
+const table = new Gtk.Table(0, 0, true);
+const score = createLabel("Score:");
+const help = createLabel("Constants.HELP_TEXT");
+
+
+const button = new Gtk.Button({ label: 'Hello Gtk+'})
+container.add(button)
+button.connect('clicked', () => {console.log('Test');
+})
+
+
+
 function createLabel(text: String): any {
-    //l.setAlignHorizontal(Align.START);
-    // l.setAlignVertical(Align.START);
+    l.setAlignHorizontal(Align.START);
+     l.setAlignVertical(Align.START);
     const result = new gi.Gtk.Label({label: text}) 
     return result
 }
+*/

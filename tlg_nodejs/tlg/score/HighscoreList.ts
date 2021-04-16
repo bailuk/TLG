@@ -1,5 +1,5 @@
 import { HighscoreEntry } from './HighscoreEntry';
-import { PlatformContext } from './PlatformContext';
+import { PlatformContext } from '../context/PlatformContext';
 
 export class HighscoreList
 {

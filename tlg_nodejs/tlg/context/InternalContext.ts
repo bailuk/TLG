@@ -1,7 +1,7 @@
-import { MatrixWithShape } from './MatrixWithShape';
-import { MatrixLineManipulator } from './MatrixLineManipulator';
-import { Score } from './Score';
-import { TlgRectangle } from './TlgRectangle';
+import { MatrixWithShape } from '../matrix/MatrixWithShape';
+import { MatrixLineManipulator } from '../matrix/MatrixLineManipulator';
+import { Score } from '../score/Score';
+import { TlgRectangle } from '../matrix/TlgRectangle';
 import { PlatformContext } from './PlatformContext';
 import { StorageContext } from './StorageContext';
 

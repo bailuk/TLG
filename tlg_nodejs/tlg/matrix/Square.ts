@@ -1,6 +1,6 @@
 import { TlgRectangle } from './TlgRectangle';
-import { PlatformContext } from './PlatformContext';
-import { StorageContext } from './StorageContext';
+import { PlatformContext } from '../context/PlatformContext';
+import { StorageContext } from '../context/StorageContext';
 
 export class Square {
     private static readonly BACKGROUND=0;

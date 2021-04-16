@@ -1,4 +1,4 @@
-import { StorageContext } from './StorageContext';
+import { StorageContext } from '../context/StorageContext';
 
 export class TlgPoint {
     private x:number;

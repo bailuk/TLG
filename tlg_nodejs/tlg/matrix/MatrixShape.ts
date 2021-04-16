@@ -1,7 +1,7 @@
 import {TlgPoint} from './TlgPoint';
 import {TlgRectangle} from './TlgRectangle'
 import { Matrix } from './Matrix';
-import { StorageContext } from './StorageContext';
+import { StorageContext } from '../context/StorageContext';
 
 export class MatrixShape extends Matrix {
     private static readonly SHAPE_SIZE:number=5;
