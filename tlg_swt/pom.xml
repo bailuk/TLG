@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+  http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ch.bailu</groupId>
+  <artifactId>tlg_swt</artifactId>
+  <version>${revision}</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <swt.version>3.115.0</swt.version>
+    <osgi.platform>x86_64 </osgi.platform>
+  </properties>
+
+
+  <parent>
+    <groupId>ch.bailu</groupId>
+    <artifactId>tlgapp</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+
+  <dependencies>
+    <dependency>
+      <groupId>ch.bailu</groupId>
+      <artifactId>tlg</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+<!-- https://mvnrepository.com/artifact/org.eclipse.platform/org.eclipse.swt -->
+<dependency>
+  <groupId>org.eclipse.platform</groupId>
+  <artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
+  <version>3.115.100</version>
+</dependency>
+
+
+  </dependencies>
+
+
+
+</project>

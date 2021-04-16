@@ -30,3 +30,7 @@ dist
 
 # Ignore local npm repository
 node_modules
+
+
+# Ignore maven target directory
+target
