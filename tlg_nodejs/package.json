@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "color-convert": "^2.0.1",
+    "node-gtk": "^0.8.1"
+  }
+}
