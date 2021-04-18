@@ -127,7 +127,7 @@ export class StateContext {
 
 
     public writeState() {
-        this.sContext.close();
         this.state.writeState();
+        this.sContext.close();
     }
 }

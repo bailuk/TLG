@@ -7,8 +7,8 @@ import { GtkContext } from '../tlg/context/nodejs/GtkContext'
 import { NonDrawingContext } from '../tlg/context/NonDrawingContext'
 import { InternalContext} from '../tlg/context/InternalContext'
 import { StateContext } from '../tlg/state/StateContext'
-import { StorageContext } from '../tlg/context/StorageContext'
 import { TlgRectangle } from '../tlg/matrix/TlgRectangle'
+import { FileStorageContext } from '../tlg/context/nodejs/FileStorageContext'
 
 
 gi.startLoop()
@@ -17,7 +17,7 @@ Gtk.init()
 
 const platformContext = new NonDrawingContext()
 const internalContext = new InternalContext()
-const stateContext = new StateContext(internalContext, platformContext, new StorageContext())
+const stateContext = new StateContext(internalContext, platformContext, new FileStorageContext())
 
 const KEY_SPC   = 32
 const KEY_G     = 103
@@ -125,4 +125,6 @@ timeout()
 win.showAll()
 Gtk.main()
 running = false
+
+stateContext.writeState()
 console.log('bye')
