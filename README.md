@@ -29,13 +29,22 @@ Note: timer is not implemented (this task is for you).
 
 ## angular:
 [Angular](https://angular.io/)/[TypeScript](https://www.typescriptlang.org/) port. [Play here!](https://bailu.ch/tlg/). 
-1. Install `npm` and `node.js`: [nodejs.org](https://nodejs.org)
+1. Install `npm` and `nodejs`: [nodejs.org](https://nodejs.org)
 2. Install `angular/cli` globaly by running `npm install -g @angular/cli`
-3. Change to directory `tlg_angular`.
+3. Change to directory `js/angular`.
 4. Run `npm install` to download and install dependencies.
 5. Run `ng serve` to start development server. Open [URL](http://localhost:4200/) in browser to run.
 
-See `tlg_angular/README.md` for more commands.
+See `js/angular/README.md` for more commands.
+
+
+## node.js / node-gtk:
+[nodejs.org](https://nodejs.org)/[node-gtk](https://www.npmjs.com/package/node-gtk) port.
+1. Install `npm`, `nodejs` and `ts-node`.
+2. Change to directory `js/nodejs`.
+3. Run `npm install` to download and install dependencies.
+4. `ts-node ./tlg-nodejs.ts` to run.
+
 
 # Copyright
 (c) 2016-2020 [Lukas Bai](mailto:bailu@bailu.ch)  
