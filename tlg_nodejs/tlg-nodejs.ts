@@ -28,16 +28,14 @@ const KEY_LEFT  = 65361
 const KEY_RIGHT = 65363
 const KEY_UP    = 65362
 
-const win = new Gtk.Window()
-win.on('destroy', () => Gtk.mainQuit())
-win.on('delete-event', () => false)
-win.setTitle('TLG node.js (node-gtk)')
+const win = new Gtk.Window({
+    title: 'TLG node.js (node-gtk)',
+    type: Gtk.WindowType.TOPLEVEL,
+    window_position: Gtk.WindowPosition.CENTER
+});
+win.setDefaultSize(600, 800);
+win.on('destroy', Gtk.mainQuit);
 win.setDefaultSize(400, 800)
-
-win.on('size-allocate', (rect) => {
-    internalContext.layout(new TlgRectangle(0, 0, rect.width, rect.height))
-    return true
-})
 
 win.on('key-press-event', (key) => {
     let update:boolean=true
@@ -61,11 +59,17 @@ win.on('key-press-event', (key) => {
     }
     
     if (update) {
+        status.setText(internalContext.getStatusText())
         canvas.queueDraw()
     }
     return update
 });
 
+const vbox = new Gtk.VBox()
+win.add(vbox)
+
+const status = new Gtk.Label()
+vbox.packStart(status, false, true, 5)
 
 const canvas = new Gtk.DrawingArea();
 canvas.on('draw', (context) => {
@@ -73,47 +77,39 @@ canvas.on('draw', (context) => {
     internalContext.updateAll(cairoPlatformContext);
     return true;
 })
+canvas.on('size-allocate', (rect) => {
+    internalContext.layout(new TlgRectangle(0, 0, rect.width, rect.height))
+    return true
+})
+vbox.add(canvas)
 
-win.add(canvas);
+const link = new Gtk.LinkButton()
+vbox.packEnd(link, false, true, 1)
+link.setUri('https://github.com/bailuk/TLG')
+link.setLabel('TLG')
 
+const info = new Gtk.Label()
+vbox.packEnd(info, false, true, 1)
+info.setText('arrow: move, up: turn, g: toggle grid, p: pause, n: new game')
+
+let running = true
 
 function timeout() {
     setTimeout(onTimeout, stateContext.getTimerInterval(), 'timer')
-    
 }
 
 function onTimeout() {
-    stateContext.moveDown(platformContext)
-    canvas.queueDraw()
-    timeout()
+    if (running == true) {
+        stateContext.moveDown(platformContext)
+        status.setText(internalContext.getStatusText())
+        canvas.queueDraw()
+        timeout()
+    }
 }
 
 timeout()
 
 win.showAll()
 Gtk.main()
-
-
-/*
-win.add(container)
-container.add(new Gtk.Label({ label: 'Hello Gtk+' , angle: 25}))
-
-const table = new Gtk.Table(0, 0, true);
-const score = createLabel("Score:");
-const help = createLabel("Constants.HELP_TEXT");
-
-
-const button = new Gtk.Button({ label: 'Hello Gtk+'})
-container.add(button)
-button.connect('clicked', () => {console.log('Test');
-})
-
-
-
-function createLabel(text: String): any {
-    l.setAlignHorizontal(Align.START);
-     l.setAlignVertical(Align.START);
-    const result = new gi.Gtk.Label({label: text}) 
-    return result
-}
-*/
+running = false
+console.log('bye')
