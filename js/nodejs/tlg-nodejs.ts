@@ -3,19 +3,19 @@ declare var require: any
 const gi = require('node-gtk')
 const Gtk = gi.require('Gtk', '3.0')
 
-import { GtkCairoContext } from './GtkCairoContext'
-import { GtkContext } from './GtkContext'
-import { InternalContext} from './tlg/context/InternalContext'
-import { StateContext } from './tlg/state/StateContext'
-import { StorageContext } from './tlg/context/StorageContext'
-import { TlgRectangle } from './tlg/matrix/TlgRectangle'
+import { GtkContext } from '../tlg/context/nodejs/GtkContext'
+import { NonDrawingContext } from '../tlg/context/NonDrawingContext'
+import { InternalContext} from '../tlg/context/InternalContext'
+import { StateContext } from '../tlg/state/StateContext'
+import { StorageContext } from '../tlg/context/StorageContext'
+import { TlgRectangle } from '../tlg/matrix/TlgRectangle'
 
 
 gi.startLoop()
 Gtk.init()
 
 
-const platformContext = new GtkContext()
+const platformContext = new NonDrawingContext()
 const internalContext = new InternalContext()
 const stateContext = new StateContext(internalContext, platformContext, new StorageContext())
 
@@ -37,8 +37,9 @@ win.setDefaultSize(600, 800)
 win.on('destroy', Gtk.mainQuit)
 win.setDefaultSize(400, 800)
 
+
 win.on('key-press-event', (key : any) => {
-    let update:boolean=true
+    let update : boolean = true
    
     if (key.keyval == KEY_N) {
         stateContext.startNewGame(platformContext)
@@ -72,6 +73,7 @@ win.on('key-press-event', (key : any) => {
     return update
 })
 
+
 const vbox = new Gtk.VBox()
 win.add(vbox)
 
@@ -79,15 +81,19 @@ const status = new Gtk.Label()
 vbox.packStart(status, false, true, 5)
 
 const canvas = new Gtk.DrawingArea()
-canvas.on('draw', (context) => {
-    const cairoPlatformContext = new GtkCairoContext(context)
-    internalContext.updateAll(cairoPlatformContext)
+canvas.on('draw', (context : any) => {
+    const cairoPlatformContext = new GtkContext(context)
+
+   internalContext.updateAll(cairoPlatformContext)    
+
     return true
 })
-canvas.on('size-allocate', (rect) => {
+
+canvas.on('size-allocate', (rect : any) => {
     internalContext.layout(new TlgRectangle(0, 0, rect.width, rect.height))
     return true
 })
+
 vbox.add(canvas)
 
 const link = new Gtk.LinkButton()

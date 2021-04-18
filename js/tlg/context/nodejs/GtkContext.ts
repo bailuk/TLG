@@ -1,12 +1,12 @@
 declare var require: any
 const convert = require('color-convert');
 
-import {TlgPoint} from './tlg/matrix/TlgPoint';
-import {TlgRectangle} from './tlg/matrix/TlgRectangle';
-import { GtkContext } from './GtkContext';
+import {TlgPoint} from '../../matrix/TlgPoint';
+import {TlgRectangle} from '../../matrix/TlgRectangle';
+import { NonDrawingContext } from '../NonDrawingContext';
 
 
-export class GtkCairoContext extends GtkContext {
+export class GtkContext extends NonDrawingContext {
 
     private readonly context : any
 
@@ -36,6 +36,4 @@ export class GtkCairoContext extends GtkContext {
         color = convert.hex.rgb(GtkContext.COLORS[Math.floor(color)]).map(v => v / 255);
         this.context.setSourceRgb(color[0], color[1], color[2]);
     }
-
-
 }

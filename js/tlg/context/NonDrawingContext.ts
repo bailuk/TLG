@@ -1,9 +1,9 @@
-import {TlgPoint} from './tlg/matrix/TlgPoint';
-import {TlgRectangle} from './tlg/matrix/TlgRectangle';
-import {PlatformContext} from './tlg/context/PlatformContext';
+import {TlgPoint} from '../matrix/TlgPoint';
+import {TlgRectangle} from '../matrix/TlgRectangle';
+import {PlatformContext} from '../context/PlatformContext';
 
 
-export class GtkContext extends PlatformContext {
+export class NonDrawingContext extends PlatformContext {
 
     
 
@@ -61,7 +61,7 @@ export class GtkContext extends PlatformContext {
     }
     
     public countOfColor():number {
-        return GtkContext.COLORS.length-4;
+        return NonDrawingContext.COLORS.length-4;
     }
 
     public getColor(i:number):number {

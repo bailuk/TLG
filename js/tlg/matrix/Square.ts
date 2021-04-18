@@ -72,7 +72,7 @@ export class Square {
         r.shrink(1);
         gc.drawFilledRectangle(c, r);
         
-/*
+        /*
         gc.drawLine(gc.colorDark(), this.rect.getTL(), this.rect.getTR());
         gc.drawLine(gc.colorDark(), this.rect.getTR(), this.rect.getBR()); 
         gc.drawLine(gc.colorHighlight(), this.rect.getBR(), this.rect.getBL()); 

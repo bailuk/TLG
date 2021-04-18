@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
-import { PlatformContext } from 'src/tlg/PlatformContext'
-import { InternalContext } from 'src/tlg/InternalContext';
-import { JScriptContext } from 'src/tlg/JScriptContext';
-import { TlgRectangle } from 'src/tlg/TlgRectangle';
-import { StateContext } from 'src/tlg/StateContext';
-import { LocalStorageContext } from 'src/tlg/LocalStorageContext';
+import { PlatformContext } from '../../../../tlg/context/PlatformContext'
+import { InternalContext } from '../../../../tlg/context/InternalContext';
+import { JScriptContext } from '../../../../tlg/context/browser/JScriptContext';
+import { TlgRectangle } from '../../../../tlg/matrix/TlgRectangle';
+import { StateContext } from '../../../../tlg/state/StateContext';
+import { LocalStorageContext } from '../../../../tlg/context/browser/LocalStorageContext';
 
 
 

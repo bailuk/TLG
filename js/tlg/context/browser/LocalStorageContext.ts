@@ -1,4 +1,4 @@
-import { StorageContext } from './StorageContext';
+import { StorageContext } from '../StorageContext';
 
 export class LocalStorageContext extends StorageContext {
     private idR:number = 0;
