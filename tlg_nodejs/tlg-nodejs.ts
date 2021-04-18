@@ -1,14 +1,14 @@
 declare var require: any
 
-const gi = require('node-gtk');
+const gi = require('node-gtk')
 const Gtk = gi.require('Gtk', '3.0')
 
-import { GtkCairoContext } from './GtkCairoContext';
-import { GtkContext } from './GtkContext';
-import { InternalContext} from './tlg/context/InternalContext';
-import { StateContext } from './tlg/state/StateContext';
-import { StorageContext } from './tlg/context/StorageContext';
-import { TlgRectangle } from './tlg/matrix/TlgRectangle';
+import { GtkCairoContext } from './GtkCairoContext'
+import { GtkContext } from './GtkContext'
+import { InternalContext} from './tlg/context/InternalContext'
+import { StateContext } from './tlg/state/StateContext'
+import { StorageContext } from './tlg/context/StorageContext'
+import { TlgRectangle } from './tlg/matrix/TlgRectangle'
 
 
 gi.startLoop()
@@ -17,7 +17,7 @@ Gtk.init()
 
 const platformContext = new GtkContext()
 const internalContext = new InternalContext()
-const stateContext = new StateContext(internalContext, platformContext, new StorageContext());
+const stateContext = new StateContext(internalContext, platformContext, new StorageContext())
 
 const KEY_SPC   = 32
 const KEY_G     = 103
@@ -32,30 +32,37 @@ const win = new Gtk.Window({
     title: 'TLG node.js (node-gtk)',
     type: Gtk.WindowType.TOPLEVEL,
     window_position: Gtk.WindowPosition.CENTER
-});
-win.setDefaultSize(600, 800);
-win.on('destroy', Gtk.mainQuit);
+})
+win.setDefaultSize(600, 800)
+win.on('destroy', Gtk.mainQuit)
 win.setDefaultSize(400, 800)
 
-win.on('key-press-event', (key) => {
+win.on('key-press-event', (key : any) => {
     let update:boolean=true
    
     if (key.keyval == KEY_N) {
-        stateContext.startNewGame(platformContext);
+        stateContext.startNewGame(platformContext)
+
     } else if (key.keyval == KEY_DOWN) {
-        stateContext.moveDown(platformContext);
+        stateContext.moveDown(platformContext)
+
     } else if (key.keyval == KEY_LEFT) {
-        stateContext.moveLeft(platformContext);
+        stateContext.moveLeft(platformContext)
+
     } else if (key.keyval == KEY_RIGHT) {
-        stateContext.moveRight(platformContext);
+        stateContext.moveRight(platformContext)
+
     } else if (key.keyval == KEY_UP) {
-        stateContext.moveTurn(platformContext);
+        stateContext.moveTurn(platformContext)
+
     } else if (key.keyval == KEY_G) {
-        internalContext.toggleGrid();
+        internalContext.toggleGrid()
+
     } else if (key.keyval == KEY_P || key.keyval == KEY_SPC) {
-        stateContext.togglePause(platformContext);
+        stateContext.togglePause(platformContext)
+
     } else {
-        update = false;
+        update = false
     }
     
     if (update) {
@@ -63,7 +70,7 @@ win.on('key-press-event', (key) => {
         canvas.queueDraw()
     }
     return update
-});
+})
 
 const vbox = new Gtk.VBox()
 win.add(vbox)
@@ -71,11 +78,11 @@ win.add(vbox)
 const status = new Gtk.Label()
 vbox.packStart(status, false, true, 5)
 
-const canvas = new Gtk.DrawingArea();
+const canvas = new Gtk.DrawingArea()
 canvas.on('draw', (context) => {
-    const cairoPlatformContext = new GtkCairoContext(context);
-    internalContext.updateAll(cairoPlatformContext);
-    return true;
+    const cairoPlatformContext = new GtkCairoContext(context)
+    internalContext.updateAll(cairoPlatformContext)
+    return true
 })
 canvas.on('size-allocate', (rect) => {
     internalContext.layout(new TlgRectangle(0, 0, rect.width, rect.height))
