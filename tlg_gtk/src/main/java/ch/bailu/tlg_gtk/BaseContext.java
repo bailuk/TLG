@@ -1,8 +1,7 @@
 package ch.bailu.tlg_gtk;
 
 
-import org.gnome.gdk.RGBA;
-
+import ch.bailu.gtk.gdk.RGBA;
 import ch.bailu.tlg.PlatformContext;
 import ch.bailu.tlg.StateRunning;
 import ch.bailu.tlg.TlgPoint;
@@ -39,23 +38,32 @@ public class BaseContext extends PlatformContext {
             
             float[] rgb = ColorHelper.HSVtoRGB(h, 1f, 1f);
             
-            palette[i]= new RGBA(rgb[0], rgb[1], rgb[2], 1);
+            palette[i]=newColor(rgb[0], rgb[1], rgb[2]);
             
             h++;
             h%=6;
         }
 
         double x=1d/256d;
-        palette[COLOR_GRID]= new RGBA(x*44,x*67,x*77,1);
-        palette[COLOR_FRAME]= new RGBA(x*44,x*109,x*205,1);        
-        palette[COLOR_BACKGROUND]= new RGBA(x*10,x*10,x*10,1);
-        palette[COLOR_HIGHLIGHT]= new RGBA(1,1,1,1);
-        palette[COLOR_DARK]= new RGBA(0,0,0,1);
-        palette[COLOR_GRAYED]= new RGBA(x*208,x*208,x*208,1);
+        palette[COLOR_GRID]=newColor(x*44,x*67,x*77);
+        palette[COLOR_FRAME]=newColor(x*44,x*109,x*205);
+        palette[COLOR_BACKGROUND]=newColor(x*10,x*10,x*10);
+        palette[COLOR_HIGHLIGHT]=newColor(1,1,1);
+        palette[COLOR_DARK]=newColor(0,0,0);
+        palette[COLOR_GRAYED]=newColor(x*208,x*208,x*208);
         
         
     }
 
+    private RGBA newColor(double r, double g, double b) {
+        RGBA result = new RGBA();
+        result.setFieldRed(r);
+        result.setFieldGreen(g);
+        result.setFieldBlue(b);
+        result.setFieldAlpha(1);
+        return result;
+    }
+    
     public RGBA getGtkColor(int color) {
         return palette[color];
     }

@@ -20,9 +20,14 @@ Note: when building the swt variant [SWT jars](https://plugins.gradle.org/plugin
 3. In terminal execute `./gradlew assemble` to download artifacts and build apks.
 4. In terminal execute `adb install ./tlg_android/build/outputs/apk/debug/tlg_android-debug.apk` to install apk on connected android device.
 
+## java-gtk (GTK 3)
+1. Install [java-gtk](https://github.com/bailuk/java-gtk)
+2. Adjust dependency for `java-gtk (library.jar)` in `tlg_gtk/build.gradle.kts`
+3. Execute `./gradlew run` to run. 
+
 ## gnome:
 1. Install [gnome java](http://java-gnome.sourceforge.net/)
-2. Adjust dependencie for `gtk.jar` in `tlg_gnome/build.gradle.kts`
+2. Adjust dependency for `gtk.jar` in `tlg_gnome/build.gradle.kts`
 3. Execute `./gradlew assemble` to build and `./gradlew run` to run.
 
 Note: timer is not implemented (this task is for you).

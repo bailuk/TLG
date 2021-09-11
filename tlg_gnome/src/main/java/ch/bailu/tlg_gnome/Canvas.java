@@ -1,4 +1,4 @@
-package ch.bailu.tlg_gnome;
+package ch.bailu.tlg_gtk;
 
 import java.awt.AWTException;
 import java.awt.Robot;
