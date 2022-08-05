@@ -1,9 +1,9 @@
-import { JScriptContext } from "./tlg-lib/context/browser/JScriptContext";
-import { LocalStorageContext } from "./tlg-lib/context/browser/LocalStorageContext";
-import { InternalContext } from "./tlg-lib/context/InternalContext";
-import { PlatformContext } from "./tlg-lib/context/PlatformContext";
-import { TlgRectangle } from "./tlg-lib/matrix/TlgRectangle";
-import { StateContext } from "./tlg-lib/state/StateContext";
+import { JScriptContext } from "../../tlg-lib/src/context/browser/JScriptContext";
+import { LocalStorageContext } from "../../tlg-lib/src/context/browser/LocalStorageContext";
+import { InternalContext } from "../../tlg-lib/src/context/InternalContext";
+import { PlatformContext } from "../../tlg-lib/src/context/PlatformContext";
+import { TlgRectangle } from "../../tlg-lib/src/matrix/TlgRectangle";
+import { StateContext } from "../../tlg-lib/src/state/StateContext";
 
 class App {
 

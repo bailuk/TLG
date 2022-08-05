@@ -10,14 +10,15 @@
     "target": "es2015",
     "lib": ["es2017", "dom"],
     "outDir": "dist",
-    "rootDir": "./",
+    "rootDir": "../",
     "baseUrl": ".",
     "paths": {
       "*": ["types/*"]
     }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "../tlg-lib/src/**/*"
   ],
   "exclude": [
     "node_modules/*"

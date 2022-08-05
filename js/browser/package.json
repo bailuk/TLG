@@ -6,10 +6,6 @@
     "serve": "webpack-cli serve --mode development",
     "build": "webpack"
   },
-  "keywords": [
-    "TypeScript",
-    "Browser"
-  ],
   "author": "Lukas Bai <bailu@bailu.ch> (https://github.com/bailuk)",
   "license": "MIT",
   "devDependencies": {

@@ -3,12 +3,12 @@ declare var require: any
 const gi = require('node-gtk')
 const Gtk = gi.require('Gtk', '3.0')
 
-import { GtkContext } from '../tlg/context/nodejs/GtkContext'
-import { NonDrawingContext } from '../tlg/context/NonDrawingContext'
-import { InternalContext} from '../tlg/context/InternalContext'
-import { StateContext } from '../tlg/state/StateContext'
-import { TlgRectangle } from '../tlg/matrix/TlgRectangle'
-import { FileStorageContext } from '../tlg/context/nodejs/FileStorageContext'
+import { GtkContext } from '../../tlg-lib/src/context/nodejs/GtkContext'
+import { NonDrawingContext } from '../../tlg-lib/src/context/NonDrawingContext'
+import { InternalContext} from '../../tlg-lib/src/context/InternalContext'
+import { StateContext } from '../../tlg-lib/src/state/StateContext'
+import { TlgRectangle } from '../../tlg-lib/src/matrix/TlgRectangle'
+import { FileStorageContext } from '../../tlg-lib/src/context/nodejs/FileStorageContext'
 
 
 gi.startLoop()
@@ -40,7 +40,7 @@ win.setDefaultSize(400, 800)
 
 win.on('key-press-event', (key : any) => {
     let update : boolean = true
-   
+
     if (key.keyval == KEY_N) {
         stateContext.startNewGame(platformContext)
 
@@ -65,7 +65,7 @@ win.on('key-press-event', (key : any) => {
     } else {
         update = false
     }
-    
+
     if (update) {
         status.setText(internalContext.getStatusText())
         canvas.queueDraw()
@@ -84,7 +84,7 @@ const canvas = new Gtk.DrawingArea()
 canvas.on('draw', (context : any) => {
     const cairoPlatformContext = new GtkContext(context)
 
-   internalContext.updateAll(cairoPlatformContext)    
+   internalContext.updateAll(cairoPlatformContext)
 
     return true
 })
