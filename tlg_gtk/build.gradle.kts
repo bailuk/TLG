@@ -1,34 +1,56 @@
-
-
 plugins {
-    java
     application
+
+    // https://imperceptiblethoughts.com/shadow/getting-started
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+
+    // https://kotlinlang.org/docs/gradle.html#targeting-the-jvm
+    kotlin("jvm") version "1.7.10"
 }
+
+java.sourceCompatibility = JavaVersion.VERSION_11
+java.targetCompatibility = JavaVersion.VERSION_11
 
 repositories {
+    maven { url = uri("https://jitpack.io") }
+    mavenCentral()
     mavenLocal()
-    maven {
-        url = uri("https://maven.pkg.github.com/bailuk/java-gtk")
-        credentials {
-            username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-            password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
-        }
-    }
-
 }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+val javaGtkVersion: String by project
 
 dependencies {
-
-    implementation("ch.bailu.java-gtk:library:0.1.0-SNAPSHOT")
-    implementation(project(":tlg"))
+    implementation("com.github.bailuk:java-gtk:${javaGtkVersion}")
 }
+
+
+val appMainClass = "AppKt"
 
 application {
-    mainClass.set("ch.bailu.tlg_gtk.Main")
+    mainClass.set(appMainClass)
 }
 
-tasks.withType<Jar> {
-    manifest {
-        attributes["Main-Class"] = "ch.bailu.tlg_gnome.Main"
+tasks {
+    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+        mergeServiceFiles()
+        manifest {
+            attributes(mapOf("Main-Class" to appMainClass))
+        }
+    }
+}
+
+tasks {
+    build {
+        dependsOn(shadowJar)
     }
 }
