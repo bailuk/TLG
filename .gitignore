@@ -1,39 +1,67 @@
+# npm
+node_modules/
 
-.settings
+# Android
+*.apk
+*.ap_
+*.dex
+
+# Java
+.mtj.tmp/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.hprof
+hs_err_pid*
+
+# Gradle
+build/
+.gradle
+.gradletasknamecache
+gradle-app.setting
+!gradle-wrapper.jar
+local.properties
+
+# IntelliJ
+out/
+.idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse
+.settings/
+bin/
+tmp/
 .metadata
 .classpath
 .project
+*.tmp
+*.bak
+*.swp
+*~.nib
+.loadpath
+.factorypath
 
+# NetBeans
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
 
-local.properties
-.idea
+# Visual Studio Code
+.vscode/
+.code-workspace
 
-project.properties
-proguard.cfg
+# Mac OS X / Windows
+*.DS_Store
+Thumbs.db
 
-packager
-
-bin
-gen
-
-
-/org.eclipse.swt
-
-# Ignore Gradle project-specific cache directory
-.gradle
-
-# Ignore Gradle build output directory
-build
-
-# Ignore angular build ouput directory
-dist
-
-# Ignore local npm repository
-node_modules
-
-
-# Ignore maven target directory
-target
-
-# Config file
+# Development
+todo/
 config
