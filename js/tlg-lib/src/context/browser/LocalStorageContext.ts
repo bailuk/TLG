@@ -1,64 +1,55 @@
-import { StorageContext } from '../StorageContext';
+import { StorageContext } from '../StorageContext'
 
 export class LocalStorageContext extends StorageContext {
-    private idR:number = 0;
-    private idW:number = 0;
-    private storage:Storage;
+    private idR:number = 0
+    private idW:number = 0
+    private storage:Storage
 
-
-    constructor() {
-        super();
-        this.storage = window.localStorage;
+    constructor () {
+        super()
+        this.storage = window.localStorage
     }
 
-
-    public writeNumber(n: number): void {
-        this.storage.setItem(this.idW.toString(), n.toString());
-        this.idW++;
+    public writeNumber (n: number): void {
+        this.storage.setItem(this.idW.toString(), n.toString())
+        this.idW++
     }
 
+    public readNumber (): number {
+        const result = Number(this.storage.getItem(this.idR.toString()))
+        this.idR++
 
-    public readNumber(): number {
-        var result = Number(this.storage.getItem(this.idR.toString()));
-        this.idR++;
-
-        return result;
+        return result
     }
 
+    public close (): void {
+        console.log('R: ' + this.idR + ' W: ' + this.idW)
 
-    public close(): void {
-        console.log("R: " + this.idR + " W: " + this.idW);
-
-        this.idR = 0;
-        this.idW = 0;
+        this.idR = 0
+        this.idW = 0
     }
 
-
-
-
-    public static factory():StorageContext {
+    public static factory ():StorageContext {
         if (this.storageAvailable()) {
-            return new LocalStorageContext();
+            return new LocalStorageContext()
         }
 
-        return new StorageContext();
+        return new StorageContext()
     }
 
-
-    private static storageAvailable(): boolean {
-        let storage = null
+    private static storageAvailable (): boolean {
+        let storage: any = null
         try {
-            storage = window.localStorage;
-            const x = '__storage_test__';
+            storage = window.localStorage
+            const x = '__storage_test__'
             if (storage) {
-                storage.setItem(x, x);
-                storage.removeItem(x);
-                return true;
+                storage.setItem(x, x)
+                storage.removeItem(x)
+                return true
             } else {
                 return false
             }
-        }
-        catch(e) {
+        } catch (e) {
             return e instanceof DOMException && (
                 // everything except Firefox
                 e.code === 22 ||
@@ -70,7 +61,7 @@ export class LocalStorageContext extends StorageContext {
                 // Firefox
                 e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
                 // acknowledge QuotaExceededError only if there's something already stored
-                (storage != null && (storage.length !== 0));
+                (storage != null && (storage.length !== 0))
         }
     }
 }

@@ -1,74 +1,66 @@
-import {TlgPoint} from '../matrix/TlgPoint';
-import {TlgRectangle} from '../matrix/TlgRectangle';
-import {PlatformContext} from '../context/PlatformContext';
-
+import { TlgPoint } from '../matrix/TlgPoint'
+import { TlgRectangle } from '../matrix/TlgRectangle'
+import { PlatformContext } from '../context/PlatformContext'
 
 export class NonDrawingContext extends PlatformContext {
-
-    
-
-    public drawLine(color:number, p1:TlgPoint, p2:TlgPoint):void {
+    public drawLine (color:number, p1:TlgPoint, p2:TlgPoint):void {
     }
 
-
-    public drawFilledRectangle(color:number, rect:TlgRectangle):void {
-    } 
-
- 
+    public drawFilledRectangle (color:number, rect:TlgRectangle):void {
+    }
 
     protected static readonly COLORS = [
-        /*WHITE        */"#FFFFFF",
-        /*SILVER       */"#F6F5F4",
-        /*GRAY         */"#808080",
-        /*BLACK        */"#000000",
-        /*RED          */"#FF0000",
-        /*MAROON       */"#800000",
-        /*YELLOW       */"#FFFF00",
-        /*OLIVE        */"#808000",
-        /*LIME         */"#00FF00",
-        /*GREEN        */"#008000",
-        /*AQUA         */"#00FFFF",
-        /*TEAL         */"#008080",
-        /*BLUE         */"#0000FF",
-        /*NAVY         */"#000080",
-        /*FUCHSIA      */"#FF00FF",
-        /*PURPLE       */"#800080",
-    ];
+        /* WHITE        */'#FFFFFF',
+        /* SILVER       */'#F6F5F4',
+        /* GRAY         */'#808080',
+        /* BLACK        */'#000000',
+        /* RED          */'#FF0000',
+        /* MAROON       */'#800000',
+        /* YELLOW       */'#FFFF00',
+        /* OLIVE        */'#808000',
+        /* LIME         */'#00FF00',
+        /* GREEN        */'#008000',
+        /* AQUA         */'#00FFFF',
+        /* TEAL         */'#008080',
+        /* BLUE         */'#0000FF',
+        /* NAVY         */'#000080',
+        /* FUCHSIA      */'#FF00FF',
+        /* PURPLE       */'#800080'
+    ]
 
-  
-    public colorBackground():number {
-        return 1;
+    public colorBackground ():number {
+        return 1
     }
 
-    public colorDark():number {
-        return 3;
-    } 
-
-    public colorHighlight():number {
-        return 0;
+    public colorDark ():number {
+        return 3
     }
 
-    public colorGrayed():number {
-        return 2;
+    public colorHighlight ():number {
+        return 0
     }
 
-    public colorFrame():number {
-        return 3;
+    public colorGrayed ():number {
+        return 2
     }
 
-    public colorGrid():number {
-        return 2;
-    }
-    
-    public countOfColor():number {
-        return NonDrawingContext.COLORS.length-4;
+    public colorFrame ():number {
+        return 3
     }
 
-    public getColor(i:number):number {
-        return Math.floor(3+i);
+    public colorGrid ():number {
+        return 2
     }
 
-    public onNewHighscore() {
+    public countOfColor ():number {
+        return NonDrawingContext.COLORS.length - 4
+    }
+
+    public getColor (i:number):number {
+        return Math.floor(3 + i)
+    }
+
+    public onNewHighscore () {
 
     }
 }

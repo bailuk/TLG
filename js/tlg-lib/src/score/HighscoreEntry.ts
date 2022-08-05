@@ -1,25 +1,21 @@
 export class HighscoreEntry {
+    private static readonly NAMEBUFFER_LIMIT:number = 20
+    private static readonly DEFAULT_NAME:string = '-'
 
-        private static readonly NAMEBUFFER_LIMIT:number=20;
-        private static readonly DEFAULT_NAME:string="-";
+    public readonly name:string
+    public readonly score:number
 
-        public readonly name:string;
-        public readonly score:number;
-
-        constructor(n:string, s:number) {
-                this.name = n;
-                this.score = s;
-        }
+    constructor (n:string, s:number) {
+        this.name = n
+        this.score = s
+    }
 }
 
-
-
-        /*
+/*
         public HighscoreEntry(BufferedInputStream reader) throws IOException {
                 score = ByteInteger.read(reader);
                 name = readName(reader);
         }
-
 
         private String readName(BufferedInputStream reader) throws IOException {
                 byte[] buf;
@@ -31,12 +27,9 @@ export class HighscoreEntry {
                 return new String(buf);
         }
 
-
-
         public void writeState(BufferedOutputStream output) throws IOException {
         System.err.print("write entry");
         System.err.print(name + "\n");
-
 
                 byte[] buf=name.getBytes();
                 ByteInteger.wrap(score).writeState(output);
@@ -44,4 +37,4 @@ export class HighscoreEntry {
                 output.write(buf);
         }
 
-}*/
+} */
