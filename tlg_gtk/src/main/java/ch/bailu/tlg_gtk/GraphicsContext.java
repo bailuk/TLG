@@ -5,6 +5,7 @@ import ch.bailu.gtk.cairo.Antialias;
 import ch.bailu.gtk.cairo.Context;
 import ch.bailu.gtk.gdk.Gdk;
 import ch.bailu.gtk.gtk.Label;
+import ch.bailu.gtk.type.Str;
 import ch.bailu.tlg.TlgPoint;
 import ch.bailu.tlg.TlgRectangle;
 
@@ -12,7 +13,7 @@ public class GraphicsContext extends BaseContext {
 
     private final Context context;
     private final Label score;
-    
+
     public GraphicsContext(Context c, Label l) {
         score = l;
         context = c;
@@ -39,7 +40,7 @@ public class GraphicsContext extends BaseContext {
 
     @Override
     public void drawText(int color, TlgRectangle rect, String text) {
-        score.setLabel(text);
+        score.setLabel(new Str(text));
 
         /*ch.bailu.gtk.pango.Context context = new ch.bailu.gtk.pango.Context(this.context.toLong());
         Layout pango = new Layout(context);

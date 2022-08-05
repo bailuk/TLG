@@ -10,26 +10,25 @@ import ch.bailu.gtk.gtk.ApplicationWindow;
 import ch.bailu.gtk.gtk.Box;
 import ch.bailu.gtk.gtk.DrawingArea;
 import ch.bailu.gtk.gtk.HeaderBar;
-import ch.bailu.gtk.gtk.IconSize;
-import ch.bailu.gtk.gtk.Image;
 import ch.bailu.gtk.gtk.Label;
 import ch.bailu.gtk.gtk.MenuButton;
 import ch.bailu.gtk.gtk.Orientation;
+import ch.bailu.gtk.type.Str;
+import ch.bailu.gtk.type.Strs;
 import ch.bailu.tlg.Constants;
 
 public class Main {
 
 
     public static void main(String[] args) throws IOException {
-        GTK.init();
         new Main(args);
     }
 
     Canvas canvas;
 
 
-    public Main(String args[]) throws IOException {
-        Application app = new Application("ch.bailu.tlg", ApplicationFlags.FLAGS_NONE);
+    public Main(String[] args) throws IOException {
+        Application app = new Application(new Str("ch.bailu.tlg"), ApplicationFlags.FLAGS_NONE);
 
 
         app.onActivate(() -> {
@@ -37,7 +36,7 @@ public class Main {
             canvas = init(window);
         });
 
-        app.run(args.length, args);
+        app.run(args.length, new Strs(args));
         canvas.cleanUp();
     }
 
@@ -50,36 +49,31 @@ public class Main {
         canvas = new Canvas(drawingArea, score);
 
         HeaderBar header = new HeaderBar();
-
-        header.setShowCloseButton(1);
-        header.setTitle("TLG");
-        header.setHasSubtitle(0);
-        header.setDecorationLayout("menu:close");
-
+        header.setShowTitleButtons(GTK.TRUE);
 
         MenuButton menubar = new MenuButton();
-        menubar.add(Image.newFromIconNameImage("open-menu-symbolic", IconSize.BUTTON));
+        //menubar.(Image.newFromIconNameImage("open-menu-symbolic", IconSize.BUTTON));
         header.packStart(menubar);
 
         var vbox = new Box(Orientation.VERTICAL, 2);
-        vbox.packStart(drawingArea, GTK.TRUE, GTK.TRUE, 2);
-        vbox.packEnd(help, GTK.FALSE, GTK.TRUE, 2);
+        vbox.append(drawingArea);
+        vbox.append(help);
 
-        window.add(vbox);
-        window.onKeyPressEvent(eventKey -> canvas.onKeyPressEvent(eventKey));
+        window.setChild(vbox);
 
-        header.add(score);
+        //window.onKeyPressEvent(eventKey -> canvas.onKeyPressEvent(eventKey));
+
+        header.packEnd(score);
         window.setTitlebar(header);
         window.setDefaultSize(400, 800);
-        window.setBorderWidth(0);
 
-        window.showAll();
+        window.show();
         return canvas;
     }
 
 
     private Label createLabel(String string) {
-        Label result = new Label(string);
+        Label result = new Label(new Str(string));
         result.setXalign(0);
         return result;
     }

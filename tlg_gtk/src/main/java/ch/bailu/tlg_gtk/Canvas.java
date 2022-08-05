@@ -6,7 +6,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ch.bailu.gtk.GTK;
-import ch.bailu.gtk.gdk.EventKey;
 import ch.bailu.gtk.gdk.GdkConstants;
 import ch.bailu.gtk.gtk.DrawingArea;
 import ch.bailu.gtk.gtk.Label;
@@ -32,20 +31,19 @@ public class Canvas  {
         baseContext = new BaseContext();
         iContext = new InternalContext(baseContext);
 
-        drawingArea.onDraw(context -> {
+        drawingArea.setDrawFunc((drawing_area, cr, width, height, user_data) -> {
             iContext.layout(new TlgRectangle(0, 0,
-                    drawingArea.getAllocatedWidth(),
-                    drawingArea.getAllocatedHeight()));
+                    drawing_area.getAllocatedWidth(),
+                    drawing_area.getAllocatedHeight()));
 
-            iContext.updateAll(new GraphicsContext(context, score));
-            return GTK.TRUE;
-        });
+            iContext.updateAll(new GraphicsContext(cr, score));
+        }, null, data -> {});
 
         timer = new Timer();
         timer.schedule(new Tick(), iContext.getTimerInterval());
     }
 
-
+/*
     public int onKeyPressEvent(EventKey k) {
         int update = 1;
         Key key = new Key(k);
@@ -79,10 +77,10 @@ public class Canvas  {
             update();
         }
         return update;
-    }
+    }*/
 
 
-    private class Key {
+  /*  private class Key {
         private final int key;
 
         public Key(EventKey key) {
@@ -97,7 +95,7 @@ public class Canvas  {
             }
             return false;
         }
-    }
+    }*/
 
     private class Tick extends TimerTask {
 

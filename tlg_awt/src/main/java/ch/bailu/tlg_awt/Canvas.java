@@ -14,7 +14,6 @@ import ch.bailu.tlg.TlgRectangle;
 
 
 
-
 public class Canvas extends java.awt.Canvas implements KeyListener {
     private static final long serialVersionUID = -5806163437915202761L;
     private final InternalContext iContext;
@@ -22,12 +21,12 @@ public class Canvas extends java.awt.Canvas implements KeyListener {
 
 
     private final Timer timer;
-    
-    
+
+
     public Canvas() {
         baseContext = new BaseContext();
         iContext = new InternalContext(baseContext);
-        
+
         timer = new Timer();
         timer.schedule(new Tick(), iContext.getTimerInterval());
     }
@@ -38,12 +37,11 @@ public class Canvas extends java.awt.Canvas implements KeyListener {
         public void run() {
             iContext.moveDown(baseContext);
             update();
-                
+
             timer.schedule(new Tick(), iContext.getTimerInterval());
         }
     }
 
-    
     @Override
     public void paint(Graphics g) {
         Dimension d = this.getSize();
@@ -51,10 +49,8 @@ public class Canvas extends java.awt.Canvas implements KeyListener {
         iContext.updateAll(new GraphicsContext(g));
      }
 
-
     @Override
     public void keyPressed(KeyEvent key) {}
-
 
     @Override
     public void keyReleased(KeyEvent key) {
@@ -81,17 +77,12 @@ public class Canvas extends java.awt.Canvas implements KeyListener {
             iContext.togglePause(baseContext);
             update();
         }
-
     }
-
 
     @Override
     public void keyTyped(KeyEvent key) {
-        
+
     }
-
-
-    
 
     private void update() {
         Graphics g=getGraphics();
@@ -100,9 +91,6 @@ public class Canvas extends java.awt.Canvas implements KeyListener {
             g.dispose();
         }
     }
-
-
-
 
     public void cleanUp() throws IOException {
         iContext.writeState(baseContext);

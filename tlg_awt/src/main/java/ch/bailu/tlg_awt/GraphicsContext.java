@@ -7,13 +7,12 @@ import ch.bailu.tlg.TlgRectangle;
 
 public class GraphicsContext extends BaseContext{
     private final Graphics graphics;
-    
-    
+
+
     public GraphicsContext(Graphics g) {
         super();
         graphics=g;
     }
-
 
     @Override
     public void drawLine(int color, TlgPoint p1, TlgPoint p2) {
@@ -25,7 +24,7 @@ public class GraphicsContext extends BaseContext{
     public void drawFilledRectangle(int color, TlgRectangle rect) {
         graphics.setColor(getAwtColor(color));
         graphics.fillRect(rect.left, rect.top, rect.getWidth(), rect.getHeight());
-        
+
     }
 
     @Override

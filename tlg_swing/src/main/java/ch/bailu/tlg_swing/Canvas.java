@@ -11,7 +11,6 @@ import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
 import ch.bailu.tlg.InternalContext;
 import ch.bailu.tlg.PlatformContext;
 import ch.bailu.tlg.TlgRectangle;
@@ -19,30 +18,24 @@ import ch.bailu.tlg_awt.BaseContext;
 import ch.bailu.tlg_awt.GraphicsContext;
 
 
-
 public class Canvas extends JPanel implements KeyListener, ActionListener {
-    
+
     private static final long serialVersionUID = -5687686137839387410L;
-    
-    
+
     private final InternalContext iContext;
     private final PlatformContext baseContext;
 
-
     private final Timer timer;
-    
-    
+
+
     public Canvas() {
         baseContext = new BaseContext();
         iContext = new InternalContext(baseContext);
-        
+
         timer = new Timer(iContext.getTimerInterval(), this);
         timer.start();
     }
 
-    
-
-    
     @Override
     public void paintComponent(Graphics g) {
         Dimension d = this.getSize();
@@ -50,10 +43,8 @@ public class Canvas extends JPanel implements KeyListener, ActionListener {
         iContext.updateAll(new GraphicsContext(g));
      }
 
-
     @Override
     public void keyPressed(KeyEvent key) {}
-
 
     @Override
     public void keyReleased(KeyEvent key) {
@@ -80,25 +71,20 @@ public class Canvas extends JPanel implements KeyListener, ActionListener {
             iContext.togglePause(baseContext);
             update();
         }
-
     }
-
 
     @Override
-    public void keyTyped(KeyEvent key) {
-        
-    }
+    public void keyTyped(KeyEvent key) {}
 
     @Override
     public void actionPerformed(ActionEvent x) {
         iContext.moveDown(baseContext);
         update();
-        
+
         if (timer.getDelay() != iContext.getTimerInterval()) {
             timer.setDelay(iContext.getTimerInterval());
         }
     }
-    
 
     private void update() {
         Graphics g=getGraphics();
@@ -108,12 +94,7 @@ public class Canvas extends JPanel implements KeyListener, ActionListener {
         }
     }
 
-
-
-
     public void cleanUp() throws IOException {
         iContext.writeState(baseContext);
     }
-
-
 }

@@ -1,15 +1,11 @@
 buildscript {
-
     repositories {
-        // needed by android edition
+        mavenCentral()
         google()
     }
 
-    val androidBuildToolVersion: String by project
-
     dependencies {
-        // needed by android edition
-        classpath ("com.android.tools.build:gradle:$androidBuildToolVersion")
+        classpath("com.android.tools.build:gradle:7.2.2")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
     }
-
 }

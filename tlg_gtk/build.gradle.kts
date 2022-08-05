@@ -5,7 +5,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 
     // https://kotlinlang.org/docs/gradle.html#targeting-the-jvm
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm")
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -31,10 +31,11 @@ val javaGtkVersion: String by project
 
 dependencies {
     implementation("com.github.bailuk:java-gtk:${javaGtkVersion}")
+    implementation(project(":tlg"))
 }
 
 
-val appMainClass = "AppKt"
+val appMainClass = "ch.bailu.tlg_gtk.Main"
 
 application {
     mainClass.set(appMainClass)
