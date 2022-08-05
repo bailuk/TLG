@@ -2,8 +2,8 @@ import { Square } from './Square';
 import { StorageContext } from '../context/StorageContext';
 
 export class Matrix {
-    private width:number;
-    private height:number;
+    private width = 0;
+    private height = 0;
     private squares:Square[] = [];
 
     private readonly SQUARE=new Square();

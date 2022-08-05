@@ -4,7 +4,7 @@ import { StorageContext } from '../context/StorageContext';
 
 export class MatrixWithShape extends MatrixManipulator {
 
-    private movingShape:MatrixShape;
+    private movingShape = new MatrixShape();
     
     public init (w: number, h:number) {
         super.init(w,h);

@@ -15,17 +15,17 @@ export class LocalStorageContext extends StorageContext {
     public writeNumber(n: number): void {
         this.storage.setItem(this.idW.toString(), n.toString());
         this.idW++;
-    }    
-    
-    
+    }
+
+
     public readNumber(): number {
         var result = Number(this.storage.getItem(this.idR.toString()));
         this.idR++;
 
         return result;
     }
-    
-    
+
+
     public close(): void {
         console.log("R: " + this.idR + " W: " + this.idW);
 
@@ -34,7 +34,7 @@ export class LocalStorageContext extends StorageContext {
     }
 
 
-    
+
 
     public static factory():StorageContext {
         if (this.storageAvailable()) {
@@ -44,15 +44,19 @@ export class LocalStorageContext extends StorageContext {
         return new StorageContext();
     }
 
-    
-    private static storageAvailable():boolean {
-        var storage:Storage;
+
+    private static storageAvailable(): boolean {
+        let storage = null
         try {
             storage = window.localStorage;
-            var x = '__storage_test__';
-            storage.setItem(x, x);
-            storage.removeItem(x);
-            return true;
+            const x = '__storage_test__';
+            if (storage) {
+                storage.setItem(x, x);
+                storage.removeItem(x);
+                return true;
+            } else {
+                return false
+            }
         }
         catch(e) {
             return e instanceof DOMException && (
@@ -66,7 +70,7 @@ export class LocalStorageContext extends StorageContext {
                 // Firefox
                 e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
                 // acknowledge QuotaExceededError only if there's something already stored
-                (storage && storage.length !== 0);
+                (storage != null && (storage.length !== 0));
         }
     }
 }

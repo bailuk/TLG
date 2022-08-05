@@ -6,7 +6,7 @@ import { StorageContext } from '../context/StorageContext';
 export class MatrixShape extends Matrix {
     private static readonly SHAPE_SIZE:number=5;
     
-    private offset:TlgPoint;
+    private offset = new TlgPoint(0,0);
     
 
 
@@ -17,7 +17,7 @@ export class MatrixShape extends Matrix {
 
     public init():void {
         super.init(MatrixShape.SHAPE_SIZE, MatrixShape.SHAPE_SIZE);
-        this.offset=new TlgPoint(0,0);
+        this.offset = new TlgPoint(0,0);
     }
 
     public readState(s:StorageContext):void {

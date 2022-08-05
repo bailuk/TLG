@@ -25,14 +25,15 @@ export class StateContext {
     private readonly pContext:PlatformContext;
     private readonly sContext:StorageContext;
 
-    private state:State;
-    private stateID:number;
+    private state: State;
+    private stateID = StateID.ID_IGNORE;
 
 
     constructor(ic:InternalContext, pc:PlatformContext, sc: StorageContext) {
         this.iContext = ic;
         this.pContext = pc;
         this.sContext = sc;
+        this.state = new StateInit(ic, sc)
         this.set(new StateID(StateID.ID_INIT).toReset());
     }
 

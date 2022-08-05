@@ -6,6 +6,7 @@ const srcPath      = path.resolve(__dirname, 'src');
 const buildPath    = path.resolve(__dirname, 'dist');
 
 module.exports = {
+  mode: 'production',
   entry: path.join(srcPath, 'index.ts'),
 
   output: {

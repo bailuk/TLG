@@ -1,8 +1,8 @@
 import { StorageContext } from '../context/StorageContext';
 
 export class TlgPoint {
-    private x:number;
-    private y:number;
+    private x = 0;
+    private y = 0;
 
     public static copy(p:TlgPoint):TlgPoint {
         return new TlgPoint(p.x,p.y);
