@@ -1,9 +1,11 @@
 package view
 
+import ch.bailu.gtk.GTK
 import context.BaseContext
 import ch.bailu.gtk.gtk.*
 import ch.bailu.gtk.type.Str
 import ch.bailu.tlg.InternalContext
+import config.CSS
 import config.Layout
 import config.Strings.appTitle
 import control.Mouse
@@ -19,6 +21,12 @@ class Window(app: Application) {
     private var running = true
 
     private val status = Label(Str.NULL)
+    private var statusVal = ""
+    private val level = Label(Str.NULL)
+    private var levelVal = -1
+    private val score = Label(Str.NULL)
+    private var scoreVal = -1
+
     private val canvasMain = CanvasMain(iContext)
     private val canvasPreview = CanvasPreview(iContext)
 
@@ -28,6 +36,8 @@ class Window(app: Application) {
             val topBox = Box(Orientation.HORIZONTAL, Layout.margin)
             val bottomBox = Box(Orientation.HORIZONTAL, Layout.margin)
 
+            level.marginStart = Layout.margin * 2
+            level.marginEnd = Layout.margin * 2
             mainBox.marginTop = Layout.margin
             mainBox.marginEnd = Layout.margin
             mainBox.marginBottom = Layout.margin
@@ -38,6 +48,8 @@ class Window(app: Application) {
             mainBox.append(bottomBox)
             bottomBox.append(canvasPreview.drawingArea)
 
+            topBox.append(score)
+            topBox.append(level)
             topBox.append(status)
 
             bottomBox.append(Buttons(iContext, bContext) { update() }.grid)
@@ -59,6 +71,7 @@ class Window(app: Application) {
                 println("window::onShow()")
             }
 
+            CSS.addStyleProvider(this)
             show()
         }
     }
@@ -76,6 +89,20 @@ class Window(app: Application) {
     private fun update() {
         canvasMain.update()
         canvasPreview.update()
-        status.setMarkup("<b>Score:</b> ${iContext.score} - <b>Level:</b> ${iContext.level} - ${iContext.stateText}")
+
+        if (levelVal != iContext.level) {
+            levelVal = iContext.level
+            level.setMarkup("<b>Level:</b> $levelVal")
+        }
+
+        if (scoreVal != iContext.score) {
+            scoreVal = iContext.score
+            score.setMarkup("<b>Score:</b> $scoreVal")
+        }
+
+        if (statusVal != iContext.stateText) {
+            statusVal = iContext.stateText
+            status.setMarkup(statusVal)
+        }
     }
 }

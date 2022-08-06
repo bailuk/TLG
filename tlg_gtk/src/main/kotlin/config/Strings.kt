@@ -22,6 +22,7 @@ object Strings {
 
     // CSS
     val linked = Str("linked")
+    val button = Str("button")
 
     // Defaults
     val empty = Str("")
