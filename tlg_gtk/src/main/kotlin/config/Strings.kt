@@ -3,6 +3,8 @@ package config
 import ch.bailu.gtk.type.Str
 
 object Strings {
+    const val userAgent = "tlg"
+
     val appID = Str("ch.bailu.tlg")
     val appTitle = Str("TLG")
 

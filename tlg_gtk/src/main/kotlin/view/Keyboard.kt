@@ -1,6 +1,6 @@
 package view
 
-import BaseContext
+import context.BaseContext
 import ch.bailu.gtk.GTK
 import ch.bailu.gtk.gdk.GdkConstants
 import ch.bailu.gtk.gtk.EventControllerKey

@@ -1,6 +1,6 @@
 package control
 
-import BaseContext
+import context.BaseContext
 import ch.bailu.gtk.GTK
 import ch.bailu.gtk.gtk.DrawingArea
 import ch.bailu.gtk.gtk.GestureClick

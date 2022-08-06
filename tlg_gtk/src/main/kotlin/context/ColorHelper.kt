@@ -1,10 +1,14 @@
+package context
+
+import kotlin.math.floor
+
 /**
  *
  * originally from
  * http://www.java2s.com/Code/Java/2D-Graphics-GUI/HSVtoRGB.htm
  */
 object ColorHelper {
-    fun HSVtoRGB(h: Float, s: Float, v: Float): FloatArray {
+    fun convertHSVtoRGB(h: Float, s: Float, v: Float): FloatArray {
         // H is given on [0->6] or -1. S and V are given on [0->1].
         // RGB are each returned on [0->1].
         val m: Float
@@ -22,7 +26,7 @@ object ColorHelper {
             rgb[0] = rgb[1]
             return rgb
         }
-        i = Math.floor(hsv[0].toDouble()).toInt()
+        i = floor(hsv[0].toDouble()).toInt()
         f = hsv[0] - i
         if (i % 2 == 0) {
             f = 1 - f // if i is even

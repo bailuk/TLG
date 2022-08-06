@@ -1,6 +1,6 @@
 package view
 
-import BaseContext
+import context.BaseContext
 import ch.bailu.gtk.gtk.*
 import ch.bailu.gtk.type.Str
 import ch.bailu.tlg.InternalContext

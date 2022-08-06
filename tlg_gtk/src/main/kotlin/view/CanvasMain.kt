@@ -1,6 +1,6 @@
 package view
 
-import GraphicsContext
+import context.GraphicsContext
 import ch.bailu.gtk.GTK
 import ch.bailu.gtk.cairo.Context
 import ch.bailu.gtk.gtk.DrawingArea
