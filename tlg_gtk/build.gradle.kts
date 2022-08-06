@@ -35,7 +35,7 @@ dependencies {
 }
 
 
-val appMainClass = "ch.bailu.tlg_gtk.Main"
+val appMainClass = "AppKt"
 
 application {
     mainClass.set(appMainClass)
