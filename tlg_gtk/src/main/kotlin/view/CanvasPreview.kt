@@ -11,7 +11,7 @@ import ch.bailu.tlg.TlgRectangle
 
 class CanvasPreview(private val iContext: InternalContext, score: Label) {
     val drawingArea = DrawingArea().apply {
-        vexpand = GTK.TRUE
+        hexpand = GTK.TRUE
 
         setDrawFunc({ drawing_area: DrawingArea, cr: Context, _: Int, _: Int, _: Pointer? ->
             iContext.previewLayout(

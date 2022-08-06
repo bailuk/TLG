@@ -7,6 +7,7 @@ import ch.bailu.tlg.InternalContext
 import config.Layout
 import config.Strings.appTitle
 import control.Mouse
+import lib.extension.setMarkup
 import java.util.*
 
 class Window(app: Application) {
@@ -17,85 +18,71 @@ class Window(app: Application) {
     }
     private var running = true
 
-    private val score = createLabel("Score:")
-    private val canvasMain = CanvasMain(iContext, score)
-    private val canvasPreview = CanvasPreview(iContext, score)
-
+    private val status = Label(Str.NULL)
+    private val canvasMain = CanvasMain(iContext, status)
+    private val canvasPreview = CanvasPreview(iContext, status)
 
     init {
-
         ApplicationWindow(app).apply {
-            val grid = Grid()
+            val mainBox = Box(Orientation.VERTICAL, Layout.margin)
+            val topBox = Box(Orientation.HORIZONTAL, Layout.margin)
+            val bottomBox = Box(Orientation.HORIZONTAL, Layout.margin)
+            val buttonGrid = Grid()
 
-            grid.attach(score, 0,0,10,1)
-            grid.attach(canvasMain.drawingArea, 0, 1, 7, 10)
-            grid.attach(canvasPreview.drawingArea, 7, 1, 3, 3)
+            mainBox.marginTop = Layout.margin
+            mainBox.marginEnd = Layout.margin
+            mainBox.marginBottom = Layout.margin
+            mainBox.marginStart = Layout.margin
 
-            grid.attach(Button().apply {
+            mainBox.append(topBox)
+            mainBox.append(canvasMain.drawingArea)
+            mainBox.append(bottomBox)
+            bottomBox.append(canvasPreview.drawingArea)
+
+            topBox.append(status)
+
+            bottomBox.append(buttonGrid)
+
+            buttonGrid.attach(Button().apply {
                 iconName  = Str("go-previous-symbolic")
                 onClicked {
                     iContext.moveLeft(baseContext)
                     update()
                 }
-            }, 7, 6, 1,1)
+            }, 0, 1, 1,1)
 
-            grid.attach(Button().apply {
+            buttonGrid.attach(Button().apply {
                 iconName  = Str("go-next-symbolic")
                 onClicked {
                     iContext.moveRight(baseContext)
                     update()
                 }
-            }, 9, 6, 1,1)
+            }, 2, 1, 1,1)
 
-            grid.attach(Button().apply {
+            buttonGrid.attach(Button().apply {
                 iconName  = Str("go-down-symbolic")
                 onClicked {
                     iContext.moveDown(baseContext)
                     update()
                 }
-            }, 8, 6, 1,1)
+            }, 1, 1, 1,1)
 
-            grid.attach(Button().apply {
+            buttonGrid.attach(Button().apply {
                 iconName  = Str("go-up-symbolic")
                 onClicked {
                     iContext.moveTurn(baseContext)
                     update()
                 }
-            }, 8, 5, 1,1)
-
-
-            grid.attach(Button().apply {
-                label = Str("New Game")
-                onClicked {
-                    iContext.startNewGame(baseContext)
-                    update()
-                }
-            }, 7, 8, 3,1)
-
-            grid.attach(Button().apply {
-                label = Str("Pause")
-                onClicked {
-                    iContext.togglePause(baseContext)
-                    update()
-                }
-            }, 7, 9, 3,1)
-
-            grid.attach(Button().apply {
-                label = Str("Grid")
-                onClicked {
-                    iContext.toggleGrid()
-                    update()
-                }
-            }, 7, 10, 3,1)
+            }, 1, 0, 1,1)
 
 
             Mouse(canvasMain.drawingArea, iContext, baseContext) {
                 update()
             }
 
-            child = grid
-            title=  appTitle
-            titlebar = Header().headerBar
+            child = mainBox
+            title =  appTitle
+            titlebar = Header(this, app, iContext, baseContext) { update() }.headerBar
             setDefaultSize(Layout.windowWidth, Layout.windowHeight)
 
             onDestroy {
@@ -103,14 +90,11 @@ class Window(app: Application) {
                 timer.cancel()
                 iContext.writeState(baseContext)
             }
+            onShow {
+                println("window::onShow()")
+            }
             show()
         }
-    }
-
-    private fun createLabel(string: String): Label {
-        val result = Label(Str(string))
-        result.xalign = 0f
-        return result
     }
 
     private inner class Tick : TimerTask() {
@@ -127,5 +111,6 @@ class Window(app: Application) {
         println("Update called")
         canvasMain.update()
         canvasPreview.update()
+        status.setMarkup("<b>Score:</b> ${iContext.score} - <b>Level:</b> ${iContext.level} - ${iContext.stateText}")
     }
 }

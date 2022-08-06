@@ -67,7 +67,7 @@ if [ "$option_build" = "--build" ]; then
 fi
 
 # install
-if [ -n "$option_install" ]; then
+if [ "$option_install" = "" ]; then
   $cmd "test -d ${data} || mkdir ${data}" || exit 1
   $copy $source_jar "${tor}${data}/${app}.jar"  || exit 1
   # $copy $source_icon "${tor}${data}/${app}.svg" || exit 1

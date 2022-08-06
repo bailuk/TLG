@@ -4,13 +4,11 @@ import java.io.IOException;
 
 public class StateHighscore extends State {
     public static final int ID=1;
-    
+
     public StateHighscore(InternalContext c) {
         super(c);
-        context.setStatusText("New Highscore!");
     }
 
-    
     @Override
     public State init(PlatformContext c) {
         context.state=this;
@@ -18,10 +16,8 @@ public class StateHighscore extends State {
         return this;
     }
 
-
     @Override
     public State setHighscoreName(PlatformContext c, String name) {
-
         if (name.length()>0) {
             HighscoreList highscoreList = new HighscoreList(c);
 
@@ -39,9 +35,13 @@ public class StateHighscore extends State {
         }
     }
 
-    
     @Override
     public int getID() {
         return ID;
+    }
+
+    @Override
+    public String toString() {
+        return "New Highscore!";
     }
 }
