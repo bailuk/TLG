@@ -1,55 +1,61 @@
 package view
 
-class Keyboard {
-    /*
-     public int onKeyPressEvent(EventKey k) {
-         int update = 1;
-         Key key = new Key(k);
+import BaseContext
+import ch.bailu.gtk.GTK
+import ch.bailu.gtk.gdk.GdkConstants
+import ch.bailu.gtk.gtk.EventControllerKey
+import ch.bailu.tlg.InternalContext
 
-         if (key.has(GdkConstants.KEY_N, GdkConstants.KEY_n)) {
-             iContext.startNewGame(baseContext);
+class Keyboard(iContext: InternalContext, bContext: BaseContext, updateView: () -> Unit) {
+    val eventControllerKey = EventControllerKey().apply {
+        onKeyPressed() { keyVal: Int, _, _ ->
+            var update = GTK.TRUE
+            val key = Key(keyVal)
 
-         } else if (key.has(GdkConstants.KEY_Down)) {
-             iContext.moveDown(baseContext);
+            if (key.has(GdkConstants.KEY_N, GdkConstants.KEY_n)) {
+                iContext.startNewGame(bContext)
 
-         } else if (key.has(GdkConstants.KEY_Left)) {
-             iContext.moveLeft(baseContext);
+            } else if (key.has(GdkConstants.KEY_Down)) {
+                iContext.moveDown(bContext)
 
-         } else if (key.has(GdkConstants.KEY_Right)) {
-             iContext.moveRight(baseContext);
+            } else if (key.has(GdkConstants.KEY_Left)) {
+                iContext.moveLeft(bContext)
 
-         } else if (key.has(GdkConstants.KEY_Up)) {
-             iContext.moveTurn(baseContext);
+            } else if (key.has(GdkConstants.KEY_Right)) {
+                iContext.moveRight(bContext)
 
-         } else if (key.has(GdkConstants.KEY_G, GdkConstants.KEY_g)) {
-             iContext.toggleGrid();
+            } else if (key.has(GdkConstants.KEY_Up)) {
+                iContext.moveTurn(bContext)
 
-         } else if (key.has(GdkConstants.KEY_P, GdkConstants.KEY_p, GdkConstants.KEY_space)) {
-             iContext.togglePause(baseContext);
+            } else if (key.has(GdkConstants.KEY_G, GdkConstants.KEY_g)) {
+                iContext.toggleGrid()
 
-         } else {
-             update = 0;
-         }
+            } else if (key.has(
+                    GdkConstants.KEY_P,
+                    GdkConstants.KEY_p,
+                    GdkConstants.KEY_space
+                )
+            ) {
+                iContext.togglePause(bContext)
+            } else {
+                update = GTK.FALSE
+            }
 
-         if (update == 1) {
-             update();
-         }
-         return update;
-     }*/
-    /*  private class Key {
-        private final int key;
-
-        public Key(EventKey key) {
-            this.key = key.getFieldKeyval();
+            if (GTK.IS(update)) {
+                updateView()
+            }
+            update
         }
+    }
 
-        public boolean has(int... keys) {
-            for (int k : keys) {
+    private inner class Key(private val key: Int) {
+        fun has(vararg keys: Int): Boolean {
+            for (k in keys) {
                 if (key == k) {
-                    return true;
+                    return true
                 }
             }
-            return false;
+            return false
         }
-    }*/
+    }
 }

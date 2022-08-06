@@ -76,9 +76,8 @@ class Window(app: Application) {
             }, 1, 0, 1,1)
 
 
-            Mouse(canvasMain.drawingArea, iContext, baseContext) {
-                update()
-            }
+            Mouse(canvasMain.drawingArea, iContext, baseContext) { update() }
+            addController(Keyboard(iContext, baseContext) { update() }.eventControllerKey)
 
             child = mainBox
             title =  appTitle
@@ -90,6 +89,7 @@ class Window(app: Application) {
                 timer.cancel()
                 iContext.writeState(baseContext)
             }
+
             onShow {
                 println("window::onShow()")
             }
