@@ -20,6 +20,6 @@ class Header(window: Window, app: Application, iContext: InternalContext, bConte
                 update()
             }
         })
-        packEnd(MainMenu(window, app, iContext, bContext, ).menuButton)
+        packEnd(MainMenu(window, app, iContext, bContext, update).menuButton)
     }
 }

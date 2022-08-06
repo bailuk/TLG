@@ -37,7 +37,7 @@ if [ -f $jar ]; then
   source_icon=app-icon.svg
 else
   source_jar="tlg_gtk/$build/$jar"
-  # source_icon="src/main/resources/svg/app-icon.svg"
+  source_icon="tlg_gtk/src/main/resources/svg/app-icon.svg"
   test -d gradle || cd ..
   test -d gradle || cd ..
 fi
@@ -70,7 +70,7 @@ fi
 if [ "$option_install" = "" ]; then
   $cmd "test -d ${data} || mkdir ${data}" || exit 1
   $copy $source_jar "${tor}${data}/${app}.jar"  || exit 1
-  # $copy $source_icon "${tor}${data}/${app}.svg" || exit 1
+  $copy $source_icon "${tor}${data}/${app}.svg" || exit 1
 
   echo "create '${desktop}'"
   $cmd "cat > ${desktop}" << EOF

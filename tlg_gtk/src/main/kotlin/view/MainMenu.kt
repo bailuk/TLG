@@ -1,15 +1,16 @@
 package view
 
-import context.BaseContext
-import ch.bailu.gtk.gtk.Application
-import ch.bailu.gtk.gtk.MenuButton
+import ch.bailu.gtk.gtk.*
+import ch.bailu.gtk.gtk.Window
 import ch.bailu.gtk.type.Str
+import ch.bailu.tlg.Constants
 import ch.bailu.tlg.InternalContext
 import config.Strings
+import context.BaseContext
 import lib.menu.Actions
 import lib.menu.MenuModelBuilder
 
-class MainMenu(window: ch.bailu.gtk.gtk.Window, app: Application, iContext: InternalContext, bContext: BaseContext) {
+class MainMenu(window: Window, app: Application, iContext: InternalContext, bContext: BaseContext, update: () -> Unit) {
     private val actions = Actions(app)
 
     val menuButton = MenuButton().apply {
@@ -17,9 +18,23 @@ class MainMenu(window: ch.bailu.gtk.gtk.Window, app: Application, iContext: Inte
         menuModel = MenuModelBuilder().apply {
             label(Strings.newGame) {
                 iContext.startNewGame(bContext)
+                update()
             }
             label(Strings.grid) {
                 iContext.toggleGrid()
+                update()
+            }
+            label(Strings.help) {
+                MessageDialog(window,
+                    DialogFlags.DESTROY_WITH_PARENT.or(DialogFlags.MODAL),
+                    MessageType.INFO,
+                    ButtonsType.CLOSE,
+                    Str(Constants.HELP_TEXT)).apply {
+                    onResponse {
+                        close()
+                        destroy()
+                    }
+                }.show()
             }
             label(Strings.info) {
                 About.show(window)

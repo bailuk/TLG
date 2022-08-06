@@ -19,6 +19,7 @@ object Strings {
     const val info = "Info…"
     const val grid = "Toggle grid"
     const val newGame = "New game"
+    const val help = "Help…"
 
     // CSS
     val linked = Str("linked")

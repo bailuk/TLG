@@ -4,11 +4,12 @@ import ch.bailu.gtk.GTK
 import ch.bailu.gtk.gtk.*
 import ch.bailu.gtk.gtk.Window
 import config.Strings
+import lib.icons.IconMap
 
 object About {
     fun show(window: Window) {
         AboutDialog().apply {
-            //logo = IconMap.getPaintable("app-icon", 100)
+            logo = IconMap.getPaintable("app-icon", 100)
             programName = Strings.appTitle
             version = Strings.version
             website = Strings.website
