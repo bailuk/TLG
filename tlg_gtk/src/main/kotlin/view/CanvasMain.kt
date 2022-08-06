@@ -1,15 +1,14 @@
 package view
 
-import context.GraphicsContext
 import ch.bailu.gtk.GTK
 import ch.bailu.gtk.cairo.Context
 import ch.bailu.gtk.gtk.DrawingArea
-import ch.bailu.gtk.gtk.Label
 import ch.bailu.gtk.type.Pointer
 import ch.bailu.tlg.InternalContext
 import ch.bailu.tlg.TlgRectangle
+import context.GraphicsContext
 
-class CanvasMain(private val iContext: InternalContext, score: Label) {
+class CanvasMain(private val iContext: InternalContext) {
     val drawingArea = DrawingArea().apply {
         hexpand = GTK.TRUE
         vexpand = GTK.TRUE
@@ -22,7 +21,7 @@ class CanvasMain(private val iContext: InternalContext, score: Label) {
                     drawing_area.allocatedHeight
                 )
             )
-            iContext.updateAllMain(GraphicsContext(cr, score))
+            iContext.updateAllMain(GraphicsContext(cr))
         }, null) { _: Pointer? -> }
 
     }
