@@ -10,11 +10,13 @@ import ch.bailu.tlg_android.controller.MotionEventTranslater
 
 class GameView(iContext: InternalContext, tContext: AndroidContext) {
     private val motionTranslator = MotionEventTranslater()
-    private val paintThread = PaintThread(tContext, { iContext.updateMain(it) }, { iContext.updateAllMain(it) })
+    private var paintThread = PaintThread(tContext, {}, {})
 
     val surface = SurfaceView(tContext.getAndroidContext()).apply {
+
         holder.addCallback(object: SurfaceHolder.Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {
+                paintThread = PaintThread(tContext, {iContext.updateMain(it)}, {iContext.updateAllMain(it)})
                 paintThread.startPainter(context, holder)
             }
 

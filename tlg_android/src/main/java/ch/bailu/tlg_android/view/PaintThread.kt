@@ -1,7 +1,6 @@
 package ch.bailu.tlg_android.view
 
 import android.content.Context
-import android.util.Log
 import android.view.SurfaceHolder
 import ch.bailu.tlg_android.context.AndroidContext
 import ch.bailu.tlg_android.context.FullGraphicContext
@@ -14,13 +13,13 @@ class PaintThread(
     private val cbUpdateAll: (tContext: AndroidContext)->Unit) : Thread() {
 
     private enum class Job {
-        paint, paintAll, none
+        PAINT, PAINT_ALL, NONE
     }
 
     private val lock = ReentrantLock()
     private val condition = lock.newCondition()
 
-    private var job = Job.none
+    private var job = Job.NONE
     private var runningThread = false
 
     override fun run() {
@@ -39,19 +38,16 @@ class PaintThread(
 
     private fun waitForNextJob() {
         lock.withLock {
-            Log.d("PaintThread", "wait()")
             condition.await()
-            Log.d("PaintThread", "wait() -> ok")
-
         }
     }
 
     private fun haveJob(): Boolean {
-        return job != Job.none
+        return job != Job.NONE
     }
 
     private fun executeJob(j: Job) {
-        if (j == Job.paint) {
+        if (j == Job.PAINT) {
             cbUpdate(tContext)
         } else {
             cbUpdateAll(tContext)
@@ -60,23 +56,23 @@ class PaintThread(
     }
 
     private fun jobDone() {
-        job = Job.none
+        job = Job.NONE
     }
 
     fun updateAll() {
-        requestJob(Job.paintAll)
+        requestJob(Job.PAINT_ALL)
     }
 
     fun update() {
-        requestJob(Job.paint)
+        if (job == Job.NONE) {
+            requestJob(Job.PAINT)
+        }
     }
 
     private fun requestJob(j: Job) {
-        if (job != Job.paintAll) job = j
+        job = j
         lock.withLock {
-            Log.d("PaintThread", " requestJob::signalAll()")
             condition.signalAll()
-            Log.d("PaintThread", "::requestJob::signalAll() -> ok")
         }
     }
 
@@ -94,13 +90,9 @@ class PaintThread(
     }
 
     private fun orderShutdown() {
-        Log.i("Painter", "Stop")
         runningThread = false
-
         lock.withLock {
-            Log.d("PaintThread", "orderShutdown::signalAll()")
             condition.signalAll()
-            Log.d("PaintThread", "orderShutdown::signalAll() -> ok")
         }
     }
 }
