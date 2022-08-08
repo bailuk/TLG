@@ -28,7 +28,7 @@ public class StateRunning extends State {
         Random random = new Random();
 
         int shape=random.nextInt(context.currentScore.getLevel() * SHAPE_PER_LEVEL)+1;
-        int color=gc.getColor(shape%gc.countOfColor());
+        int color=gc.getColor(shape % gc.countOfColor());
         int turn=random.nextInt(4);
 
         context.previewMatrix.erase();

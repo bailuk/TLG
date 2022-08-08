@@ -3,14 +3,17 @@ package ch.bailu.tlg_android.context
 import android.content.Context
 import android.graphics.Color
 import ch.bailu.tlg.PlatformContext
+import ch.bailu.tlg.StateRunning
 import java.io.File
 
 abstract class AndroidContext(private val context: Context) : PlatformContext() {
     companion object {
+        private const val PALETTE_SIZE = StateRunning.SHAPE_PER_LEVEL * 3
+
         private val palette = ArrayList<Int>().apply {
             val colorStep = 360 / 8
             var h = 0f
-            for (i in indices) {
+            for (i in 0 until PALETTE_SIZE) {
                 add(Color.HSVToColor(floatArrayOf(h, 1f, 1f)))
                 h += colorStep
                 h %= 360

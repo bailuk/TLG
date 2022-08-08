@@ -3,13 +3,16 @@ package ch.bailu.tlg_android.view
 import android.content.Context
 import android.util.Log
 import android.view.SurfaceHolder
-import ch.bailu.tlg.InternalContext
 import ch.bailu.tlg_android.context.AndroidContext
 import ch.bailu.tlg_android.context.FullGraphicContext
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
-class PaintThread(private val iContext: InternalContext, private var tContext: AndroidContext): Thread() {
+class PaintThread(
+    private var tContext: AndroidContext,
+    private val cbUpdate: (tContext: AndroidContext)->Unit,
+    private val cbUpdateAll: (tContext: AndroidContext)->Unit) : Thread() {
+
     private enum class Job {
         paint, paintAll, none
     }
@@ -20,11 +23,11 @@ class PaintThread(private val iContext: InternalContext, private var tContext: A
     private var job = Job.none
     private var runningThread = false
 
-    @Synchronized
     override fun run() {
-        while (runningThread) waitAndExecuteJob()
+        while (runningThread) {
+            waitAndExecuteJob()
+        }
     }
-
 
     private fun waitAndExecuteJob() {
         if (haveJob()) {
@@ -36,7 +39,10 @@ class PaintThread(private val iContext: InternalContext, private var tContext: A
 
     private fun waitForNextJob() {
         lock.withLock {
+            Log.d("PaintThread", "wait()")
             condition.await()
+            Log.d("PaintThread", "wait() -> ok")
+
         }
     }
 
@@ -46,13 +52,12 @@ class PaintThread(private val iContext: InternalContext, private var tContext: A
 
     private fun executeJob(j: Job) {
         if (j == Job.paint) {
-            iContext.update(tContext)
+            cbUpdate(tContext)
         } else {
-            iContext.updateAll(tContext)
+            cbUpdateAll(tContext)
         }
         tContext.unlockCanvas()
     }
-
 
     private fun jobDone() {
         job = Job.none
@@ -66,18 +71,17 @@ class PaintThread(private val iContext: InternalContext, private var tContext: A
         requestJob(Job.paint)
     }
 
-    @Synchronized
     private fun requestJob(j: Job) {
         if (job != Job.paintAll) job = j
         lock.withLock {
-            condition.signal()
+            Log.d("PaintThread", " requestJob::signalAll()")
+            condition.signalAll()
+            Log.d("PaintThread", "::requestJob::signalAll() -> ok")
         }
     }
 
-    @Synchronized
     fun startPainter(context: Context, surfaceHolder: SurfaceHolder) {
         if (!runningThread) {
-            Log.i("Painter", "Start")
             tContext = FullGraphicContext(context, surfaceHolder)
             updateAll()
             runningThread = true
@@ -89,13 +93,14 @@ class PaintThread(private val iContext: InternalContext, private var tContext: A
         orderShutdown()
     }
 
-    @Synchronized
     private fun orderShutdown() {
         Log.i("Painter", "Stop")
         runningThread = false
 
         lock.withLock {
-            condition.signal()
+            Log.d("PaintThread", "orderShutdown::signalAll()")
+            condition.signalAll()
+            Log.d("PaintThread", "orderShutdown::signalAll() -> ok")
         }
     }
 }

@@ -1,28 +1,92 @@
 package ch.bailu.tlg_android.activity
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.*
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.PopupMenu
+import android.widget.TextView
+import ch.bailu.tlg_android.Configuration
 import ch.bailu.tlg_android.R
-import ch.bailu.tlg_android.controller.MotionEventTranslater
-import ch.bailu.tlg_android.view.GameView
-import java.io.BufferedOutputStream
+import ch.bailu.tlg_android.controller.Controller
 
-class GameActivity : Activity(), Runnable, SurfaceHolder.Callback {
-    private var timer: Handler? = null
-    private var tetris: GameView? = null
-    private var motionTranslater: MotionEventTranslater? = null
 
+class GameActivity : Activity() {
+    private var controller: Controller? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val surface = SurfaceView(this)
-        surface.holder.addCallback(this)
-        setContentView(surface)
-        motionTranslater = MotionEventTranslater()
+
+        val context = this
+
+        val controller = Controller(context)
+        val mainLayout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+        }
+
+        val statusLayout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            addView(TextView(context).apply {
+                text = "Level"
+            })
+            addView(TextView(context).apply {
+                text = "Status"
+            })
+            addView(TextView(context).apply {
+                text = "Score"
+            })
+        }
+
+        val buttonLayout = LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+            addView(Button(context).apply {
+                setOnClickListener {
+                    controller.pauseOrResume()
+                }
+
+                text = "Pause"
+            })
+
+            addView(Button(context).apply {
+                setOnClickListener {
+                    val popup = PopupMenu(context, it)
+                    inflateMenu(R.menu.menu, popup.menu)
+                    popup.setOnMenuItemClickListener { item->
+                        onOptionsItemSelected(item)
+                    }
+                    popup.show()
+                }
+                text = "Menu…"
+            })
+
+        }
+
+        val topLayout = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            addView(buttonLayout)
+            addView(TextView(context), Configuration.MARGIN,Configuration.MARGIN)
+            addView(controller.gamePreview.surface, Configuration.PREVIEW_SIZE,Configuration.PREVIEW_SIZE)
+            addView(TextView(context), Configuration.MARGIN,Configuration.MARGIN)
+            addView(statusLayout)
+        }
+
+        mainLayout.addView(topLayout)
+        mainLayout.addView(TextView(context), Configuration.MARGIN,Configuration.MARGIN)
+        mainLayout.addView(controller.gameMainView.surface)
+        setContentView(mainLayout)
+        this.controller = controller
+    }
+
+    override fun onResume() {
+        super.onResume()
+        controller?.onActivityResume()
+    }
+
+    override fun onPause() {
+        controller?.onActivityPause()
+        super.onPause()
     }
 
 
@@ -32,44 +96,44 @@ class GameActivity : Activity(), Runnable, SurfaceHolder.Callback {
     }
 
     private fun inflateMenu(id: Int, menu: Menu?) {
-        val inflater: MenuInflater = getMenuInflater()
-        inflater.inflate(id, menu)
+        menuInflater.inflate(id, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_grid -> {
-                tetris!!.toggleGrid()
-                true
+        val tetris = controller
+        if (tetris is Controller) {
+            return when (item.itemId) {
+                R.id.menu_grid -> {
+                    tetris.toggleGrid()
+                    true
+                }
+                R.id.menu_pause -> {
+                    tetris.pauseOrResume()
+                    true
+                }
+                R.id.menu_start -> {
+                    tetris.newGame()
+                    true
+                }
+                R.id.menu_about -> {
+                    startActivity(AboutActivity::class.java)
+                    true
+                }
+                R.id.menu_score -> {
+                    startActivity(HighscoreActivity::class.java)
+                    true
+                }
+                R.id.menu_name -> {
+                    tetris.setHighscoreName()
+                    false
+                }
+                else -> false
             }
-            R.id.menu_pause -> {
-                tetris!!.pauseOrResume()
-                startTimer()
-                true
-            }
-            R.id.menu_start -> {
-                tetris!!.newGame()
-                startTimer()
-                true
-            }
-            R.id.menu_about -> {
-                start(AboutActivity::class.java)
-                true
-            }
-            R.id.menu_score -> {
-                start(HighscoreActivity::class.java)
-                true
-            }
-            R.id.menu_name -> {
-                tetris!!.setHighscoreName()
-                false
-            }
-            else -> false
         }
+        return false
     }
 
-
-    private fun start(activityClass: Class<*>) {
+    private fun startActivity(activityClass: Class<*>) {
         val intent = Intent()
         intent.setClass(this, activityClass)
         intent.action = activityClass.name
@@ -77,74 +141,8 @@ class GameActivity : Activity(), Runnable, SurfaceHolder.Callback {
         startActivity(intent)
     }
 
-
-    private fun startTimer() {
-        if (timer == null) {
-            timer = Handler()
-            kickTimer()
-        }
-    }
-
-    private fun stopTimer() {
-        if (timer != null) {
-            timer!!.removeCallbacks(this)
-            timer = null
-        }
-    }
-
-    private fun kickTimer() {
-        val timer = timer
-        if (timer is Handler) {
-            val interval = tetris!!.timerInterval
-            if (interval == 0) {
-                stopTimer()
-            } else {
-                timer.removeCallbacks(this)
-                timer.postDelayed(this, interval.toLong()) // fire in milliseconds
-            }
-        }
-    }
-
-    override fun run() {
-        tetris!!.moveShape(MotionEventTranslater.KEY_DOWN)
-        kickTimer()
-    }
-
-    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-        tetris!!.setPixelGeometry(width, height)
-        motionTranslater!!.setGeometry(width, height)
-    }
-
-
-    override fun surfaceCreated(holder: SurfaceHolder) {
-        tetris = GameView(this)
-        startTimer()
-        tetris!!.startPainter(this, holder)
-    }
-
-
-    override fun surfaceDestroyed(holder: SurfaceHolder) {
-        tetris!!.stopPainter()
-        stopTimer()
-        writeState()
-    }
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        val motionTranslater = motionTranslater
-        
-        if (motionTranslater is MotionEventTranslater && motionTranslater.translateEvent(event)) tetris!!.moveShape(motionTranslater.getLastEvent())
+        controller?.onTouchEvent(event)
         return true
-    }
-
-    private val STATE_FILE = "app_state"
-
-    private fun writeState() {
-        try {
-            val output = BufferedOutputStream(openFileOutput(STATE_FILE, Context.MODE_PRIVATE))
-            tetris!!.writeState()
-            output.close()
-        } catch (e: Exception) {
-            System.err.println(e.message)
-        }
     }
 }

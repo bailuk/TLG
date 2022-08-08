@@ -65,13 +65,13 @@ public class InternalContext {
         previewMatrix.setPixelGeometry(previewGeometry);
     }
 
-    public synchronized void updatePreview(PlatformContext gc) {
-        previewMatrix.update(gc);
+    public synchronized void updatePreview(PlatformContext platformContext) {
+        previewMatrix.update(platformContext);
     }
 
-    public synchronized void updateAllPreview(PlatformContext gc) {
-        updateBackgroundPreview(gc);
-        previewMatrix.updateAll(gc);
+    public synchronized void updateAllPreview(PlatformContext platformContext) {
+        updateBackgroundPreview(platformContext);
+        previewMatrix.updateAll(platformContext);
     }
 
     public synchronized void updateMain(PlatformContext gc) {

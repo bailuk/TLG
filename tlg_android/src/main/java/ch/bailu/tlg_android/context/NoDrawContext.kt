@@ -3,7 +3,6 @@ package ch.bailu.tlg_android.context
 import android.content.Context
 import ch.bailu.tlg.TlgPoint
 import ch.bailu.tlg.TlgRectangle
-import ch.bailu.tlg_android.AndroidContext
 
 open class NoDrawContext(c: Context) : AndroidContext(c) {
     override fun drawLine(color: Int, p1: TlgPoint, p2: TlgPoint) {}

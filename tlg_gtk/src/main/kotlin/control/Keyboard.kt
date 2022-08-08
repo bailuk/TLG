@@ -1,4 +1,4 @@
-package view
+package control
 
 import context.BaseContext
 import ch.bailu.gtk.GTK

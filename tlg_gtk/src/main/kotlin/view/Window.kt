@@ -1,6 +1,5 @@
 package view
 
-import ch.bailu.gtk.GTK
 import context.BaseContext
 import ch.bailu.gtk.gtk.*
 import ch.bailu.gtk.type.Str
@@ -8,6 +7,7 @@ import ch.bailu.tlg.InternalContext
 import config.CSS
 import config.Layout
 import config.Strings.appTitle
+import control.Keyboard
 import control.Mouse
 import lib.extension.setMarkup
 import java.util.*
