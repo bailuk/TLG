@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="TLG GTK" type="JetRunConfigurationType">
+  <configuration default="false" name="TLG Swing" type="JetRunConfigurationType">
     <option name="MAIN_CLASS_NAME" value="AppKt" />
-    <module name="TLG.tlg_gtk.main" />
+    <module name="TLG.tlg_swing.main" />
     <shortenClasspath name="NONE" />
     <method v="2">
       <option name="Make" enabled="true" />

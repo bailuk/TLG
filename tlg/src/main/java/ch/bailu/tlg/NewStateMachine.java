@@ -6,10 +6,7 @@ public class NewStateMachine {
         public abstract State inputPause();
         public abstract State inputLocked();
     }
-    
-    
-    
-    
+
     public class Init extends State {
 
         @Override
@@ -27,8 +24,8 @@ public class NewStateMachine {
             return this;
         }
     }
-    
-    
+
+
     public class Running extends State {
 
         @Override
@@ -45,10 +42,10 @@ public class NewStateMachine {
         public State inputLocked() {
             return new Locked();
         }
-        
+
     }
-    
-    
+
+
     public class Paused extends State {
 
         @Override
@@ -65,10 +62,10 @@ public class NewStateMachine {
         public State inputLocked() {
             return new Locked();
         }
-        
-        
+
+
     }
-    
+
     public class Locked extends State {
 
         @Override
@@ -87,5 +84,3 @@ public class NewStateMachine {
         }
     }
 }
-
-

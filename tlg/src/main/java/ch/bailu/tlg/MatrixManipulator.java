@@ -11,15 +11,15 @@ public class MatrixManipulator extends MatrixVisible {
 
     public MatrixManipulator(Matrix m) {
         super(m);
-    }    
+    }
 
     public MatrixManipulator(BufferedInputStream reader) throws IOException {
         super(reader);
     }
 
-    public boolean  placeShape(MatrixShape b) {
-        boolean r;
-        if (r=isShapePlaceable(b)) {
+    public boolean placeShape(MatrixShape b) {
+        boolean r = isShapePlaceable(b);
+        if (r) {
             for (int x = 0; x < b.getWidth(); x++) {
                 for (int y = 0; y < b.getHeight(); y++) {
                     if (b.get(x,y).isActivated()) {
@@ -38,7 +38,7 @@ public class MatrixManipulator extends MatrixVisible {
                     int vx=b.getX() + x;
                     int vy=b.getY() + y;
 
-                    if (isPositionValid(vx, vy)) 
+                    if (isPositionValid(vx, vy))
                         getD(vx,vy).makeInvisible();
                 }
             }
@@ -93,7 +93,7 @@ public class MatrixManipulator extends MatrixVisible {
         shape.autoOffset();
 
         for (int xoffset=0; !placed && xoffset < (getWidth() - center); xoffset++) {
-            placed=(   placeShapeHorizontal(shape, center+xoffset) 
+            placed=(   placeShapeHorizontal(shape, center+xoffset)
                     || placeShapeHorizontal(shape, center-xoffset) );
         }
         return placed;
@@ -103,5 +103,4 @@ public class MatrixManipulator extends MatrixVisible {
         shape.setX(xpos);
         return placeShape(shape);
     }
-
 }

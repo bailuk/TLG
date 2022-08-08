@@ -23,6 +23,7 @@ open class BaseContext : PlatformContext() {
                 add(Color.getHSBColor(h, 1f, 1f))
                 h += colorStep
             }
+
             this[COLOR_GRID] = Color(44, 67, 77)
             this[COLOR_FRAME] = Color(44, 109, 205)
             this[COLOR_BACKGROUND] = Color.BLACK
