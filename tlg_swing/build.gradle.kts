@@ -1,8 +1,14 @@
-
-
 plugins {
-    java
     application
+    // https://imperceptiblethoughts.com/shadow/getting-started
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+
+    // https://kotlinlang.org/docs/gradle.html#targeting-the-jvm
+    kotlin("jvm")
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -10,12 +16,28 @@ dependencies {
     implementation(project(":tlg_awt"))
 }
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+val appMainClass = "AppKt"
+
 application {
-    mainClass.set("ch.bailu.tlg_swing.Main")
+    mainClass.set(appMainClass)
 }
 
-tasks.withType<Jar> {
-    manifest {
-        attributes["Main-Class"] = "ch.bailu.tlg_swing.Main"
+tasks {
+    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+        mergeServiceFiles()
+        manifest {
+            attributes(mapOf("Main-Class" to appMainClass))
+        }
+    }
+}
+
+tasks {
+    build {
+        dependsOn(shadowJar)
     }
 }

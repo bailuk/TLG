@@ -45,7 +45,7 @@ class FullGraphicContext(context: Context, private val surfaceHolder: SurfaceHol
         val canvas = canvas
         if (canvas is Canvas) {
             paint.color = color
-            canvas.drawRect(createAndroidRect(r)!!, paint)
+            canvas.drawRect(createAndroidRect(r), paint)
             //drawText(colorBackground(),r, "T");
         }
     }
@@ -60,7 +60,7 @@ class FullGraphicContext(context: Context, private val surfaceHolder: SurfaceHol
             paint.color = Color.WHITE
             paint.textSize = (rect.height - 2).toFloat()
             paint.isAntiAlias = true
-            canvas.drawText(text!!, rect.left.toFloat(), (rect.bottom - 3).toFloat(), paint)
+            canvas.drawText(text, rect.left.toFloat(), (rect.bottom - 3).toFloat(), paint)
             paint.isAntiAlias = false
         }
     }
