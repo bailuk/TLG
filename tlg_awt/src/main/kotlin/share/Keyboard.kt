@@ -1,11 +1,11 @@
 package share
 
-import GtkBaseContext
+import AwtBaseContext
 import ch.bailu.tlg.InternalContext
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
-class Keyboard(private val iContext: InternalContext, private val bContext: GtkBaseContext, private val update: () -> Unit) : KeyListener {
+class Keyboard(private val iContext: InternalContext, private val bContext: AwtBaseContext, private val update: () -> Unit) : KeyListener {
 
     override fun keyReleased(key: KeyEvent) {}
 

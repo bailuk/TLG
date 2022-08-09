@@ -2,7 +2,7 @@ import ch.bailu.tlg.TlgPoint
 import ch.bailu.tlg.TlgRectangle
 import java.awt.Graphics
 
-class GtkGraphicsContext(private val graphics: Graphics) : GtkBaseContext() {
+class AwtGraphicsContext(private val graphics: Graphics) : AwtBaseContext() {
     override fun drawLine(color: Int, p1: TlgPoint, p2: TlgPoint) {
         graphics.color = super.getAwtColor(color)
         graphics.drawLine(p1.x, p1.y, p2.x, p2.y)

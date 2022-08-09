@@ -8,7 +8,7 @@ import lib.color.HSV
 import java.awt.Color
 import java.util.*
 
-open class GtkBaseContext : PlatformContext() {
+open class AwtBaseContext : PlatformContext() {
     companion object {
         private const val PALETTE_RESERVED = 5
         private const val PALETTE_SIZE = StateRunning.SHAPE_PER_LEVEL * 3 + PALETTE_RESERVED

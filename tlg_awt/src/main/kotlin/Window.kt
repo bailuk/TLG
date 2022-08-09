@@ -3,23 +3,28 @@ import Configuration.windowTitle
 import Configuration.windowWidth
 import ch.bailu.tlg.InternalContext
 import share.Keyboard
+import java.awt.BorderLayout
 import java.awt.Frame
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import java.io.IOException
 
 class Window internal constructor() : Frame() {
-    private val bContext = GtkBaseContext()
+    private val bContext = AwtBaseContext()
     private val iContext = InternalContext(bContext)
-    private val canvas: Canvas = Canvas(iContext, bContext)
+    private val controller: Controller = Controller(iContext, bContext)
+
+    private val layout = BorderLayout()
 
     private fun cleanUp() {
-        canvas.cleanUp()
+        controller.cleanUp()
     }
 
     init {
-        add(canvas)
-        addKeyListener(Keyboard(iContext, bContext) {canvas.update()})
+        setLayout(layout)
+        add(controller.previewCanvas, BorderLayout.NORTH)
+        add(controller.mainCanvas, BorderLayout.CENTER)
+        addKeyListener(Keyboard(iContext, bContext) {controller.mainCanvas.update()})
         addWindowListener(object : WindowAdapter() {
             override fun windowClosing(w: WindowEvent) {
                 try {
