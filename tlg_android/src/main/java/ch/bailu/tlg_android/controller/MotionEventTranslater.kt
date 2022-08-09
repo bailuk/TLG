@@ -1,7 +1,9 @@
 package ch.bailu.tlg_android.controller
 
+import TlgConfiguration.MATRIX_HEIGHT
+import TlgConfiguration.MATRIX_WIDTH
 import android.view.MotionEvent
-import ch.bailu.tlg.StateInit
+
 
 class MotionEventTranslater {
     companion object {
@@ -73,8 +75,8 @@ class MotionEventTranslater {
     fun setGeometry(w: Int, h: Int) {
         width = w
         height = h
-        verticalMotion.setTrigger((h / StateInit.MATRIX_HEIGHT).toFloat())
-        horizontalMotion.setTrigger((w / StateInit.MATRIX_WIDTH).toFloat())
+        verticalMotion.setTrigger((h / MATRIX_HEIGHT).toFloat())
+        horizontalMotion.setTrigger((w / MATRIX_WIDTH).toFloat())
     }
 
     fun translateEvent(event: MotionEvent): Boolean {

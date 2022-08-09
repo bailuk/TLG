@@ -3,10 +3,10 @@ package ch.bailu.tlg_android.view
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import ch.bailu.tlg.InternalContext
-import ch.bailu.tlg.TlgRectangle
 import ch.bailu.tlg_android.context.AndroidBaseContext
 import ch.bailu.tlg_android.controller.MotionEventTranslater
+import context.InternalContext
+import geometry.TlgRectangle
 
 class GameView(iContext: InternalContext, tContext: AndroidBaseContext) {
     private val motionTranslator = MotionEventTranslater()

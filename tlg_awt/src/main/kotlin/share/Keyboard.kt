@@ -1,7 +1,7 @@
 package share
 
 import AwtBaseContext
-import ch.bailu.tlg.InternalContext
+import context.InternalContext
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 

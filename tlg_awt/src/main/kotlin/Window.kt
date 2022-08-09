@@ -1,7 +1,7 @@
 import Configuration.windowHeight
 import Configuration.windowTitle
 import Configuration.windowWidth
-import ch.bailu.tlg.InternalContext
+import context.InternalContext
 import share.Keyboard
 import java.awt.BorderLayout
 import java.awt.Frame

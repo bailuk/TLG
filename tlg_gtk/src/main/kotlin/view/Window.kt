@@ -3,18 +3,18 @@ package view
 import context.AwtBaseContext
 import ch.bailu.gtk.gtk.*
 import ch.bailu.gtk.type.Str
-import ch.bailu.tlg.InternalContext
 import config.CSS
 import config.Layout
 import config.Strings.appTitle
+import context.InternalContext
 import control.Keyboard
 import control.Mouse
 import lib.extension.setMarkup
 import java.util.*
 
 class Window(app: Application) {
-    private val bContext = AwtBaseContext()
-    private val iContext = InternalContext(bContext)
+    private val pContext = AwtBaseContext()
+    private val iContext = InternalContext(pContext)
     private val timer = Timer().apply {
         schedule(Tick(), iContext.timerInterval.toLong())
     }
@@ -52,19 +52,19 @@ class Window(app: Application) {
             topBox.append(level)
             topBox.append(status)
 
-            bottomBox.append(Buttons(iContext, bContext) { update() }.grid)
-            Mouse(canvasMain.drawingArea, iContext, bContext) { update() }
-            addController(Keyboard(iContext, bContext) { update() }.eventControllerKey)
+            bottomBox.append(Buttons(iContext, pContext) { update() }.grid)
+            Mouse(canvasMain.drawingArea, iContext, pContext) { update() }
+            addController(Keyboard(iContext, pContext) { update() }.eventControllerKey)
 
             child = mainBox
             title =  appTitle
-            titlebar = Header(this, app, iContext, bContext) { update() }.headerBar
+            titlebar = Header(this, app, iContext, pContext) { update() }.headerBar
             setDefaultSize(Layout.windowWidth, Layout.windowHeight)
 
             onDestroy {
                 running = false
                 timer.cancel()
-                iContext.writeState(bContext)
+                iContext.writeState(pContext)
             }
 
             onShow {
@@ -79,7 +79,7 @@ class Window(app: Application) {
     private inner class Tick : TimerTask() {
         override fun run() {
             if (running) {
-                iContext.moveDown(bContext)
+                iContext.moveDown(pContext)
                 timer.schedule(Tick(), iContext.timerInterval.toLong())
                 update()
             }

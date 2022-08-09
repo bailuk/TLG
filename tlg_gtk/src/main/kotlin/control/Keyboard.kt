@@ -4,28 +4,28 @@ import context.AwtBaseContext
 import ch.bailu.gtk.GTK
 import ch.bailu.gtk.gdk.GdkConstants
 import ch.bailu.gtk.gtk.EventControllerKey
-import ch.bailu.tlg.InternalContext
+import context.InternalContext
 
-class Keyboard(iContext: InternalContext, bContext: AwtBaseContext, updateView: () -> Unit) {
+class Keyboard(iContext: InternalContext, pContext: AwtBaseContext, updateView: () -> Unit) {
     val eventControllerKey = EventControllerKey().apply {
         onKeyPressed() { keyVal: Int, _, _ ->
             var update = GTK.TRUE
             val key = Key(keyVal)
 
             if (key.has(GdkConstants.KEY_N, GdkConstants.KEY_n)) {
-                iContext.startNewGame(bContext)
+                iContext.startNewGame(pContext)
 
             } else if (key.has(GdkConstants.KEY_Down)) {
-                iContext.moveDown(bContext)
+                iContext.moveDown(pContext)
 
             } else if (key.has(GdkConstants.KEY_Left)) {
-                iContext.moveLeft(bContext)
+                iContext.moveLeft(pContext)
 
             } else if (key.has(GdkConstants.KEY_Right)) {
-                iContext.moveRight(bContext)
+                iContext.moveRight(pContext)
 
             } else if (key.has(GdkConstants.KEY_Up)) {
-                iContext.moveTurn(bContext)
+                iContext.moveTurn(pContext)
 
             } else if (key.has(GdkConstants.KEY_G, GdkConstants.KEY_g)) {
                 iContext.toggleGrid()
@@ -36,7 +36,7 @@ class Keyboard(iContext: InternalContext, bContext: AwtBaseContext, updateView: 
                     GdkConstants.KEY_space
                 )
             ) {
-                iContext.togglePause(bContext)
+                iContext.togglePause(pContext)
             } else {
                 update = GTK.FALSE
             }

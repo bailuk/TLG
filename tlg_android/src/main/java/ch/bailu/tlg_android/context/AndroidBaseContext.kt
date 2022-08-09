@@ -1,22 +1,21 @@
 package ch.bailu.tlg_android.context
 
+import TlgConfiguration.SHAPE_PER_LEVEL
 import android.content.Context
 import android.graphics.Color
-import ch.bailu.tlg.PlatformContext
-import ch.bailu.tlg.StateRunning
-import ch.bailu.tlg.TlgPoint
-import ch.bailu.tlg.TlgRectangle
 import ch.bailu.tlg_android.Configuration
+import context.PlatformContext
+import geometry.TlgPoint
+import geometry.TlgRectangle
 import lib.color.ColorInterface
 import lib.color.HSV
-import java.io.File
 
 open class AndroidBaseContext(val androidContext: Context) : PlatformContext() {
     companion object {
-        private const val PALETTE_SIZE = StateRunning.SHAPE_PER_LEVEL * 3
+        private const val PALETTE_SIZE = SHAPE_PER_LEVEL * 3
 
         private val palette = java.util.ArrayList<Int>().apply {
-            val colorStep = 1.0 / StateRunning.SHAPE_PER_LEVEL
+            val colorStep = 1.0 / SHAPE_PER_LEVEL
             var h = 0.0
 
             for (i in 0 until PALETTE_SIZE) {
@@ -69,9 +68,9 @@ open class AndroidBaseContext(val androidContext: Context) : PlatformContext() {
         return Configuration.gridColor
     }
 
-    override fun getConfigDirectory(): File {
-        return androidContext.filesDir
-    }
+    override val configDirectory
+        get() = androidContext.filesDir
+
 
     override fun onNewHighscore() {}
 }

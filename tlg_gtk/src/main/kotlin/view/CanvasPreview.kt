@@ -4,9 +4,9 @@ import ch.bailu.gtk.GTK
 import ch.bailu.gtk.cairo.Context
 import ch.bailu.gtk.gtk.DrawingArea
 import ch.bailu.gtk.type.Pointer
-import ch.bailu.tlg.InternalContext
-import ch.bailu.tlg.TlgRectangle
 import context.AwtGraphicsContext
+import context.InternalContext
+import geometry.TlgRectangle
 
 class CanvasPreview(private val iContext: InternalContext) {
     val drawingArea = DrawingArea().apply {

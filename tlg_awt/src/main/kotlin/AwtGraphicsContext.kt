@@ -1,5 +1,5 @@
-import ch.bailu.tlg.TlgPoint
-import ch.bailu.tlg.TlgRectangle
+import geometry.TlgPoint
+import geometry.TlgRectangle
 import java.awt.Graphics
 
 class AwtGraphicsContext(private val graphics: Graphics) : AwtBaseContext() {

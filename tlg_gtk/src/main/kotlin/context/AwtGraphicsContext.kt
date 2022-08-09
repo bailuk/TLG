@@ -3,8 +3,8 @@ package context
 import ch.bailu.gtk.cairo.Antialias
 import ch.bailu.gtk.cairo.Context
 import ch.bailu.gtk.gdk.Gdk
-import ch.bailu.tlg.TlgPoint
-import ch.bailu.tlg.TlgRectangle
+import geometry.TlgPoint
+import geometry.TlgRectangle
 
 class AwtGraphicsContext(private val context: Context): AwtBaseContext() {
     override fun drawLine(color: Int, p1: TlgPoint, p2: TlgPoint) {

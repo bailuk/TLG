@@ -1,8 +1,8 @@
-import ch.bailu.tlg.InternalContext
-import ch.bailu.tlg.PlatformContext
+import context.InternalContext
+import context.PlatformContext
 import java.util.*
 
-class Controller(private val iContext: InternalContext, private val bContext: PlatformContext) {
+class Controller(private val iContext: InternalContext, private val pContext: PlatformContext) {
     private val timer = Timer()
     val previewCanvas = PreviewCanvas(iContext)
     val mainCanvas = MainCanvas(iContext)
@@ -17,7 +17,7 @@ class Controller(private val iContext: InternalContext, private val bContext: Pl
 
     private inner class Task(): TimerTask() {
         override fun run() {
-            iContext.moveDown(bContext)
+            iContext.moveDown(pContext)
             previewCanvas.update()
             mainCanvas.update()
             schedule()
@@ -25,6 +25,6 @@ class Controller(private val iContext: InternalContext, private val bContext: Pl
     }
 
     fun cleanUp() {
-        iContext.writeState(bContext)
+        iContext.writeState(pContext)
     }
 }

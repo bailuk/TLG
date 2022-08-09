@@ -3,9 +3,9 @@ package view
 import ch.bailu.gtk.gtk.Button
 import ch.bailu.gtk.gtk.Grid
 import ch.bailu.gtk.type.Str
-import ch.bailu.tlg.InternalContext
 import config.Strings
 import context.AwtBaseContext
+import context.InternalContext
 
 class Buttons(iContext: InternalContext, bContext: AwtBaseContext, update: () -> Unit) {
 

@@ -1,5 +1,5 @@
-import ch.bailu.tlg.InternalContext
-import ch.bailu.tlg.TlgRectangle
+import context.InternalContext
+import geometry.TlgRectangle
 import java.awt.Canvas
 import java.awt.Graphics
 

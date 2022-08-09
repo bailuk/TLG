@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.text.Html
 import android.widget.ScrollView
 import android.widget.TextView
-import ch.bailu.tlg.HighscoreList
-import ch.bailu.tlg.PlatformContext
 import ch.bailu.tlg_android.Configuration
 import ch.bailu.tlg_android.context.AndroidBaseContext
+import context.PlatformContext
+import score.HighscoreList
 
 class HighscoreActivity: Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class HighscoreActivity: Activity() {
         setContentView(scroll)
     }
 
-    private fun getHighscoreText(): String? {
+    private fun getHighscoreText(): String {
         val bContext: PlatformContext = AndroidBaseContext(this)
         val list = HighscoreList(bContext)
         return list.formatedHTMLText

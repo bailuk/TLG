@@ -2,12 +2,12 @@ package ch.bailu.tlg_android.controller
 
 import android.content.Context
 import android.view.MotionEvent
-import ch.bailu.tlg.InternalContext
-import ch.bailu.tlg.StateHighscore
 import ch.bailu.tlg_android.context.AndroidBaseContext
 import ch.bailu.tlg_android.view.GamePreview
 import ch.bailu.tlg_android.view.GameView
 import ch.bailu.tlg_android.view.NameDialog
+import context.InternalContext
+import state.StateHighscore
 
 class Controller(context: Context) {
     private val tContext = AndroidBaseContext(context)

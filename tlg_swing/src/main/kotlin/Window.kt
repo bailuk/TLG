@@ -1,7 +1,7 @@
 import Configuration.windowHeight
 import Configuration.windowTitle
 import Configuration.windowWidth
-import ch.bailu.tlg.InternalContext
+import context.InternalContext
 import share.Keyboard
 import java.awt.BorderLayout
 import java.awt.Color
@@ -9,7 +9,6 @@ import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import java.io.IOException
 import javax.swing.BoxLayout
-import javax.swing.JButton
 import javax.swing.JFrame
 import javax.swing.JPanel
 

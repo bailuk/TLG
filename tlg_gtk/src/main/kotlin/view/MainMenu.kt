@@ -1,23 +1,23 @@
 package view
 
+import TlgConfiguration.HELP_TEXT
 import ch.bailu.gtk.gtk.*
 import ch.bailu.gtk.gtk.Window
 import ch.bailu.gtk.type.Str
-import ch.bailu.tlg.Constants
-import ch.bailu.tlg.InternalContext
 import config.Strings
 import context.AwtBaseContext
+import context.InternalContext
 import lib.menu.Actions
 import lib.menu.MenuModelBuilder
 
-class MainMenu(window: Window, app: Application, iContext: InternalContext, bContext: AwtBaseContext, update: () -> Unit) {
+class MainMenu(window: Window, app: Application, iContext: InternalContext, pContext: AwtBaseContext, update: () -> Unit) {
     private val actions = Actions(app)
 
     val menuButton = MenuButton().apply {
         iconName = Str("open-menu-symbolic")
         menuModel = MenuModelBuilder().apply {
             label(Strings.newGame) {
-                iContext.startNewGame(bContext)
+                iContext.startNewGame(pContext)
                 update()
             }
             label(Strings.grid) {
@@ -29,7 +29,7 @@ class MainMenu(window: Window, app: Application, iContext: InternalContext, bCon
                     DialogFlags.DESTROY_WITH_PARENT.or(DialogFlags.MODAL),
                     MessageType.INFO,
                     ButtonsType.CLOSE,
-                    Str(Constants.HELP_TEXT)).apply {
+                    Str(HELP_TEXT)).apply {
                     onResponse {
                         close()
                         destroy()
