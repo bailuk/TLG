@@ -1,8 +1,7 @@
-import Configuration.windowHeight
-import Configuration.windowTitle
-import Configuration.windowWidth
+package awt
+
+import awt.share.Keyboard
 import tlg.context.InternalContext
-import share.Keyboard
 import java.awt.BorderLayout
 import java.awt.Frame
 import java.awt.event.WindowAdapter
@@ -24,7 +23,7 @@ class Window internal constructor() : Frame() {
         setLayout(layout)
         add(controller.previewCanvas, BorderLayout.NORTH)
         add(controller.mainCanvas, BorderLayout.CENTER)
-        addKeyListener(Keyboard(iContext, bContext) {controller.mainCanvas.update()})
+        addKeyListener(Keyboard(iContext, bContext) { controller.mainCanvas.update() })
         addWindowListener(object : WindowAdapter() {
             override fun windowClosing(w: WindowEvent) {
                 try {
@@ -37,8 +36,8 @@ class Window internal constructor() : Frame() {
             }
         })
 
-        title = windowTitle
-        setSize(windowWidth, windowHeight)
+        title = Configuration.windowTitle
+        setSize(Configuration.windowWidth, Configuration.windowHeight)
         isVisible = true
     }
 }

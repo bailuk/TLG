@@ -24,7 +24,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     }
 }
 
-val appMainClass = "AppKt"
+val appMainClass = "awt.AppKt"
 
 application {
     mainClass.set(appMainClass)

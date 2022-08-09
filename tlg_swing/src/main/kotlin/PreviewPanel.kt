@@ -1,3 +1,4 @@
+import awt.AwtGraphicsContext
 import tlg.context.InternalContext
 import tlg.geometry.TlgRectangle
 import java.awt.Dimension

@@ -1,8 +1,9 @@
 import Configuration.windowHeight
 import Configuration.windowTitle
 import Configuration.windowWidth
+import awt.AwtBaseContext
 import tlg.context.InternalContext
-import share.Keyboard
+import awt.share.Keyboard
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.event.WindowAdapter

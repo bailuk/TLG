@@ -1,3 +1,5 @@
+package awt
+
 import tlg.geometry.TlgPoint
 import tlg.geometry.TlgRectangle
 import java.awt.Graphics

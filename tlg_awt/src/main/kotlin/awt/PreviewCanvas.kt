@@ -1,3 +1,5 @@
+package awt
+
 import tlg.context.InternalContext
 import tlg.geometry.TlgRectangle
 import java.awt.Canvas

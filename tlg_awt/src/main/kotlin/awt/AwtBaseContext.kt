@@ -1,4 +1,6 @@
-import tlg.Configuration.SHAPE_PER_LEVEL
+package awt
+
+import tlg.Configuration
 import tlg.context.PlatformContext
 import tlg.geometry.TlgPoint
 import tlg.geometry.TlgRectangle
@@ -6,12 +8,12 @@ import tlg.lib.color.ARGB
 import tlg.lib.color.ColorInterface
 import tlg.lib.color.HSV
 import java.awt.Color
-import java.util.*
+import java.util.ArrayList
 
 open class AwtBaseContext : PlatformContext() {
     companion object {
         private const val PALETTE_RESERVED = 5
-        private const val PALETTE_SIZE = SHAPE_PER_LEVEL * 3 + PALETTE_RESERVED
+        private const val PALETTE_SIZE = Configuration.SHAPE_PER_LEVEL * 3 + PALETTE_RESERVED
         private const val COLOR_GRID = PALETTE_SIZE - PALETTE_RESERVED - 1
         private const val COLOR_BACKGROUND = COLOR_GRID + 1
         private const val COLOR_HIGHLIGHT = COLOR_GRID + 2
@@ -20,7 +22,7 @@ open class AwtBaseContext : PlatformContext() {
         private const val COLOR_GRAYED = COLOR_GRID + 5
 
         private val palette = ArrayList<Color>().apply {
-            val colorStep = 1.0 / SHAPE_PER_LEVEL
+            val colorStep = 1.0 / Configuration.SHAPE_PER_LEVEL
             var h = 0.0
 
             for (i in 0 until PALETTE_SIZE) {

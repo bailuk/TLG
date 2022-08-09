@@ -1,3 +1,5 @@
+package awt
+
 object Configuration {
     const val windowTitle = "TLG - AWT"
     const val windowWidth = 720 / 2

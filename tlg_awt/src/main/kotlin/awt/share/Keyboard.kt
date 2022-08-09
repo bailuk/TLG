@@ -1,6 +1,6 @@
-package share
+package awt.share
 
-import AwtBaseContext
+import awt.AwtBaseContext
 import tlg.context.InternalContext
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
