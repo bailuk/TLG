@@ -11,12 +11,16 @@ import tlg.state.StateInit
 import java.io.IOException
 
 class InternalContext(c: PlatformContext) {
-    var state: State = StateInit(this).init(c)
     var currentScore: Score = Score()
     var previewMatrix: MatrixWithShape = MatrixWithShape(3,3)
     var mainMatrix: MatrixLineManipulator = MatrixLineManipulator(3,3)
+
     private var previewGeometry: TlgRectangle = TlgRectangle()
     private var mainGeometry: TlgRectangle = TlgRectangle()
+
+    // IMPORTANT: StateInit initializes previewMatrix and mainMatrix (order)
+    var state: State = StateInit(this).init(c)
+
 
     @Synchronized
     fun moveLeft(c: PlatformContext) {
@@ -111,8 +115,8 @@ class InternalContext(c: PlatformContext) {
     val timerInterval: Int
         get() = state.timerInterval
 
-    fun setHighscoreName(pContext: PlatformContext, name: String) {
-        state = state.setHighscoreName(pContext, name)
+    fun setHighScoreName(pContext: PlatformContext, name: String) {
+        state = state.setHighScoreName(pContext, name)
     }
 
     val id: Int
@@ -123,5 +127,4 @@ class InternalContext(c: PlatformContext) {
         get() = currentScore.level
     val score: Int
         get() = currentScore.score
-
 }

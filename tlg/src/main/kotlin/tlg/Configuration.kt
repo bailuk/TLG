@@ -3,10 +3,9 @@ package tlg
 object Configuration {
     const val HELP_TEXT = "COMMANDS:\n" +
             "Arrow-keys:\tmove and turn\n" +
-            "'P' or ' ':\t\tPause\n" +
+            "'P':\t\t\tpause\n" +
             "'G':\t\t\ttoggle grid\n" +
             "'N':\t\t\tnew game\n"
-
 
     const val ABOUT_TEXT = "https://github.com/bailuk/TLG"
 
@@ -17,6 +16,8 @@ object Configuration {
 
     const val MATRIX_WIDTH = 10
     const val MATRIX_HEIGHT = 20
+
+    const val PREVIEW_SIZE = 5
 
     const val LEVEL_MAX = 3
 

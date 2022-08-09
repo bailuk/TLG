@@ -7,7 +7,7 @@ import ch.bailu.tlg_android.view.GamePreview
 import ch.bailu.tlg_android.view.GameView
 import ch.bailu.tlg_android.view.NameDialog
 import tlg.context.InternalContext
-import tlg.state.StateHighscore
+import tlg.state.StateHighScore
 
 class Controller(context: Context) {
     private val tContext = AndroidBaseContext(context)
@@ -68,7 +68,7 @@ class Controller(context: Context) {
     }
 
     fun setHighscoreName() {
-        if (iContext.id == StateHighscore.ID) {
+        if (iContext.id == StateHighScore.ID) {
             NameDialog(iContext, tContext)
         }
     }

@@ -5,31 +5,31 @@ import tlg.context.PlatformContext
 import tlg.score.HighScoreList
 
 abstract class State(val context: InternalContext) {
-    open fun init(c: PlatformContext): State {
+    open fun init(pContext: PlatformContext): State {
         return this
     }
 
-    open fun moveLeft(c: PlatformContext): State {
+    open fun moveLeft(pContext: PlatformContext): State {
         return this
     }
 
-    open fun moveRight(c: PlatformContext): State {
+    open fun moveRight(pContext: PlatformContext): State {
         return this
     }
 
-    open fun moveDown(c: PlatformContext): State {
+    open fun moveDown(pContext: PlatformContext): State {
         return this
     }
 
-    open fun moveTurn(c: PlatformContext): State {
+    open fun moveTurn(pContext: PlatformContext): State {
         return this
     }
 
-    fun startNewGame(c: PlatformContext): State {
-        return StateRunning(context).init(c)
+    fun startNewGame(pContext: PlatformContext): State {
+        return StateRunning(context).init(pContext)
     }
 
-    open fun togglePause(c: PlatformContext): State {
+    open fun togglePause(pContext: PlatformContext): State {
         return this
     }
 
@@ -38,7 +38,7 @@ abstract class State(val context: InternalContext) {
 
     abstract val id: Int
 
-    open fun setHighscoreName(c: PlatformContext, name: String): State {
+    open fun setHighScoreName(pContext: PlatformContext, name: String): State {
         return this
     }
 
@@ -48,17 +48,17 @@ abstract class State(val context: InternalContext) {
                 StateRunning(iContext)
             } else if (id == StatePaused.ID) {
                 StatePaused(iContext)
-            } else if (id == StateHighscore.ID) {
-                StateHighscore(iContext)
+            } else if (id == StateHighScore.ID) {
+                StateHighScore(iContext)
             } else {
                 StateLocked(iContext)
             }
         }
 
         fun gameOverStateFactory(iContext: InternalContext, pContext: PlatformContext): State {
-            val highscoreList = HighScoreList(pContext)
-            return if (highscoreList.haveNewHighScore(iContext.currentScore.score)) {
-                StateHighscore(iContext).init(pContext)
+            val highScoreList = HighScoreList(pContext)
+            return if (highScoreList.haveNewHighScore(iContext.currentScore.score)) {
+                StateHighScore(iContext).init(pContext)
             } else {
                 StateLocked(iContext).init(pContext)
             }

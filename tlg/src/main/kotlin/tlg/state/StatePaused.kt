@@ -5,7 +5,7 @@ import tlg.context.PlatformContext
 
 
 class StatePaused(c: InternalContext) : State(c) {
-    override fun togglePause(c: PlatformContext): State {
+    override fun togglePause(pContext: PlatformContext): State {
         return StateRunning(context)
     }
 

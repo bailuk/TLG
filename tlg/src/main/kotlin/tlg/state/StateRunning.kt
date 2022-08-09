@@ -6,10 +6,10 @@ import tlg.context.PlatformContext
 import java.util.*
 
 class StateRunning(c: InternalContext) : State(c) {
-    override fun init(c: PlatformContext): State {
+    override fun init(pContext: PlatformContext): State {
         erase()
-        initPreview(c)
-        return initMovingShape(c)
+        initPreview(pContext)
+        return initMovingShape(pContext)
     }
 
     fun erase() {
@@ -42,25 +42,25 @@ class StateRunning(c: InternalContext) : State(c) {
         return context.mainMatrix.setMovingShape(context.previewMatrix.movingShape)
     }
 
-    override fun moveRight(c: PlatformContext): State {
+    override fun moveRight(pContext: PlatformContext): State {
         context.mainMatrix.moveShapeRight()
         return this
     }
 
-    override fun moveLeft(c: PlatformContext): State {
+    override fun moveLeft(pContext: PlatformContext): State {
         context.mainMatrix.moveShapeLeft()
         return this
     }
 
-    override fun moveDown(c: PlatformContext): State {
+    override fun moveDown(pContext: PlatformContext): State {
         if (!context.mainMatrix.moveShapeDown()) {
             removeLines()
-            return initMovingShape(c)
+            return initMovingShape(pContext)
         }
         return this
     }
 
-    override fun moveTurn(c: PlatformContext): State {
+    override fun moveTurn(pContext: PlatformContext): State {
         context.mainMatrix.moveShapeTurn()
         return this
     }
@@ -69,8 +69,8 @@ class StateRunning(c: InternalContext) : State(c) {
         context.currentScore.addLines(context.mainMatrix.eraseLines())
     }
 
-    override fun togglePause(c: PlatformContext): State {
-        return StatePaused(context).init(c)
+    override fun togglePause(pContext: PlatformContext): State {
+        return StatePaused(context).init(pContext)
     }
 
     override val timerInterval: Int

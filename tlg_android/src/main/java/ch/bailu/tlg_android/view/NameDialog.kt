@@ -10,7 +10,7 @@ import tlg.context.InternalContext
 class NameDialog(private val iContext: InternalContext, private val pContext: AndroidBaseContext) : DialogInterface.OnClickListener {
     private val edit: EditText
     override fun onClick(dialog: DialogInterface, which: Int) {
-        iContext.setHighscoreName(pContext, edit.text.toString())
+        iContext.setHighScoreName(pContext, edit.text.toString())
     }
 
     init {

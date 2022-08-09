@@ -6,30 +6,30 @@ import tlg.context.PlatformContext
 import tlg.score.HighScoreList
 import java.io.IOException
 
-class StateHighscore(c: InternalContext) : State(c) {
-    override fun init(c: PlatformContext): State {
+class StateHighScore(iContext: InternalContext) : State(iContext) {
+    override fun init(pContext: PlatformContext): State {
         context.state = this
-        c.onNewHighscore()
+        pContext.onNewHighscore()
         return this
     }
 
-    override fun setHighscoreName(c: PlatformContext, name: String): State {
+    override fun setHighScoreName(pContext: PlatformContext, name: String): State {
         return if (name.isNotEmpty()) {
-            val highscoreList = HighScoreList(c)
-            highscoreList.add(name, context.currentScore.score)
+            val highScoreList = HighScoreList(pContext)
+            highScoreList.add(name, context.currentScore.score)
             try {
-                highscoreList.writeState(c)
+                highScoreList.writeState(pContext)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-            StateLocked(context).init(c)
+            StateLocked(context).init(pContext)
         } else {
             this
         }
     }
 
     override fun toString(): String {
-        return "New Highscore!"
+        return "New High Score!"
     }
 
     override val id = ID

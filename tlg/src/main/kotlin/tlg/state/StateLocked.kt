@@ -4,7 +4,7 @@ import tlg.context.InternalContext
 import tlg.context.PlatformContext
 
 class StateLocked(c: InternalContext) : State(c) {
-    override fun init(c: PlatformContext): State {
+    override fun init(pContext: PlatformContext): State {
         return this
     }
 

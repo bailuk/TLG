@@ -6,8 +6,8 @@ import java.io.BufferedInputStream
 class MatrixLineManipulator : MatrixWithShape {
     private var greyedLines = 0
 
-    constructor(w: Int, h: Int) : super(w, h) {}
-    constructor(reader: BufferedInputStream) : super(reader) {}
+    constructor(w: Int, h: Int) : super(w, h)
+    constructor(reader: BufferedInputStream) : super(reader)
 
     fun eraseLines(): Int {
         var count = 0
@@ -30,7 +30,7 @@ class MatrixLineManipulator : MatrixWithShape {
 
     fun removeGreyedLine() {
         val y = height - greyedLines
-        if (y < height && y > 0) {
+        if (y in 1 until height) {
             for (x in 0 until width) getD(x, y).disableGreyedOut()
             greyedLines--
         }

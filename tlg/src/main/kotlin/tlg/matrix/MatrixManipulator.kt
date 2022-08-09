@@ -4,17 +4,16 @@ import tlg.geometry.TlgPoint
 import java.io.BufferedInputStream
 
 open class MatrixManipulator : MatrixVisible {
-    constructor(w: Int, h: Int) : super(w, h) {}
-    constructor(m: Matrix) : super(m) {}
-    constructor(reader: BufferedInputStream) : super(reader) {}
+    constructor(w: Int, h: Int) : super(w, h)
+    constructor(reader: BufferedInputStream) : super(reader)
 
     fun placeShape(b: MatrixShape): Boolean {
         val r = isShapePlaceable(b)
         if (r) {
             for (x in 0 until b.width) {
                 for (y in 0 until b.height) {
-                    if (b.get(x, y).isActivated) {
-                        getD(b.x + x, b.y + y).set(b.get(x, y))
+                    if (b[x, y].isActivated) {
+                        getD(b.x + x, b.y + y).set(b[x, y])
                     }
                 }
             }

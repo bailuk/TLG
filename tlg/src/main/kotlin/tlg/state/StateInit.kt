@@ -2,6 +2,7 @@ package tlg.state
 
 import tlg.Configuration.MATRIX_HEIGHT
 import tlg.Configuration.MATRIX_WIDTH
+import tlg.Configuration.PREVIEW_SIZE
 import tlg.Configuration.STATE_FILE
 import tlg.Configuration.STATE_FILE_VERSION
 import tlg.context.ByteInteger
@@ -13,16 +14,16 @@ import tlg.score.Score
 import java.io.IOException
 
 class StateInit(c: InternalContext) : State(c) {
-    override fun init(c: PlatformContext): State {
+    override fun init(pContext: PlatformContext): State {
         return try {
-            restore(c)
+            restore(pContext)
         } catch (e: IOException) {
-            create(c)
+            create(pContext)
         }
     }
 
     private fun create(gc: PlatformContext): State {
-        context.previewMatrix = MatrixWithShape(5, 5)
+        context.previewMatrix = MatrixWithShape(PREVIEW_SIZE, PREVIEW_SIZE)
         context.mainMatrix = MatrixLineManipulator(MATRIX_WIDTH, MATRIX_HEIGHT)
         context.currentScore = Score()
         val state: State = StateRunning(context)

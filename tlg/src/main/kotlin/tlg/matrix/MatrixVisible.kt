@@ -15,10 +15,6 @@ open class MatrixVisible : Matrix {
         markAllAsDirty()
     }
 
-    constructor(m: Matrix) : super(m) {
-        markAllAsDirty()
-    }
-
     constructor(reader: BufferedInputStream) : super(reader) {
         if (reader.read() > 0) drawGrid = true
     }
@@ -71,19 +67,18 @@ open class MatrixVisible : Matrix {
     var pixelGeometry: TlgRectangle
         get() = getPixelArea(TlgRectangle(0, 0, width - 1, height - 1))
         set(rect) {
-            val xoffset: Int
-            val yoffset: Int
-            var xpos: Int
-            var ypos: Int
             var squareSize: Int = rect.width / width
-            if (squareSize > rect.height / height) squareSize = rect.height / height
+            if (squareSize > rect.height / height) {
+                squareSize = rect.height / height
+            }
 
             // center
-            xoffset = rect.left + (rect.width - squareSize * width) / 2
-            yoffset = rect.top + (rect.height - squareSize * height) / 2
-            xpos = xoffset
+            val xOffset = rect.left + (rect.width - squareSize * width) / 2
+            val yOffset = rect.top + (rect.height - squareSize * height) / 2
+            var xpos: Int = xOffset
+            var ypos: Int
             for (x in 0 until width) {
-                ypos = yoffset
+                ypos = yOffset
                 for (y in 0 until height) {
                     get(x, y).rect =
                         TlgRectangle(xpos, ypos, xpos + squareSize - 1, ypos + squareSize - 1)
@@ -98,16 +93,16 @@ open class MatrixVisible : Matrix {
         get() = getPixelArea(dirtyArea)
 
     private fun getPixelArea(rect: TlgRectangle): TlgRectangle {
-        val ret = TlgRectangle(0, 0, 0, 0)
+        val result = TlgRectangle(0, 0, 0, 0)
         if (rect.width > 0 && rect.height > 0) {
             val tl = get(rect.left, rect.top)
             val br = get(rect.right, rect.bottom)
-            ret.left = tl.rect.left
-            ret.top = tl.rect.top
-            ret.right = br.rect.right
-            ret.bottom = br.rect.bottom
+            result.left = tl.rect.left
+            result.top = tl.rect.top
+            result.right = br.rect.right
+            result.bottom = br.rect.bottom
         }
-        return ret
+        return result
     }
 
     private val isDirty: Boolean
