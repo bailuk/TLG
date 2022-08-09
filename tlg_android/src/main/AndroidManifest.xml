@@ -10,7 +10,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.AboutActivity"></activity>
-        <activity android:name=".activity.HighscoreActivity"></activity>
+        <activity android:name=".activity.HighScoreActivity"></activity>
 
     </application>
 

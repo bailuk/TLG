@@ -20,14 +20,11 @@ class Controller(context: Context) {
     val gamePreview = GamePreview(iContext, tContext)
 
     fun moveShape(e: Int) {
-        if (e == MotionEventTranslater.KEY_LEFT) {
-            iContext.moveLeft(tContext)
-        } else if (e == MotionEventTranslater.KEY_RIGHT) {
-            iContext.moveRight(tContext)
-        } else if (e == MotionEventTranslater.KEY_DOWN) {
-            iContext.moveDown(tContext)
-        } else if (e == MotionEventTranslater.KEY_UP) {
-            iContext.moveTurn(tContext)
+        when(e) {
+            MotionEventTranslator.KEY_LEFT -> iContext.moveLeft(tContext)
+            MotionEventTranslator.KEY_RIGHT -> iContext.moveRight(tContext)
+            MotionEventTranslator.KEY_DOWN -> iContext.moveDown(tContext)
+            MotionEventTranslator.KEY_UP -> iContext.moveTurn(tContext)
         }
         gameMainView.update()
         gamePreview.update()

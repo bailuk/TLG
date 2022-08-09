@@ -10,21 +10,21 @@ import ch.bailu.tlg_android.context.AndroidBaseContext
 import tlg.context.PlatformContext
 import tlg.score.HighScoreList
 
-class HighscoreActivity: Activity() {
+class HighScoreActivity: Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val scroll = ScrollView(this)
         val text = TextView(this)
         text.textSize = 15f
         text.setLinkTextColor(Configuration.frameColor)
-        text.text = Html.fromHtml(getHighscoreText())
+        text.text = Html.fromHtml(getHighScoreText())
         scroll.addView(text)
         setContentView(scroll)
     }
 
-    private fun getHighscoreText(): String {
-        val bContext: PlatformContext = AndroidBaseContext(this)
-        val list = HighScoreList(bContext)
+    private fun getHighScoreText(): String {
+        val pContext: PlatformContext = AndroidBaseContext(this)
+        val list = HighScoreList(pContext)
         return list.formattedHTMLText
     }
 }

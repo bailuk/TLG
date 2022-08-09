@@ -4,12 +4,12 @@ import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import ch.bailu.tlg_android.context.AndroidBaseContext
-import ch.bailu.tlg_android.controller.MotionEventTranslater
+import ch.bailu.tlg_android.controller.MotionEventTranslator
 import tlg.context.InternalContext
 import tlg.geometry.TlgRectangle
 
 class GameView(iContext: InternalContext, tContext: AndroidBaseContext) {
-    private val motionTranslator = MotionEventTranslater()
+    private val motionTranslator = MotionEventTranslator()
     private var paintThread = PaintThread(tContext, {}, {})
 
     val surface = SurfaceView(tContext.androidContext).apply {

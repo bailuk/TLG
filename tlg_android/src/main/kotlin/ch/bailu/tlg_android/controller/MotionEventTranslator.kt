@@ -1,11 +1,10 @@
 package ch.bailu.tlg_android.controller
 
+import android.view.MotionEvent
 import tlg.Configuration.MATRIX_HEIGHT
 import tlg.Configuration.MATRIX_WIDTH
-import android.view.MotionEvent
 
-
-class MotionEventTranslater {
+class MotionEventTranslator {
     companion object {
         const val KEY_LEFT = -1
         const val KEY_RIGHT = 1
@@ -13,53 +12,8 @@ class MotionEventTranslater {
         const val KEY_DOWN = KEY_RIGHT * 2
     }
 
-
-    private class MotionTranslater {
-        private var delta = 0f
-        private var latestPixel = 0f
-        var latestEvent = 0
-            private set
-        private var trigger = 40f
-        fun setTrigger(t: Float) {
-            trigger = t
-        }
-
-        fun reset(p: Float) {
-            latestPixel = p
-            reset()
-        }
-
-        fun reset() {
-            delta = 0f
-            latestEvent = 0
-        }
-
-        fun recordEvent(p: Float): Boolean {
-            var r: Boolean
-            recordMotionEvent(p)
-            if ((delta < -1 * trigger).also { r = it }) {
-                latestEvent = KEY_LEFT
-            } else if ((delta > trigger).also { r = it }) {
-                latestEvent = KEY_RIGHT
-            }
-            if (r) {
-                delta %= trigger
-            }
-            return r
-        }
-
-        private fun recordMotionEvent(p: Float) {
-            delta += p - latestPixel
-            setPosition(p)
-        }
-
-        fun setPosition(p: Float) {
-            latestPixel = p
-        }
-    }
-
-    private val verticalMotion = MotionTranslater()
-    private val horizontalMotion = MotionTranslater()
+    private val verticalMotion = MotionTranslator()
+    private val horizontalMotion = MotionTranslator()
     private var tapEvent = 0
     private var width = 0
     private var height = 0
@@ -93,25 +47,33 @@ class MotionEventTranslater {
 
     private fun translateEventFromTap(event: MotionEvent): Boolean {
         var r: Boolean
-        val tline: Int = height / 3
-        val bline: Int = height - tline
-        val lline = width / 3
-        val rline = width - lline
+
+        val tLine: Int = height / 3
+        val bLine: Int = height - tLine
+        val lLine = width / 3
+        val rLine = width - lLine
+
         var he = 0
         var ve = 0
-        if (event.x < lline) {
+
+        if (event.x < lLine) {
             he = KEY_LEFT
-        } else if (event.x > rline) {
+        } else if (event.x > rLine) {
             he = KEY_RIGHT
         }
-        if (event.y < tline) {
+
+        if (event.y < tLine) {
             ve = KEY_UP
-        } else if (event.y > bline) {
+        } else if (event.y > bLine) {
             ve = KEY_DOWN
         }
-        if ((he != 0 && ve == 0).also { r = it }) tapEvent = he else if ((ve != 0 && he == 0).also {
-                r = it
-            }) tapEvent = ve
+
+        if ((he != 0 && ve == 0).also { r = it }) {
+            tapEvent = he
+        } else if ((ve != 0 && he == 0).also { r = it }) {
+            tapEvent = ve
+        }
+
         return r
     }
 

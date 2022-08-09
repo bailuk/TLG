@@ -120,7 +120,7 @@ class GameActivity : Activity() {
                     true
                 }
                 R.id.menu_score -> {
-                    startActivity(HighscoreActivity::class.java)
+                    startActivity(HighScoreActivity::class.java)
                     true
                 }
                 R.id.menu_name -> {

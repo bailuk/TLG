@@ -9,7 +9,8 @@ import config.Strings
 import config.Strings.appTitle
 import tlg.context.InternalContext
 import control.Keyboard
-import control.Mouse
+import control.TouchDrag
+import control.TouchTap
 import lib.extension.setMarkup
 import java.util.*
 
@@ -59,7 +60,8 @@ class Window(app: Application) {
             topBox.append(status)
 
             bottomBox.append(Buttons(iContext, pContext) { update() }.grid)
-            Mouse(canvasMain.drawingArea, iContext, pContext) { update() }
+            TouchTap(canvasMain.drawingArea, iContext, pContext) { update() }
+            TouchDrag(canvasMain.drawingArea, iContext, pContext) { update() }
             addController(Keyboard(iContext, pContext) { update() }.eventControllerKey)
 
             child = mainBox

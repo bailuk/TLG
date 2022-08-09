@@ -6,10 +6,10 @@ import ch.bailu.gtk.gtk.DrawingArea
 import ch.bailu.gtk.gtk.GestureClick
 import tlg.context.InternalContext
 
-class Mouse(private val drawingArea: DrawingArea,
-            private val iContext: InternalContext,
-            private val bContext: GtkBaseContext,
-            private val update: ()->Unit) {
+class TouchTap(private val drawingArea: DrawingArea,
+               private val iContext: InternalContext,
+               private val bContext: GtkBaseContext,
+               private val update: ()->Unit) {
     private var singleClick = false
 
     init {

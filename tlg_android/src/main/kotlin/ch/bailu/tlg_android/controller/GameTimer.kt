@@ -36,7 +36,7 @@ class GameTimer(private val controller: Controller): Runnable {
     }
 
     override fun run() {
-        controller.moveShape(MotionEventTranslater.KEY_DOWN)
+        controller.moveShape(MotionEventTranslator.KEY_DOWN)
         kick()
     }
 }
