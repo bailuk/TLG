@@ -8,8 +8,8 @@ import android.graphics.Paint.Cap
 import android.graphics.Rect
 import android.view.SurfaceHolder
 
-import geometry.TlgPoint
-import geometry.TlgRectangle
+import tlg.geometry.TlgPoint
+import tlg.geometry.TlgRectangle
 
 class AndroidGraphicsContext(context: Context, private val surfaceHolder: SurfaceHolder): AndroidBaseContext(context) {
 

@@ -5,7 +5,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.widget.EditText
 import ch.bailu.tlg_android.context.AndroidBaseContext
-import context.InternalContext
+import tlg.context.InternalContext
 
 class NameDialog(private val iContext: InternalContext, private val pContext: AndroidBaseContext) : DialogInterface.OnClickListener {
     private val edit: EditText

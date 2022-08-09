@@ -6,7 +6,7 @@ import ch.bailu.gtk.type.Str
 import config.CSS
 import config.Layout
 import config.Strings.appTitle
-import context.InternalContext
+import tlg.context.InternalContext
 import control.Keyboard
 import control.Mouse
 import lib.extension.setMarkup

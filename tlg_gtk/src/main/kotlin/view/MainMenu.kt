@@ -1,12 +1,12 @@
 package view
 
-import TlgConfiguration.HELP_TEXT
+import tlg.Configuration.HELP_TEXT
 import ch.bailu.gtk.gtk.*
 import ch.bailu.gtk.gtk.Window
 import ch.bailu.gtk.type.Str
 import config.Strings
 import context.AwtBaseContext
-import context.InternalContext
+import tlg.context.InternalContext
 import lib.menu.Actions
 import lib.menu.MenuModelBuilder
 

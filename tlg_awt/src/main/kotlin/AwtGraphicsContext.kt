@@ -1,5 +1,5 @@
-import geometry.TlgPoint
-import geometry.TlgRectangle
+import tlg.geometry.TlgPoint
+import tlg.geometry.TlgRectangle
 import java.awt.Graphics
 
 class AwtGraphicsContext(private val graphics: Graphics) : AwtBaseContext() {

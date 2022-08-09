@@ -1,10 +1,10 @@
-import TlgConfiguration.SHAPE_PER_LEVEL
-import context.PlatformContext
-import geometry.TlgPoint
-import geometry.TlgRectangle
-import lib.color.ARGB
-import lib.color.ColorInterface
-import lib.color.HSV
+import tlg.Configuration.SHAPE_PER_LEVEL
+import tlg.context.PlatformContext
+import tlg.geometry.TlgPoint
+import tlg.geometry.TlgRectangle
+import tlg.lib.color.ARGB
+import tlg.lib.color.ColorInterface
+import tlg.lib.color.HSV
 import java.awt.Color
 import java.util.*
 

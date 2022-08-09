@@ -7,7 +7,7 @@ import ch.bailu.gtk.gtk.HeaderBar
 import ch.bailu.gtk.gtk.Window
 import config.Strings
 import context.AwtBaseContext
-import context.InternalContext
+import tlg.context.InternalContext
 
 class Header(window: Window, app: Application, iContext: InternalContext, pContext: AwtBaseContext, update: ()->Unit) {
     val headerBar = HeaderBar().apply {

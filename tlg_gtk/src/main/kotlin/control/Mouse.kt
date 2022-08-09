@@ -4,7 +4,7 @@ import context.AwtBaseContext
 import ch.bailu.gtk.GTK
 import ch.bailu.gtk.gtk.DrawingArea
 import ch.bailu.gtk.gtk.GestureClick
-import context.InternalContext
+import tlg.context.InternalContext
 
 class Mouse(private val drawingArea: DrawingArea,
             private val iContext: InternalContext,

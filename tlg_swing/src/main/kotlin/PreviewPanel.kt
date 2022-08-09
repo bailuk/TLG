@@ -1,5 +1,5 @@
-import context.InternalContext
-import geometry.TlgRectangle
+import tlg.context.InternalContext
+import tlg.geometry.TlgRectangle
 import java.awt.Dimension
 import java.awt.Graphics
 import javax.swing.JPanel

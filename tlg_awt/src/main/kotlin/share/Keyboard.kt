@@ -1,7 +1,7 @@
 package share
 
 import AwtBaseContext
-import context.InternalContext
+import tlg.context.InternalContext
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 

@@ -1,7 +1,7 @@
 package ch.bailu.tlg_android.controller
 
-import TlgConfiguration.MATRIX_HEIGHT
-import TlgConfiguration.MATRIX_WIDTH
+import tlg.Configuration.MATRIX_HEIGHT
+import tlg.Configuration.MATRIX_WIDTH
 import android.view.MotionEvent
 
 

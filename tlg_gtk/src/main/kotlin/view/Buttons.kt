@@ -5,7 +5,7 @@ import ch.bailu.gtk.gtk.Grid
 import ch.bailu.gtk.type.Str
 import config.Strings
 import context.AwtBaseContext
-import context.InternalContext
+import tlg.context.InternalContext
 
 class Buttons(iContext: InternalContext, bContext: AwtBaseContext, update: () -> Unit) {
 

@@ -1,14 +1,14 @@
 package ch.bailu.tlg_android.context
 
-import TlgConfiguration.SHAPE_PER_LEVEL
+import tlg.Configuration.SHAPE_PER_LEVEL
 import android.content.Context
 import android.graphics.Color
 import ch.bailu.tlg_android.Configuration
-import context.PlatformContext
-import geometry.TlgPoint
-import geometry.TlgRectangle
-import lib.color.ColorInterface
-import lib.color.HSV
+import tlg.context.PlatformContext
+import tlg.geometry.TlgPoint
+import tlg.geometry.TlgRectangle
+import tlg.lib.color.ColorInterface
+import tlg.lib.color.HSV
 
 open class AndroidBaseContext(val androidContext: Context) : PlatformContext() {
     companion object {

@@ -2,8 +2,8 @@ import { JScriptContext } from '../../tlg-lib/src/context/browser/JScriptContext
 import { LocalStorageContext } from '../../tlg-lib/src/context/browser/LocalStorageContext'
 import { InternalContext } from '../../tlg-lib/src/context/InternalContext'
 import { PlatformContext } from '../../tlg-lib/src/context/PlatformContext'
-import { TlgRectangle } from '../../tlg-lib/src/matrix/TlgRectangle'
-import { StateContext } from '../../tlg-lib/src/state/StateContext'
+import { TlgRectangle } from '../../tlg-lib/src/tlg.matrix/TlgRectangle'
+import { StateContext } from '../../tlg-lib/src/tlg.state/StateContext'
 
 class App {
     private readonly canvas

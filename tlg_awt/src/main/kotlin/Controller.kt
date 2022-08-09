@@ -1,5 +1,5 @@
-import context.InternalContext
-import context.PlatformContext
+import tlg.context.InternalContext
+import tlg.context.PlatformContext
 import java.util.*
 
 class Controller(private val iContext: InternalContext, private val pContext: PlatformContext) {

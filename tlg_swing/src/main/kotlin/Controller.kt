@@ -1,4 +1,4 @@
-import context.InternalContext
+import tlg.context.InternalContext
 import javax.swing.Timer
 
 class Controller(private val iContext: InternalContext, private val bContext: AwtBaseContext) {

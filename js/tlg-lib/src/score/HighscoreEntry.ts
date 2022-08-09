@@ -3,17 +3,17 @@ export class HighscoreEntry {
     private static readonly DEFAULT_NAME:string = '-'
 
     public readonly name:string
-    public readonly score:number
+    public readonly tlg.score:number
 
     constructor (n:string, s:number) {
         this.name = n
-        this.score = s
+        this.tlg.score = s
     }
 }
 
 /*
         public HighscoreEntry(BufferedInputStream reader) throws IOException {
-                score = ByteInteger.read(reader);
+                tlg.score = ByteInteger.read(reader);
                 name = readName(reader);
         }
 
@@ -32,7 +32,7 @@ export class HighscoreEntry {
         System.err.print(name + "\n");
 
                 byte[] buf=name.getBytes();
-                ByteInteger.wrap(score).writeState(output);
+                ByteInteger.wrap(tlg.score).writeState(output);
                 ByteInteger.wrap(buf.length).writeState(output);
                 output.write(buf);
         }

@@ -5,8 +5,8 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import ch.bailu.tlg_android.context.AndroidBaseContext
 import ch.bailu.tlg_android.controller.MotionEventTranslater
-import context.InternalContext
-import geometry.TlgRectangle
+import tlg.context.InternalContext
+import tlg.geometry.TlgRectangle
 
 class GameView(iContext: InternalContext, tContext: AndroidBaseContext) {
     private val motionTranslator = MotionEventTranslater()

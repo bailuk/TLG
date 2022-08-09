@@ -1,12 +1,13 @@
 package context
 
-import TlgConfiguration.SHAPE_PER_LEVEL
+import tlg.Configuration.SHAPE_PER_LEVEL
 import ch.bailu.gtk.gdk.RGBA
-import geometry.TlgPoint
-import geometry.TlgRectangle
-import lib.color.ARGB
-import lib.color.ColorInterface
-import lib.color.HSV
+import tlg.context.PlatformContext
+import tlg.geometry.TlgPoint
+import tlg.geometry.TlgRectangle
+import tlg.lib.color.ARGB
+import tlg.lib.color.ColorInterface
+import tlg.lib.color.HSV
 
 open class AwtBaseContext : PlatformContext() {
     companion object {

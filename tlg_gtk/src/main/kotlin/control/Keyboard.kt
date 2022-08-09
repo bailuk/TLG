@@ -4,7 +4,7 @@ import context.AwtBaseContext
 import ch.bailu.gtk.GTK
 import ch.bailu.gtk.gdk.GdkConstants
 import ch.bailu.gtk.gtk.EventControllerKey
-import context.InternalContext
+import tlg.context.InternalContext
 
 class Keyboard(iContext: InternalContext, pContext: AwtBaseContext, updateView: () -> Unit) {
     val eventControllerKey = EventControllerKey().apply {
