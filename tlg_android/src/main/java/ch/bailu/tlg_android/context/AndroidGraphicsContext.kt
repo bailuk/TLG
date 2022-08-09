@@ -10,7 +10,7 @@ import android.view.SurfaceHolder
 import ch.bailu.tlg.TlgPoint
 import ch.bailu.tlg.TlgRectangle
 
-class FullGraphicContext(context: Context, private val surfaceHolder: SurfaceHolder): AndroidContext(context) {
+class AndroidGraphicsContext(context: Context, private val surfaceHolder: SurfaceHolder): AndroidBaseContext(context) {
 
     var canvas: Canvas? = null
     private val paint = Paint()
@@ -33,19 +33,19 @@ class FullGraphicContext(context: Context, private val surfaceHolder: SurfaceHol
         }
     }
 
-    override fun drawLine(c: Int, p1: TlgPoint, p2: TlgPoint) {
+    override fun drawLine(color: Int, p1: TlgPoint, p2: TlgPoint) {
         val canvas = canvas
         if (canvas is Canvas) {
-            paint.color = c
+            paint.color = color
             canvas.drawLine(p1.x.toFloat(), p1.y.toFloat(), p2.x.toFloat(), p2.y.toFloat(), paint)
         }
     }
 
-    override fun drawFilledRectangle(color: Int, r: TlgRectangle) {
+    override fun drawFilledRectangle(color: Int, rect: TlgRectangle) {
         val canvas = canvas
         if (canvas is Canvas) {
             paint.color = color
-            canvas.drawRect(createAndroidRect(r), paint)
+            canvas.drawRect(createAndroidRect(rect), paint)
             //drawText(colorBackground(),r, "T");
         }
     }

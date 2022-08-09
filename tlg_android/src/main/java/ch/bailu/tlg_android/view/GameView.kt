@@ -5,14 +5,14 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import ch.bailu.tlg.InternalContext
 import ch.bailu.tlg.TlgRectangle
-import ch.bailu.tlg_android.context.AndroidContext
+import ch.bailu.tlg_android.context.AndroidBaseContext
 import ch.bailu.tlg_android.controller.MotionEventTranslater
 
-class GameView(iContext: InternalContext, tContext: AndroidContext) {
+class GameView(iContext: InternalContext, tContext: AndroidBaseContext) {
     private val motionTranslator = MotionEventTranslater()
     private var paintThread = PaintThread(tContext, {}, {})
 
-    val surface = SurfaceView(tContext.getAndroidContext()).apply {
+    val surface = SurfaceView(tContext.androidContext).apply {
 
         holder.addCallback(object: SurfaceHolder.Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {

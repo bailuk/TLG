@@ -9,7 +9,7 @@ import java.io.IOException
 import javax.swing.JFrame
 
 class Window : JFrame() {
-    private val bContext = BaseContext()
+    private val bContext = GtkBaseContext()
     private val iContext = InternalContext(bContext)
     private val gamePanel = GamePanel(iContext, bContext)
 

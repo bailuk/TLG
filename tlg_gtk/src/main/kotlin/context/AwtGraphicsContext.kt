@@ -5,10 +5,8 @@ import ch.bailu.gtk.cairo.Context
 import ch.bailu.gtk.gdk.Gdk
 import ch.bailu.tlg.TlgPoint
 import ch.bailu.tlg.TlgRectangle
-import config.Files
-import java.io.File
 
-class GraphicsContext(private val context: Context): BaseContext() {
+class AwtGraphicsContext(private val context: Context): AwtBaseContext() {
     override fun drawLine(color: Int, p1: TlgPoint, p2: TlgPoint) {
         Gdk.cairoSetSourceRgba(context, getGtkColor(color))
         context.moveTo(p1.x.toDouble(), p1.y.toDouble())

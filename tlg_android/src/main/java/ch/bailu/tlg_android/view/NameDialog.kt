@@ -5,9 +5,9 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.widget.EditText
 import ch.bailu.tlg.InternalContext
-import ch.bailu.tlg_android.context.AndroidContext
+import ch.bailu.tlg_android.context.AndroidBaseContext
 
-class NameDialog(private val iContext: InternalContext, private val tContext: AndroidContext) : DialogInterface.OnClickListener {
+class NameDialog(private val iContext: InternalContext, private val tContext: AndroidBaseContext) : DialogInterface.OnClickListener {
     private val edit: EditText
     override fun onClick(dialog: DialogInterface, which: Int) {
         iContext.setHighscoreName(tContext, edit.text.toString())
@@ -15,8 +15,8 @@ class NameDialog(private val iContext: InternalContext, private val tContext: An
 
     init {
         val title = "Your name?"
-        edit = EditText(tContext.getAndroidContext())
-        val builder = AlertDialog.Builder(tContext.getAndroidContext())
+        edit = EditText(tContext.androidContext)
+        val builder = AlertDialog.Builder(tContext.androidContext)
         val dialog: Dialog
         builder.setTitle(title)
         builder.setView(edit)

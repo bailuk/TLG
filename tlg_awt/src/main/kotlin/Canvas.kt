@@ -6,28 +6,35 @@ import java.awt.Graphics
 import java.util.*
 
 class Canvas(private val iContext: InternalContext, private val bContext: PlatformContext) : Canvas() {
+
+    private val timer = Timer()
+
+
     init {
-        Timer().apply {
-            schedule(object : TimerTask() {
-                override fun run() {
-                    iContext.moveDown(bContext)
-                    update()
-                    schedule(this, iContext.timerInterval.toLong())
-                }
-            }, iContext.timerInterval.toLong())
-        }
+        schedule()
     }
 
+    private fun schedule() {
+        timer.schedule(Task(), iContext.timerInterval.toLong())
+    }
+
+    private inner class Task(): TimerTask() {
+        override fun run() {
+            iContext.moveDown(bContext)
+            update()
+            schedule()
+        }
+    }
     override fun paint(g: Graphics) {
         val d = this.size
         iContext.mainLayout(TlgRectangle(0, 0, d.width, d.height))
-        iContext.updateAllMain(GraphicsContext(g))
+        iContext.updateAllMain(GtkGraphicsContext(g))
     }
 
     fun update() {
         val g = graphics
         if (g != null) {
-            iContext.updateMain(GraphicsContext(g))
+            iContext.updateMain(GtkGraphicsContext(g))
             g.dispose()
         }
     }

@@ -4,28 +4,37 @@ import android.content.Context
 import android.graphics.Color
 import ch.bailu.tlg.PlatformContext
 import ch.bailu.tlg.StateRunning
+import ch.bailu.tlg.TlgPoint
+import ch.bailu.tlg.TlgRectangle
+import ch.bailu.tlg_android.Configuration
+import lib.color.ColorInterface
+import lib.color.HSV
 import java.io.File
 
-abstract class AndroidContext(private val context: Context) : PlatformContext() {
+open class AndroidBaseContext(val androidContext: Context) : PlatformContext() {
     companion object {
         private const val PALETTE_SIZE = StateRunning.SHAPE_PER_LEVEL * 3
 
-        private val palette = ArrayList<Int>().apply {
-            val colorStep = 360 / 8
-            var h = 0f
+        private val palette = java.util.ArrayList<Int>().apply {
+            val colorStep = 1.0 / StateRunning.SHAPE_PER_LEVEL
+            var h = 0.0
+
             for (i in 0 until PALETTE_SIZE) {
-                add(Color.HSVToColor(floatArrayOf(h, 1f, 1f)))
+                add(androidColor(HSV(h)))
                 h += colorStep
-                h %= 360
+                h %= 1.0
             }
+        }
+
+        private fun androidColor(color: ColorInterface): Int {
+            return color.toInt()
         }
     }
 
-    fun getAndroidContext(): Context {
-        return context
-    }
-
-    abstract fun unlockCanvas()
+    override fun drawLine(color: Int, p1: TlgPoint, p2: TlgPoint) {}
+    override fun drawFilledRectangle(color: Int, rect: TlgRectangle) {}
+    override fun drawText(color: Int, rect: TlgRectangle, text: String) {}
+    open fun unlockCanvas() {}
 
     override fun colorBackground(): Int {
         return Color.BLACK
@@ -52,15 +61,17 @@ abstract class AndroidContext(private val context: Context) : PlatformContext() 
     }
 
     override fun colorFrame(): Int {
-        return Color.rgb(44, 109, 205)
+        return Configuration.frameColor
     }
 
 
     override fun colorGrid(): Int {
-        return Color.rgb(44, 57, 77)
+        return Configuration.gridColor
     }
 
     override fun getConfigDirectory(): File {
-        return context.filesDir
+        return androidContext.filesDir
     }
+
+    override fun onNewHighscore() {}
 }

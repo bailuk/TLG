@@ -5,13 +5,13 @@ import android.view.SurfaceHolder.Callback
 import android.view.SurfaceView
 import ch.bailu.tlg.InternalContext
 import ch.bailu.tlg.TlgRectangle
-import ch.bailu.tlg_android.context.AndroidContext
+import ch.bailu.tlg_android.context.AndroidBaseContext
 
-class GamePreview(iContext: InternalContext, tContext: AndroidContext) {
+class GamePreview(iContext: InternalContext, tContext: AndroidBaseContext) {
     private val paintThread = PaintThread(tContext, { iContext.updatePreview(it) }, { iContext.updateAllPreview(it) })
 
 
-    val surface = SurfaceView(tContext.getAndroidContext()).apply {
+    val surface = SurfaceView(tContext.androidContext).apply {
 
         holder.addCallback(object: Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {

@@ -1,6 +1,6 @@
 package control
 
-import context.BaseContext
+import context.AwtBaseContext
 import ch.bailu.gtk.GTK
 import ch.bailu.gtk.gtk.DrawingArea
 import ch.bailu.gtk.gtk.GestureClick
@@ -8,7 +8,7 @@ import ch.bailu.tlg.InternalContext
 
 class Mouse(private val drawingArea: DrawingArea,
             private val iContext: InternalContext,
-            private val bContext: BaseContext,
+            private val bContext: AwtBaseContext,
             private val update: ()->Unit) {
     private var singleClick = false
 

@@ -4,18 +4,13 @@ import android.content.Context
 import android.view.MotionEvent
 import ch.bailu.tlg.InternalContext
 import ch.bailu.tlg.StateHighscore
-import ch.bailu.tlg_android.context.NoDrawContext
+import ch.bailu.tlg_android.context.AndroidBaseContext
 import ch.bailu.tlg_android.view.GamePreview
 import ch.bailu.tlg_android.view.GameView
 import ch.bailu.tlg_android.view.NameDialog
-import java.io.IOException
 
 class Controller(context: Context) {
-    private val tContext = object : NoDrawContext(context) {
-            override fun onNewHighscore() {
-                setHighscoreName()
-            }
-        }
+    private val tContext = AndroidBaseContext(context)
 
     private val iContext = InternalContext(tContext)
 

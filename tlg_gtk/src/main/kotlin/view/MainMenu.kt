@@ -6,11 +6,11 @@ import ch.bailu.gtk.type.Str
 import ch.bailu.tlg.Constants
 import ch.bailu.tlg.InternalContext
 import config.Strings
-import context.BaseContext
+import context.AwtBaseContext
 import lib.menu.Actions
 import lib.menu.MenuModelBuilder
 
-class MainMenu(window: Window, app: Application, iContext: InternalContext, bContext: BaseContext, update: () -> Unit) {
+class MainMenu(window: Window, app: Application, iContext: InternalContext, bContext: AwtBaseContext, update: () -> Unit) {
     private val actions = Actions(app)
 
     val menuButton = MenuButton().apply {

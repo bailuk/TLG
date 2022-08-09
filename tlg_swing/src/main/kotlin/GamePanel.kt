@@ -2,14 +2,10 @@ import ch.bailu.tlg.InternalContext
 import ch.bailu.tlg.TlgRectangle
 import java.awt.Dimension
 import java.awt.Graphics
-import java.awt.event.ActionEvent
-import java.awt.event.ActionListener
-import java.awt.event.KeyEvent
-import java.awt.event.KeyListener
 import javax.swing.JPanel
 import javax.swing.Timer
 
-class GamePanel(private val iContext: InternalContext, private val bContext: BaseContext) : JPanel() {
+class GamePanel(private val iContext: InternalContext, private val bContext: GtkBaseContext) : JPanel() {
     private val timer: Timer = Timer(iContext.timerInterval) {
         iContext.moveDown(bContext)
         update()
@@ -19,11 +15,11 @@ class GamePanel(private val iContext: InternalContext, private val bContext: Bas
     override fun paintComponent(g: Graphics) {
         val d: Dimension = size
         iContext.mainLayout(TlgRectangle(0, 0, d.width, d.height))
-        iContext.updateAllMain(GraphicsContext(g))
+        iContext.updateAllMain(GtkGraphicsContext(g))
     }
 
     fun update() {
-        iContext.updateMain(GraphicsContext(graphics))
+        iContext.updateMain(GtkGraphicsContext(graphics))
         graphics.dispose()
     }
 

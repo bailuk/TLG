@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent
 import java.io.IOException
 
 class Window internal constructor() : Frame() {
-    private val bContext = BaseContext()
+    private val bContext = GtkBaseContext()
     private val iContext = InternalContext(bContext)
     private val canvas: Canvas = Canvas(iContext, bContext)
 

@@ -6,7 +6,7 @@ import ch.bailu.gtk.gtk.DrawingArea
 import ch.bailu.gtk.type.Pointer
 import ch.bailu.tlg.InternalContext
 import ch.bailu.tlg.TlgRectangle
-import context.GraphicsContext
+import context.AwtGraphicsContext
 
 class CanvasMain(private val iContext: InternalContext) {
     val drawingArea = DrawingArea().apply {
@@ -21,7 +21,7 @@ class CanvasMain(private val iContext: InternalContext) {
                     drawing_area.allocatedHeight
                 )
             )
-            iContext.updateAllMain(GraphicsContext(cr))
+            iContext.updateAllMain(AwtGraphicsContext(cr))
         }, null) { _: Pointer? -> }
 
     }

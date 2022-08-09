@@ -1,6 +1,6 @@
 package view
 
-import context.BaseContext
+import context.AwtBaseContext
 import ch.bailu.gtk.gtk.*
 import ch.bailu.gtk.type.Str
 import ch.bailu.tlg.InternalContext
@@ -13,7 +13,7 @@ import lib.extension.setMarkup
 import java.util.*
 
 class Window(app: Application) {
-    private val bContext = BaseContext()
+    private val bContext = AwtBaseContext()
     private val iContext = InternalContext(bContext)
     private val timer = Timer().apply {
         schedule(Tick(), iContext.timerInterval.toLong())

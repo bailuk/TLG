@@ -5,9 +5,9 @@ import ch.bailu.gtk.gtk.Grid
 import ch.bailu.gtk.type.Str
 import ch.bailu.tlg.InternalContext
 import config.Strings
-import context.BaseContext
+import context.AwtBaseContext
 
-class Buttons(iContext: InternalContext, bContext: BaseContext, update: () -> Unit) {
+class Buttons(iContext: InternalContext, bContext: AwtBaseContext, update: () -> Unit) {
 
     val grid = Grid().apply {
         attach(Button().apply {

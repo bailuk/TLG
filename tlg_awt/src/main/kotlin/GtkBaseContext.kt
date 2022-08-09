@@ -2,10 +2,13 @@ import ch.bailu.tlg.PlatformContext
 import ch.bailu.tlg.StateRunning
 import ch.bailu.tlg.TlgPoint
 import ch.bailu.tlg.TlgRectangle
+import lib.color.ARGB
+import lib.color.ColorInterface
+import lib.color.HSV
 import java.awt.Color
 import java.util.*
 
-open class BaseContext : PlatformContext() {
+open class GtkBaseContext : PlatformContext() {
     companion object {
         private const val PALETTE_RESERVED = 5
         private const val PALETTE_SIZE = StateRunning.SHAPE_PER_LEVEL * 3 + PALETTE_RESERVED
@@ -17,21 +20,29 @@ open class BaseContext : PlatformContext() {
         private const val COLOR_GRAYED = COLOR_GRID + 5
 
         private val palette = ArrayList<Color>().apply {
-            val colorStep = 1f / StateRunning.SHAPE_PER_LEVEL
-            var h = 0f
+            val colorStep = 1.0 / StateRunning.SHAPE_PER_LEVEL
+            var h = 0.0
+
             for (i in 0 until PALETTE_SIZE) {
-                add(Color.getHSBColor(h, 1f, 1f))
+                add(awtColor(HSV(h)))
                 h += colorStep
+                h %= 1.0
             }
 
-            this[COLOR_GRID] = Color(44, 67, 77)
-            this[COLOR_FRAME] = Color(44, 109, 205)
-            this[COLOR_BACKGROUND] = Color.BLACK
-            this[COLOR_HIGHLIGHT] = Color.LIGHT_GRAY
-            this[COLOR_DARK] = Color.DARK_GRAY
-            this[COLOR_GRAYED] = Color.GRAY
+            this[COLOR_GRID] = awtColor(ARGB.decode("#8309c4"))
+            this[COLOR_FRAME] = awtColor(ARGB.decode("#09c4b7"))
+            this[COLOR_BACKGROUND] = awtColor(ARGB.decode("#000000"))
+            this[COLOR_HIGHLIGHT] = awtColor(ARGB.decode("#ffffff"))
+            this[COLOR_DARK] = awtColor(ARGB.decode("#4e4f4e"))
+            this[COLOR_GRAYED] = awtColor(ARGB.decode("#a3a3a3"))
+        }
+
+        private fun awtColor(color: ColorInterface): Color {
+            return Color(color.red(), color.green(), color.blue(), color.alpha())
         }
     }
+
+
 
     fun getAwtColor(color: Int): Color {
         return palette[color]

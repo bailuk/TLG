@@ -6,7 +6,7 @@ import android.text.Html
 import android.text.util.Linkify
 import android.widget.ScrollView
 import android.widget.TextView
-import ch.bailu.tlg_android.context.NoDrawContext
+import ch.bailu.tlg_android.Configuration
 import ch.bailu.tlg_android.R
 
 class AboutActivity : Activity() {
@@ -16,7 +16,7 @@ class AboutActivity : Activity() {
         val text = TextView(this)
         text.textSize = 15f
         text.autoLinkMask = Linkify.WEB_URLS
-        text.setLinkTextColor(NoDrawContext(this).colorFrame())
+        text.setLinkTextColor(Configuration.frameColor)
         text.text = Html.fromHtml(getString(R.string.about))
         scroll.addView(text)
         setContentView(scroll)

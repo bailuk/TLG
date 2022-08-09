@@ -2,15 +2,15 @@ package ch.bailu.tlg_android.view
 
 import android.content.Context
 import android.view.SurfaceHolder
-import ch.bailu.tlg_android.context.AndroidContext
-import ch.bailu.tlg_android.context.FullGraphicContext
+import ch.bailu.tlg_android.context.AndroidBaseContext
+import ch.bailu.tlg_android.context.AndroidGraphicsContext
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
 class PaintThread(
-    private var tContext: AndroidContext,
-    private val cbUpdate: (tContext: AndroidContext)->Unit,
-    private val cbUpdateAll: (tContext: AndroidContext)->Unit) : Thread() {
+    private var tContext: AndroidBaseContext,
+    private val cbUpdate: (tContext: AndroidBaseContext)->Unit,
+    private val cbUpdateAll: (tContext: AndroidBaseContext)->Unit) : Thread() {
 
     private enum class Job {
         PAINT, PAINT_ALL, NONE
@@ -78,7 +78,7 @@ class PaintThread(
 
     fun startPainter(context: Context, surfaceHolder: SurfaceHolder) {
         if (!runningThread) {
-            tContext = FullGraphicContext(context, surfaceHolder)
+            tContext = AndroidGraphicsContext(context, surfaceHolder)
             updateAll()
             runningThread = true
             start()

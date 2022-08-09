@@ -1,12 +1,12 @@
 package control
 
-import context.BaseContext
+import context.AwtBaseContext
 import ch.bailu.gtk.GTK
 import ch.bailu.gtk.gdk.GdkConstants
 import ch.bailu.gtk.gtk.EventControllerKey
 import ch.bailu.tlg.InternalContext
 
-class Keyboard(iContext: InternalContext, bContext: BaseContext, updateView: () -> Unit) {
+class Keyboard(iContext: InternalContext, bContext: AwtBaseContext, updateView: () -> Unit) {
     val eventControllerKey = EventControllerKey().apply {
         onKeyPressed() { keyVal: Int, _, _ ->
             var update = GTK.TRUE

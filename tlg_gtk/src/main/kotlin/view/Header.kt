@@ -1,6 +1,6 @@
 package view
 
-import context.BaseContext
+import context.AwtBaseContext
 import ch.bailu.gtk.GTK
 import ch.bailu.gtk.gtk.Application
 import ch.bailu.gtk.gtk.Button
@@ -9,7 +9,7 @@ import ch.bailu.gtk.gtk.Window
 import ch.bailu.tlg.InternalContext
 import config.Strings
 
-class Header(window: Window, app: Application, iContext: InternalContext, bContext: BaseContext, update: ()->Unit) {
+class Header(window: Window, app: Application, iContext: InternalContext, bContext: AwtBaseContext, update: ()->Unit) {
     val headerBar = HeaderBar().apply {
         showTitleButtons = GTK.TRUE
 
