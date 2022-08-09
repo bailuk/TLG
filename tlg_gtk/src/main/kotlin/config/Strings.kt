@@ -23,7 +23,8 @@ object Strings {
 
     // CSS
     val linked = Str("linked")
-    val button = Str("button")
+    val button = Str("arrow-button")
+    val darkBackground = Str("dark-background")
 
     // Defaults
     val empty = Str("")

@@ -6,10 +6,10 @@ import ch.bailu.gtk.gtk.Button
 import ch.bailu.gtk.gtk.HeaderBar
 import ch.bailu.gtk.gtk.Window
 import config.Strings
-import context.AwtBaseContext
+import context.GtkBaseContext
 import tlg.context.InternalContext
 
-class Header(window: Window, app: Application, iContext: InternalContext, pContext: AwtBaseContext, update: ()->Unit) {
+class Header(window: Window, app: Application, iContext: InternalContext, pContext: GtkBaseContext, update: ()->Unit) {
     val headerBar = HeaderBar().apply {
         showTitleButtons = GTK.TRUE
 

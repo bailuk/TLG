@@ -4,10 +4,10 @@ import ch.bailu.gtk.gtk.Button
 import ch.bailu.gtk.gtk.Grid
 import ch.bailu.gtk.type.Str
 import config.Strings
-import context.AwtBaseContext
+import context.GtkBaseContext
 import tlg.context.InternalContext
 
-class Buttons(iContext: InternalContext, bContext: AwtBaseContext, update: () -> Unit) {
+class Buttons(iContext: InternalContext, bContext: GtkBaseContext, update: () -> Unit) {
 
     val grid = Grid().apply {
         attach(Button().apply {

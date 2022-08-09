@@ -32,21 +32,21 @@ open class MatrixVisible : Matrix {
         markAllAsDirty()
     }
 
-    protected fun markAllAsDirty() {
+    private fun markAllAsDirty() {
         dirtyArea.left = 0
         dirtyArea.top = 0
         dirtyArea.width = width
         dirtyArea.height = height
     }
 
-    protected fun markAllAsClean() {
+    private fun markAllAsClean() {
         dirtyArea.left = width - 1
         dirtyArea.top = height - 1
         dirtyArea.bottom = 0 //setWidth(0);
         dirtyArea.right = 0 //setHeight(0);
     }
 
-    fun getD(x: Int, y: Int): Square {
+    fun getDirty(x: Int, y: Int): Square {
         markSquareAsDirty(x, y)
         return get(x, y)
     }

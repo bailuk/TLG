@@ -13,7 +13,7 @@ open class MatrixManipulator : MatrixVisible {
             for (x in 0 until b.width) {
                 for (y in 0 until b.height) {
                     if (b[x, y].isActivated) {
-                        getD(b.x + x, b.y + y).set(b[x, y])
+                        getDirty(b.x + x, b.y + y).set(b[x, y])
                     }
                 }
             }
@@ -27,7 +27,7 @@ open class MatrixManipulator : MatrixVisible {
                 if (b.get(x, y).isActivated) {
                     val vx: Int = b.x + x
                     val vy: Int = b.y + y
-                    if (isPositionValid(vx, vy)) getD(vx, vy).makeInvisible()
+                    if (isPositionValid(vx, vy)) getDirty(vx, vy).makeInvisible()
                 }
             }
         }
@@ -42,10 +42,9 @@ open class MatrixManipulator : MatrixVisible {
     }
 
     fun moveShape(shape: MatrixShape, pos: TlgPoint): Boolean {
-        val r: Boolean
         val oldPos: TlgPoint = shape.pos
         removeShape(shape)
-        r = placeShapeAtPos(shape, pos)
+        val r: Boolean = placeShapeAtPos(shape, pos)
         if (!r) {
             placeShapeAtPos(shape, oldPos)
         }

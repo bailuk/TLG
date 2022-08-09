@@ -4,7 +4,7 @@ import ch.bailu.gtk.GTK
 import ch.bailu.gtk.cairo.Context
 import ch.bailu.gtk.gtk.DrawingArea
 import ch.bailu.gtk.type.Pointer
-import context.AwtGraphicsContext
+import context.GtkGraphicsContext
 import tlg.context.InternalContext
 import tlg.geometry.TlgRectangle
 
@@ -15,12 +15,12 @@ class CanvasPreview(private val iContext: InternalContext) {
         setDrawFunc({ drawing_area: DrawingArea, cr: Context, _: Int, _: Int, _: Pointer? ->
             iContext.previewLayout(
                 TlgRectangle(
-                    0, 0,
-                    drawing_area.allocatedWidth,
-                    drawing_area.allocatedHeight
+                    1, 1,
+                    drawing_area.allocatedWidth-2,
+                    drawing_area.allocatedHeight-2
                 )
             )
-            iContext.updateAllPreview(AwtGraphicsContext(cr))
+            iContext.updateAllPreview(GtkGraphicsContext(cr))
         }, null) { _: Pointer? -> }
 
     }

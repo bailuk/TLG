@@ -23,7 +23,7 @@ class MatrixLineManipulator : MatrixWithShape {
     fun insertGreyedLine() {
         val y = height - greyedLines - 1
         if (y > 0) {
-            for (x in 0 until width) getD(x, y).enableGreyedOut()
+            for (x in 0 until width) getDirty(x, y).enableGreyedOut()
             greyedLines++
         }
     }
@@ -31,7 +31,7 @@ class MatrixLineManipulator : MatrixWithShape {
     fun removeGreyedLine() {
         val y = height - greyedLines
         if (y in 1 until height) {
-            for (x in 0 until width) getD(x, y).disableGreyedOut()
+            for (x in 0 until width) getDirty(x, y).disableGreyedOut()
             greyedLines--
         }
     }
@@ -54,10 +54,10 @@ class MatrixLineManipulator : MatrixWithShape {
     }
 
     private fun moveLineOneDown(l: Int) {
-        for (x in 0 until width) getD(x, l).set(get(x, l - 1))
+        for (x in 0 until width) getDirty(x, l).set(get(x, l - 1))
     }
 
     private fun eraseTopLine() {
-        for (x in 0 until width) getD(x, 0).makeInvisible()
+        for (x in 0 until width) getDirty(x, 0).makeInvisible()
     }
 }

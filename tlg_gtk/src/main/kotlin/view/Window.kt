@@ -1,10 +1,11 @@
 package view
 
-import context.AwtBaseContext
+import context.GtkBaseContext
 import ch.bailu.gtk.gtk.*
 import ch.bailu.gtk.type.Str
 import config.CSS
 import config.Layout
+import config.Strings
 import config.Strings.appTitle
 import tlg.context.InternalContext
 import control.Keyboard
@@ -13,7 +14,7 @@ import lib.extension.setMarkup
 import java.util.*
 
 class Window(app: Application) {
-    private val pContext = AwtBaseContext()
+    private val pContext = GtkBaseContext()
     private val iContext = InternalContext(pContext)
     private val timer = Timer().apply {
         schedule(Tick(), iContext.timerInterval.toLong())
@@ -38,11 +39,16 @@ class Window(app: Application) {
 
             level.marginStart = Layout.margin * 2
             level.marginEnd = Layout.margin * 2
-            mainBox.marginTop = Layout.margin
-            mainBox.marginEnd = Layout.margin
-            mainBox.marginBottom = Layout.margin
-            mainBox.marginStart = Layout.margin
+            topBox.marginTop = Layout.margin
+            topBox.marginEnd = Layout.margin
+            //topBox.marginBottom = Layout.margin
+            topBox.marginStart = Layout.margin
+            //bottomBox.marginTop = Layout.margin
+            bottomBox.marginEnd = Layout.margin
+            bottomBox.marginBottom = Layout.margin
+            bottomBox.marginStart = Layout.margin
 
+            mainBox.addCssClass(Strings.darkBackground)
             mainBox.append(topBox)
             mainBox.append(canvasMain.drawingArea)
             mainBox.append(bottomBox)

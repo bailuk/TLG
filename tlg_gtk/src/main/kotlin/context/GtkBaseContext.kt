@@ -9,7 +9,7 @@ import tlg.lib.color.ARGB
 import tlg.lib.color.ColorInterface
 import tlg.lib.color.HSV
 
-open class AwtBaseContext : PlatformContext() {
+open class GtkBaseContext : PlatformContext() {
     companion object {
         private const val PALETTE_RESERVED = 5
         private const val PALETTE_SIZE = SHAPE_PER_LEVEL * 3 + PALETTE_RESERVED
@@ -22,7 +22,7 @@ open class AwtBaseContext : PlatformContext() {
 
         private val palette = ArrayList<RGBA>().apply {
             val colorStep = 1.0 / SHAPE_PER_LEVEL
-            var h = 0.0
+            var h = colorStep
 
             for (i in 0 until PALETTE_SIZE) {
                 add(gtkColor(HSV(h)))
@@ -30,8 +30,8 @@ open class AwtBaseContext : PlatformContext() {
                 h %= 1.0
             }
 
-            this[COLOR_GRID] = gtkColor(ARGB.decode("#8309c4"))
-            this[COLOR_FRAME] = gtkColor(ARGB.decode("#09c4b7"))
+            this[COLOR_GRID] = gtkColor(ARGB.decode("#5d006e"))
+            this[COLOR_FRAME] = gtkColor(ARGB.decode("#5d006e"))
             this[COLOR_BACKGROUND] = gtkColor(ARGB.decode("#000000"))
             this[COLOR_HIGHLIGHT] = gtkColor(ARGB.decode("#ffffff"))
             this[COLOR_DARK] = gtkColor(ARGB.decode("#4e4f4e"))

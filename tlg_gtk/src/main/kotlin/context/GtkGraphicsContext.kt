@@ -6,7 +6,7 @@ import ch.bailu.gtk.gdk.Gdk
 import tlg.geometry.TlgPoint
 import tlg.geometry.TlgRectangle
 
-class AwtGraphicsContext(private val context: Context): AwtBaseContext() {
+class GtkGraphicsContext(private val context: Context): GtkBaseContext() {
     override fun drawLine(color: Int, p1: TlgPoint, p2: TlgPoint) {
         Gdk.cairoSetSourceRgba(context, getGtkColor(color))
         context.moveTo(p1.x.toDouble(), p1.y.toDouble())
