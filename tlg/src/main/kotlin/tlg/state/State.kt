@@ -38,10 +38,6 @@ abstract class State(val context: InternalContext) {
 
     abstract val id: Int
 
-    open fun setHighScoreName(pContext: PlatformContext, name: String): State {
-        return this
-    }
-
     companion object {
         fun restoreContextFactory(iContext: InternalContext, id: Int): State {
             return if (id == StateRunning.ID) {

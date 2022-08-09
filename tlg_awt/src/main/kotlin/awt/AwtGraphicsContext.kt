@@ -14,9 +14,4 @@ class AwtGraphicsContext(private val graphics: Graphics) : AwtBaseContext() {
         graphics.color = super.getAwtColor(color)
         graphics.fillRect(rect.left, rect.top, rect.width, rect.height)
     }
-
-    override fun drawText(color: Int, rect: TlgRectangle, text: String) {
-        graphics.color = super.getAwtColor(color)
-        graphics.drawString(text, rect.left, rect.top + rect.height / 2)
-    }
 }

@@ -10,6 +10,11 @@ class HighScoreEntry {
     val name: String
     val score: Int
 
+    companion object {
+        private const val NAME_BUFFER_LIMIT = 50
+        private const val DEFAULT_NAME = "-"
+    }
+
     constructor() {
         score = 0
         name = DEFAULT_NAME
@@ -37,21 +42,10 @@ class HighScoreEntry {
 
     @Throws(IOException::class)
     fun writeState(output: BufferedOutputStream) {
-        System.err.print("write entry")
-        System.err.print(
-            """
-                $name
-                
-                """.trimIndent()
-        )
-        val buf = name.toByteArray()
+        println("write entry: $name - $score")
         ByteInteger.wrap(score).writeState(output)
-        ByteInteger.wrap(buf.size).writeState(output)
-        output.write(buf)
-    }
-
-    companion object {
-        private const val NAME_BUFFER_LIMIT = 20
-        private const val DEFAULT_NAME = "-"
+        val nameBuffer = name.toByteArray()
+        ByteInteger.wrap(nameBuffer.size).writeState(output)
+        output.write(nameBuffer)
     }
 }

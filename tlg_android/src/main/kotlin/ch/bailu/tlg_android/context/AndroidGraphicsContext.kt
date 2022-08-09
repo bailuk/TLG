@@ -47,24 +47,10 @@ class AndroidGraphicsContext(context: Context, private val surfaceHolder: Surfac
         if (canvas is Canvas) {
             paint.color = color
             canvas.drawRect(createAndroidRect(rect), paint)
-            //drawText(colorBackground(),r, "T");
         }
     }
 
     private fun createAndroidRect(r: TlgRectangle): Rect {
         return Rect(r.left, r.top, r.right + 1, r.bottom + 1)
     }
-
-    override fun drawText(color: Int, rect: TlgRectangle, text: String) {
-        val canvas = canvas
-        if (canvas is Canvas) {
-            paint.color = Color.WHITE
-            paint.textSize = (rect.height - 2).toFloat()
-            paint.isAntiAlias = true
-            canvas.drawText(text, rect.left.toFloat(), (rect.bottom - 3).toFloat(), paint)
-            paint.isAntiAlias = false
-        }
-    }
-
-    override fun onNewHighscore() {}
 }

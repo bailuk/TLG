@@ -7,6 +7,5 @@
 <item android:id="@+id/menu_pause"     android:title="@string/string_pause"></item>
 <item android:id="@+id/menu_start"     android:title="@string/string_start"></item>
 <item android:id="@+id/menu_score"     android:title="@string/string_score"></item>
-<item android:id="@+id/menu_name"      android:title="@string/string_name"></item>
-<item android:id="@+id/menu_about"     android:title="@string/string_about"></item>
+    <item android:id="@+id/menu_about"     android:title="@string/string_about"></item>
 </menu>

@@ -123,10 +123,6 @@ class GameActivity : Activity() {
                     startActivity(HighScoreActivity::class.java)
                     true
                 }
-                R.id.menu_name -> {
-                    tetris.setHighscoreName()
-                    false
-                }
                 else -> false
             }
         }

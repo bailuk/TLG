@@ -1,14 +1,14 @@
 package view
 
-import tlg.Configuration.HELP_TEXT
-import ch.bailu.gtk.gtk.*
+import ch.bailu.gtk.gtk.Application
+import ch.bailu.gtk.gtk.MenuButton
 import ch.bailu.gtk.gtk.Window
 import ch.bailu.gtk.type.Str
 import config.Strings
 import context.GtkBaseContext
-import tlg.context.InternalContext
 import lib.menu.Actions
 import lib.menu.MenuModelBuilder
+import tlg.context.InternalContext
 
 class MainMenu(window: Window, app: Application, iContext: InternalContext, pContext: GtkBaseContext, update: () -> Unit) {
     private val actions = Actions(app)
@@ -25,16 +25,10 @@ class MainMenu(window: Window, app: Application, iContext: InternalContext, pCon
                 update()
             }
             label(Strings.help) {
-                MessageDialog(window,
-                    DialogFlags.DESTROY_WITH_PARENT.or(DialogFlags.MODAL),
-                    MessageType.INFO,
-                    ButtonsType.CLOSE,
-                    Str(HELP_TEXT)).apply {
-                    onResponse {
-                        close()
-                        destroy()
-                    }
-                }.show()
+                HelpDialog(window)
+            }
+            label(Strings.highScore) {
+                HighScoreDialog(window, pContext)
             }
             label(Strings.info) {
                 About.show(window)

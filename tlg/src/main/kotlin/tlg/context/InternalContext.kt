@@ -115,10 +115,6 @@ class InternalContext(c: PlatformContext) {
     val timerInterval: Int
         get() = state.timerInterval
 
-    fun setHighScoreName(pContext: PlatformContext, name: String) {
-        state = state.setHighScoreName(pContext, name)
-    }
-
     val id: Int
         get() = state.id
     val stateText: String

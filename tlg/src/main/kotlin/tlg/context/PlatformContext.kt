@@ -5,13 +5,6 @@ import tlg.geometry.TlgRectangle
 import java.io.*
 
 abstract class PlatformContext {
-    open fun setDirtyRect(rect: TlgRectangle) {
-        /*TetrisRectangle r = new TetrisRectangle(rect);
-
-        r.grow(1);
-        drawRectangle(colorGrid(), r);*/
-    }
-
     fun drawRectangle(c: Int, r: TlgRectangle) {
         drawLine(c, r.tL, r.tR)
         drawLine(c, r.tR, r.bR)
@@ -21,9 +14,7 @@ abstract class PlatformContext {
 
     abstract fun drawLine(color: Int, p1: TlgPoint, p2: TlgPoint)
     abstract fun drawFilledRectangle(color: Int, rect: TlgRectangle)
-    abstract fun drawText(color: Int, rect: TlgRectangle, text: String)
 
-    // TODO: move color stuff out of context
     abstract fun colorBackground(): Int
     abstract fun colorDark(): Int
     abstract fun colorHighlight(): Int
@@ -37,7 +28,6 @@ abstract class PlatformContext {
     open val configDirectory: File
         get() = File(System.getProperty("user.home"), ".config/tlg")
 
-    abstract fun onNewHighscore()
     @Throws(FileNotFoundException::class)
     fun getInputStream(fileName: String): BufferedInputStream {
         val file = File(configDirectory, fileName)
@@ -50,5 +40,9 @@ abstract class PlatformContext {
         directory.mkdirs()
         val file = File(directory, fileName)
         return BufferedOutputStream(FileOutputStream(file))
+    }
+
+    open fun setDirtyRect(rect: TlgRectangle) {
+
     }
 }

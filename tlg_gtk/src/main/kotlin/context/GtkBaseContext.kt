@@ -54,7 +54,6 @@ open class GtkBaseContext : PlatformContext() {
 
     override fun drawLine(color: Int, p1: TlgPoint, p2: TlgPoint) {}
     override fun drawFilledRectangle(color: Int, rect: TlgRectangle) {}
-    override fun drawText(color: Int, rect: TlgRectangle, text: String) {}
     override fun colorBackground(): Int {
         return COLOR_BACKGROUND
     }
@@ -86,6 +85,4 @@ open class GtkBaseContext : PlatformContext() {
     override fun getColor(i: Int): Int {
         return i
     }
-
-    override fun onNewHighscore() {}
 }

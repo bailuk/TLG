@@ -5,9 +5,7 @@ import android.view.MotionEvent
 import ch.bailu.tlg_android.context.AndroidBaseContext
 import ch.bailu.tlg_android.view.GamePreview
 import ch.bailu.tlg_android.view.GameView
-import ch.bailu.tlg_android.view.NameDialog
 import tlg.context.InternalContext
-import tlg.state.StateHighScore
 
 class Controller(context: Context) {
     private val tContext = AndroidBaseContext(context)
@@ -62,12 +60,6 @@ class Controller(context: Context) {
     fun toggleGrid() {
         iContext.toggleGrid()
         gameMainView.update()
-    }
-
-    fun setHighscoreName() {
-        if (iContext.id == StateHighScore.ID) {
-            NameDialog(iContext, tContext)
-        }
     }
 
     fun onTouchEvent(event: MotionEvent) {

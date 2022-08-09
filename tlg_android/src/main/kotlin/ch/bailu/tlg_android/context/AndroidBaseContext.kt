@@ -1,14 +1,15 @@
 package ch.bailu.tlg_android.context
 
-import tlg.Configuration.SHAPE_PER_LEVEL
 import android.content.Context
 import android.graphics.Color
 import ch.bailu.tlg_android.Configuration
+import tlg.Configuration.SHAPE_PER_LEVEL
 import tlg.context.PlatformContext
 import tlg.geometry.TlgPoint
 import tlg.geometry.TlgRectangle
 import tlg.lib.color.ColorInterface
 import tlg.lib.color.HSV
+import java.io.File
 
 open class AndroidBaseContext(val androidContext: Context) : PlatformContext() {
     companion object {
@@ -32,7 +33,6 @@ open class AndroidBaseContext(val androidContext: Context) : PlatformContext() {
 
     override fun drawLine(color: Int, p1: TlgPoint, p2: TlgPoint) {}
     override fun drawFilledRectangle(color: Int, rect: TlgRectangle) {}
-    override fun drawText(color: Int, rect: TlgRectangle, text: String) {}
     open fun unlockCanvas() {}
 
     override fun colorBackground(): Int {
@@ -69,8 +69,12 @@ open class AndroidBaseContext(val androidContext: Context) : PlatformContext() {
     }
 
     override val configDirectory
-        get() = androidContext.filesDir
-
-
-    override fun onNewHighscore() {}
+        get() = run {
+            val file: File? = androidContext.filesDir
+            if (file is File) {
+                file
+            } else {
+                super.configDirectory
+            }
+        }
 }

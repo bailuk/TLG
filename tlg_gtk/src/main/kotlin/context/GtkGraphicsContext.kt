@@ -1,4 +1,5 @@
-package context
+package context            //drawText(colorBackground(),r, "T");
+
 
 import ch.bailu.gtk.cairo.Antialias
 import ch.bailu.gtk.cairo.Context
