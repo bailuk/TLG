@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import ch.bailu.tlg_android.Configuration
 import tlg.Configuration.SHAPE_PER_LEVEL
+import tlg.context.InternalContext
 import tlg.context.PlatformContext
 import tlg.geometry.TlgPoint
 import tlg.geometry.TlgRectangle
@@ -11,7 +12,7 @@ import tlg.lib.color.ColorInterface
 import tlg.lib.color.HSV
 import java.io.File
 
-open class AndroidBaseContext(val androidContext: Context) : PlatformContext() {
+open class AndroidBaseContext(val androidContext: Context, val cbUpdateStatus: (iContext: InternalContext) -> Unit = {}) : PlatformContext() {
     companion object {
         private const val PALETTE_SIZE = SHAPE_PER_LEVEL * 3
 
@@ -77,4 +78,8 @@ open class AndroidBaseContext(val androidContext: Context) : PlatformContext() {
                 super.configDirectory
             }
         }
+
+    override fun onStatusUpdated(iContext: InternalContext) {
+        cbUpdateStatus(iContext)
+    }
 }

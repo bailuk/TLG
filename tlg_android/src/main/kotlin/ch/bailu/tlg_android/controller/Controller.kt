@@ -7,8 +7,8 @@ import ch.bailu.tlg_android.view.GamePreview
 import ch.bailu.tlg_android.view.GameView
 import tlg.context.InternalContext
 
-class Controller(context: Context) {
-    private val pContext = AndroidBaseContext(context)
+class Controller(context: Context, private val cbUpdateStatus: (iContext: InternalContext) -> Unit) {
+    private val pContext = AndroidBaseContext(context) { cbUpdateStatus(it) }
     private val iContext = InternalContext(pContext)
 
     private val gameTimer = GameTimer(this)
@@ -61,5 +61,9 @@ class Controller(context: Context) {
 
     fun onActivityResume() {
         gameTimer.start()
+    }
+
+    fun updateStatusText() {
+        cbUpdateStatus(iContext)
     }
 }

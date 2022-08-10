@@ -21,31 +21,31 @@ class InternalContext(pContext: PlatformContext) {
     // IMPORTANT: StateInit initializes previewMatrix and mainMatrix (order)
     private var state: State = StateInit(this).init(pContext)
 
-    fun moveLeft(pContext: PlatformContext) {
+    @Synchronized fun moveLeft(pContext: PlatformContext) {
         setState(pContext, state.moveLeft(pContext))
     }
 
-    fun moveRight(pContext: PlatformContext) {
+    @Synchronized fun moveRight(pContext: PlatformContext) {
         setState(pContext, state.moveRight(pContext))
     }
 
-    fun moveDown(pContext: PlatformContext) {
+    @Synchronized fun moveDown(pContext: PlatformContext) {
         setState(pContext, state.moveDown(pContext))
     }
 
-    fun moveTurn(pContext: PlatformContext) {
+    @Synchronized fun moveTurn(pContext: PlatformContext) {
         setState(pContext, state.moveTurn(pContext))
     }
 
-    fun toggleGrid() {
+    @Synchronized fun toggleGrid() {
         mainMatrix.toggleGrid()
     }
 
-    fun togglePause(pContext: PlatformContext) {
+    @Synchronized fun togglePause(pContext: PlatformContext) {
         setState(pContext, state.togglePause(pContext))
     }
 
-    fun startNewGame(pContext: PlatformContext) {
+    @Synchronized fun startNewGame(pContext: PlatformContext) {
         setState(pContext, state.startNewGame(pContext))
     }
 
@@ -60,40 +60,40 @@ class InternalContext(pContext: PlatformContext) {
         output.close()
     }
 
-    fun mainLayout(rect: TlgRectangle) {
+    @Synchronized fun mainLayout(rect: TlgRectangle) {
         mainGeometry = rect
         mainMatrix.pixelGeometry = mainGeometry
     }
 
-    fun previewLayout(rect: TlgRectangle) {
+    @Synchronized fun previewLayout(rect: TlgRectangle) {
         previewGeometry = rect
         previewMatrix.pixelGeometry = previewGeometry
     }
 
-    fun updatePreview(pContext: PlatformContext) {
+    @Synchronized fun updatePreview(pContext: PlatformContext) {
         previewMatrix.update(pContext)
     }
 
-    fun updateAllPreview(pContext: PlatformContext) {
+    @Synchronized fun updateAllPreview(pContext: PlatformContext) {
         updateBackgroundPreview(pContext)
         previewMatrix.updateAll(pContext)
     }
 
-    fun updateMain(pContext: PlatformContext) {
+    @Synchronized fun updateMain(pContext: PlatformContext) {
         mainMatrix.update(pContext)
     }
 
-    fun updateAllMain(pContext: PlatformContext) {
+    @Synchronized fun updateAllMain(pContext: PlatformContext) {
         updateBackgroundMain(pContext)
         mainMatrix.updateAll(pContext)
     }
 
-    private fun updateBackgroundMain(pContext: PlatformContext) {
+    @Synchronized private fun updateBackgroundMain(pContext: PlatformContext) {
         pContext.setDirtyRect(mainGeometry)
         pContext.drawFilledRectangle(pContext.colorBackground(), mainGeometry)
     }
 
-    private fun updateBackgroundPreview(pContext: PlatformContext) {
+    @Synchronized private fun updateBackgroundPreview(pContext: PlatformContext) {
         pContext.setDirtyRect(previewGeometry)
         pContext.drawFilledRectangle(pContext.colorBackground(), previewGeometry)
     }

@@ -11,6 +11,7 @@ import android.widget.TextView
 import ch.bailu.tlg_android.Configuration
 import ch.bailu.tlg_android.R
 import ch.bailu.tlg_android.controller.Controller
+import tlg.context.InternalContext
 
 
 class GameActivity : Activity() {
@@ -20,23 +21,26 @@ class GameActivity : Activity() {
         super.onCreate(savedInstanceState)
 
         val context = this
+        val level = TextView(context)
+        val score = TextView(context)
+        val status = TextView(context)
 
-        val controller = Controller(context)
+
         val mainLayout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
         }
 
         val statusLayout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            addView(TextView(context).apply {
-                text = "Level"
-            })
-            addView(TextView(context).apply {
-                text = "Status"
-            })
-            addView(TextView(context).apply {
-                text = "Score"
-            })
+            addView(level)
+            addView(score)
+            addView(status)
+        }
+
+        val controller = Controller(context) {
+            level.text = "Level: ${it.level}"
+            score.text = "Score: ${it.score}"
+            status.text = it.toString()
         }
 
         val buttonLayout = LinearLayout(context).apply {
@@ -45,7 +49,6 @@ class GameActivity : Activity() {
                 setOnClickListener {
                     controller.pauseOrResume()
                 }
-
                 text = "Pause"
             })
 
@@ -82,6 +85,7 @@ class GameActivity : Activity() {
     override fun onResume() {
         super.onResume()
         controller?.onActivityResume()
+        controller?.updateStatusText()
     }
 
     override fun onPause() {
@@ -141,4 +145,5 @@ class GameActivity : Activity() {
         controller?.onTouchEvent(event)
         return true
     }
+
 }
