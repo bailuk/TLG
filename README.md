@@ -48,4 +48,4 @@ npm run start
 - Run install script as user: `sh install.sh`
 
 # License
-[CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
+Source code is released under the [MIT License](https://en.wikipedia.org/wiki/MIT_License)

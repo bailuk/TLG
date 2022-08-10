@@ -22,8 +22,8 @@ object Configuration {
 
     const val LEVEL_MAX = 3
 
-    const val COPYRIGHT = "© 2016-2022 Lukas Bai, CC BY 4.0"
-    const val LICENSE = "http://creativecommons.org/licenses/by/4.0/"
+    const val COPYRIGHT = "© 2016-2022 Lukas Bai"
+    const val LICENSE = "MIT License"
     const val WEBSITE = "https://github.com/bailuk/TLG"
     const val VERSION = "v0.1.0"
 
