@@ -8,6 +8,11 @@ import android.widget.ScrollView
 import android.widget.TextView
 import ch.bailu.tlg_android.Configuration
 import ch.bailu.tlg_android.R
+import tlg.Configuration.COPYRIGHT
+import tlg.Configuration.LICENSE
+import tlg.Configuration.PITCH
+import tlg.Configuration.VERSION
+import tlg.Configuration.WEBSITE
 
 class AboutActivity : Activity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +22,13 @@ class AboutActivity : Activity() {
         text.textSize = 15f
         text.autoLinkMask = Linkify.WEB_URLS
         text.setLinkTextColor(Configuration.frameColor)
-        text.text = Html.fromHtml(getString(R.string.about))
+        text.text = """
+            $PITCH - $VERSION            
+            $WEBSITE
+            
+            $COPYRIGHT
+            $LICENSE
+        """
         scroll.addView(text)
         setContentView(scroll)
     }

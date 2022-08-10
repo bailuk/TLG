@@ -7,8 +7,6 @@ object Configuration {
             "'G':\t\t\ttoggle grid\n" +
             "'N':\t\t\tnew game\n"
 
-    const val ABOUT_TEXT = "https://github.com/bailuk/TLG"
-
     const val SCORE_FILE = "score"
     const val SCORE_FILE_ENTRIES = 10
 
@@ -24,4 +22,10 @@ object Configuration {
 
     const val LEVEL_MAX = 3
 
+    const val COPYRIGHT = "© 2016-2022 Lukas Bai, CC BY 4.0"
+    const val LICENSE = "http://creativecommons.org/licenses/by/4.0/"
+    const val WEBSITE = "https://github.com/bailuk/TLG"
+    const val VERSION = "v0.1.0"
+
+    const val PITCH = "TLG - multi platform Tetris like game"
 }

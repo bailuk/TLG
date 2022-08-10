@@ -8,23 +8,4 @@
 <string name="string_start">&quot;New Game&quot;</string>
 <string name="string_about">About…</string>
 
-<string name="about">
-    &lt;h1>About&lt;/h1>
-
-    &lt;p>
-    &lt;b>TLG - Tetris Like Game&lt;/b> is a minimalistic tetris-like Game written in Java(tm). It supports multible GUI-platforms.
-    &lt;/p>
-
-    &lt;/p>
-    &lt;b>Sourcecode:&lt;/b> https://github.com/bailuk/TLG
-    &lt;/p>
-
-
-    &lt;h1>Copyright&lt;/h1>
-    &lt;p>
-       &amp;#0169; 2016 Lukas Bai bailu@bailu.ch
-       &lt;br>license: CC BY 4.0
-       &lt;br>http://creativecommons.org/licenses/by/4.0/
-    &lt;/p>
-</string>
 </resources>

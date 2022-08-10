@@ -1,0 +1,37 @@
+name: Node on ubuntu
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Browser install
+        run: cd js/browser && npm ci
+
+      - name: Browser lint
+        run: cd js/browser && npm lint
+
+      - name: Browser build
+        run: cd js/browser && npm build
+
+      - name: GTK install
+        run: cd js/gtk && npm ci
+
+      - name: GTK lint
+        run: cd js/gtk && npm lint
+
+      - name: GTK build
+        run: cd js/gtk && npm build

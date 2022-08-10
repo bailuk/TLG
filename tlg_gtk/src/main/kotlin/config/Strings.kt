@@ -2,6 +2,9 @@ package config
 
 import ch.bailu.gtk.type.Str
 import tlg.Configuration
+import tlg.Configuration.COPYRIGHT
+import tlg.Configuration.VERSION
+import tlg.Configuration.WEBSITE
 
 object Strings {
     const val userAgent = "tlg"
@@ -9,10 +12,10 @@ object Strings {
     val appID = Str("ch.bailu.tlg")
     val appTitle = Str("TLG")
 
-    val version = Str("v0.1.0")
+    val version = Str(VERSION)
 
-    val copyright = Str("© 2021, 2022 Lukas Bai, MIT License")
-    val website = Str("https://github.com/bailuk/TLG")
+    val copyright = Str(COPYRIGHT)
+    val website = Str(WEBSITE)
 
     // UX
     val close = Str("Close")

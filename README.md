@@ -1,57 +1,51 @@
 ![Java CI with Gradle](https://github.com/bailuk/TLG/workflows/Java%20CI%20with%20Gradle/badge.svg)
 # About
-*TLG - Tetris Like Game* is a minimalistic tetris-like Game written in Java. It supports multible GUI-platforms.
+*TLG - Tetris Like Game* Kotlin and Typescript variant for multiple GUI-platforms.
     
 # Screenshot
 ![TLG running on Android](screenshot.png)  
 TLG running on Android.
 
+
+# Dependencies
+- Java 11
+- GTK 4
+- Android SDK
+- Node.js and npm
+
 # Build and run
-## All variants:
-Open file `settings.gradle.kts` in text editor and comment/uncomment lines to enable specific variants.
+```bash
+# Build all Kotlin variants
+./gradlew build
 
-## awt / swing / swt:
-In terminal execute `./gradlew assemble` to build variant(s) and then execute `./gradlew run` to run variant(s).  
-Note: when building the swt variant [SWT jars](https://plugins.gradle.org/plugin/com.diffplug.gradle.swt.nativedeps) will be downloaded from the gradle maven repository.
+# Build GTK 4 variant
+./gradlew tlg_gtk:build
+./gradlew tlg_gtk:run
 
-## android:
-1. Install adb and android SDK. Or install [Android Studio](https://developer.android.com/studio/).
-2. Set `ANDROID_SDK_ROOT` environment variable. For example: `export ANDROID_SDK_ROOT=$HOME/Android/Sdk/`
-3. In terminal execute `./gradlew assemble` to download artifacts and build apks.
-4. In terminal execute `adb install ./tlg_android/build/outputs/apk/debug/tlg_android-debug.apk` to install apk on connected android device.
+# Build Swing variant
+./gradlew tlg_swing:build
+./gradlew tlg_swing:run
 
-## java-gtk (GTK 3)
-1. Install [java-gtk](https://github.com/bailuk/java-gtk)
-2. Adjust dependency for `java-gtk (library.jar)` in `tlg_gtk/build.gradle.kts`
-3. Execute `./gradlew run` to run. 
+# Build Android variant
+./gradlew tlg_android:build
 
-## gnome:
-1. Install [gnome java](http://java-gnome.sourceforge.net/)
-2. Adjust dependency for `gtk.jar` in `tlg_gnome/build.gradle.kts`
-3. Execute `./gradlew assemble` to build and `./gradlew run` to run.
+# Browser: install, build and run
+cd js/browser
+npm install
+npm run build
+npm run serve
 
-Note: timer is not implemented (this task is for you).
+# GTK (node-gtk): install, build and run
+cd js/gtk
+npm run build
+npm run start
+```
 
-## angular:
-[Angular](https://angular.io/)/[TypeScript](https://www.typescriptlang.org/) port. [Play here!](https://bailu.ch/tlg/). 
-1. Install `npm` and `nodejs`: [nodejs.org](https://nodejs.org)
-2. Install `angular/cli` globaly by running `npm install -g @angular/cli`
-3. Change to directory `js/angular`.
-4. Run `npm install` to download and install dependencies.
-5. Run `ng serve` to start development server. Open [URL](http://localhost:4200/) in browser to run.
+# Install distribution (Kotlin / GTK-4 variant)
+- Install dependencies: `sudo apt install openjdk-11-jre libgtk-4-1`
+- Download `tlg-gtk.zip` from [release](https://github.com/bailuk/TLG/releases) or [build pipeline](https://github.com/bailuk/TLG/actions)
+- Extract archive: `unzip tlg-gtk.zip`
+- Run install script as user: `sh install.sh`
 
-See `js/angular/README.md` for more commands.
-
-
-## node.js / node-gtk:
-[nodejs.org](https://nodejs.org)/[node-gtk](https://www.npmjs.com/package/node-gtk) port.
-1. Install `npm`, `nodejs` and `ts-node`.
-2. Change to directory `js/nodejs`.
-3. Run `npm install` to download and install dependencies.
-4. `ts-node ./tlg-nodejs.ts` to run.
-
-
-# Copyright
-(c) 2016-2020 [Lukas Bai](mailto:bailu@bailu.ch)  
+# License
 [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
-
