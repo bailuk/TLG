@@ -1,0 +1,9 @@
+.dark-background {
+    background-color: black;
+    color: #aff400;
+}
+
+.arrow-button {
+    padding: 10px;
+    margin: 2px;
+}

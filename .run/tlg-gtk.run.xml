@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="TLG GTK" type="JetRunConfigurationType">
+    <option name="MAIN_CLASS_NAME" value="AppKt" />
+    <module name="TLG.tlg_gtk.main" />
+    <shortenClasspath name="NONE" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

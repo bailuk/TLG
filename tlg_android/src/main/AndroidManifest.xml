@@ -3,19 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ch.bailu.tlg_android">
     <application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar">
-        <activity android:label="@string/app_name" android:name=".GameActivity" android:screenOrientation="portrait">
+        <activity android:label="@string/app_name" android:name=".activity.GameActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ch.bailu.tlg_android.AboutActivity"></activity>
-        <activity android:name="ch.bailu.tlg_android.HighscoreActivity"></activity>
+        <activity android:name=".activity.AboutActivity"></activity>
+        <activity android:name=".activity.HighScoreActivity"></activity>
 
     </application>
 
 
 </manifest>
-
-
-

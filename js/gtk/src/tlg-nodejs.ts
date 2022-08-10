@@ -6,8 +6,8 @@ const Gtk = gi.require('Gtk', '3.0')
 import { GtkContext } from '../../tlg-lib/src/context/nodejs/GtkContext'
 import { NonDrawingContext } from '../../tlg-lib/src/context/NonDrawingContext'
 import { InternalContext} from '../../tlg-lib/src/context/InternalContext'
-import { StateContext } from '../../tlg-lib/src/state/StateContext'
-import { TlgRectangle } from '../../tlg-lib/src/matrix/TlgRectangle'
+import { StateContext } from '../../tlg-lib/src/tlg.state/StateContext'
+import { TlgRectangle } from '../../tlg-lib/src/tlg.matrix/TlgRectangle'
 import { FileStorageContext } from '../../tlg-lib/src/context/nodejs/FileStorageContext'
 
 
