@@ -3,9 +3,7 @@
 *TLG - Tetris Like Game* Kotlin and Typescript variant for multiple GUI-platforms.
     
 # Screenshot
-![TLG running on Android](screenshot.png)  
-TLG running on Android.
-
+![GTK 4 variant](screenshot.png)  
 
 # Dependencies
 - Java 11
