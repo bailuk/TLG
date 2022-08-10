@@ -1,33 +1,35 @@
 package tlg.score
 
+import tlg.Configuration.SCORE_FILE
+import tlg.Configuration.SCORE_FILE_ENTRIES
 import tlg.context.PlatformContext
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.IOException
 
-class HighScoreList(c: PlatformContext) {
+class HighScoreList(pContext: PlatformContext) {
     private val highScore = ArrayList<HighScoreEntry>()
 
     init {
         try {
-            val input: BufferedInputStream = c.getInputStream(SCORE_FILE)
-            for (i in 0 until MAX_ENTRY) {
+            val input: BufferedInputStream = pContext.getInputStream(SCORE_FILE)
+            for (i in 0 until SCORE_FILE_ENTRIES) {
                 highScore.add(HighScoreEntry(input))
             }
             input.close()
         } catch (e: IOException) {
             System.err.println(e.message)
-            highScore.clear()
 
-            for (i in 0 until MAX_ENTRY) {
+            highScore.clear()
+            for (i in 0 until SCORE_FILE_ENTRIES) {
                 highScore.add(HighScoreEntry())
             }
         }
     }
 
     @Throws(IOException::class)
-    fun writeState(c: PlatformContext) {
-        val out: BufferedOutputStream = c.getOutputStream(SCORE_FILE)
+    fun writeState(pContext: PlatformContext) {
+        val out: BufferedOutputStream = pContext.getOutputStream(SCORE_FILE)
         highScore.forEach {
             it.writeState(out)
         }
@@ -37,7 +39,7 @@ class HighScoreList(c: PlatformContext) {
     val formattedHTMLText: String
         get() {
             val builder = StringBuilder()
-            builder.append("<h1>Highscore:</h1>")
+            builder.append("<h1>High score:</h1>")
             highScore.forEachIndexed { index, value ->
                 if (value.score > 0) {
                     builder.append("<p>[")
@@ -56,7 +58,7 @@ class HighScoreList(c: PlatformContext) {
     val formattedText: String
         get() {
             val builder = StringBuilder()
-            builder.append("HIGHSCORE:\n")
+            builder.append("High score:\n")
 
             highScore.forEachIndexed { index, value ->
                 if (value.score > 0) {
@@ -73,8 +75,8 @@ class HighScoreList(c: PlatformContext) {
         }
 
     fun haveNewHighScore(score: Int): Boolean {
-        for (i in 0 until MAX_ENTRY) {
-            if (highScore[i].score < score) {
+        highScore.forEach {
+            if (it.score < score) {
                 return true
             }
         }
@@ -83,7 +85,7 @@ class HighScoreList(c: PlatformContext) {
 
     fun add(name: String, score: Int) {
         if (haveNewHighScore(score)) {
-            for (i in MAX_ENTRY - 1 downTo 1) {
+            for (i in SCORE_FILE_ENTRIES - 1 downTo 1) {
                 if (highScore[i - 1].score < score) {
                     highScore[i] = highScore[i - 1]
                 } else {
@@ -93,10 +95,5 @@ class HighScoreList(c: PlatformContext) {
             }
             highScore[0] = HighScoreEntry(name, score)
         }
-    }
-
-    companion object {
-        private const val SCORE_FILE = "score"
-        private const val MAX_ENTRY = 10
     }
 }
