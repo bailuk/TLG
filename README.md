@@ -1,4 +1,6 @@
-![Java CI with Gradle](https://github.com/bailuk/TLG/workflows/Java%20CI%20with%20Gradle/badge.svg)
+[![Kotlin on ubuntu](https://github.com/bailuk/TLG/actions/workflows/kotlin-on-ubuntu.yml/badge.svg)](https://github.com/bailuk/TLG/actions/workflows/kotlin-on-ubuntu.yml)
+[![Node on ubuntu](https://github.com/bailuk/TLG/actions/workflows/node-on-ubuntu.yml/badge.svg)](https://github.com/bailuk/TLG/actions/workflows/node-on-ubuntu.yml)
+
 # About
 *TLG - Tetris Like Game* Kotlin and Typescript variant for multiple GUI-platforms.
     
