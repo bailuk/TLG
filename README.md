@@ -2,7 +2,7 @@
 [![Node on ubuntu](https://github.com/bailuk/TLG/actions/workflows/node-on-ubuntu.yml/badge.svg)](https://github.com/bailuk/TLG/actions/workflows/node-on-ubuntu.yml)
 
 # About
-*TLG - Tetris Like Game* Kotlin and Typescript variant for multiple GUI-platforms.
+*TLG - Tetris Like Game* - Kotlin and Typescript variants for multiple GUI-platforms.
     
 # Screenshot
 ![GTK 4 variant](screenshot.png)  
@@ -37,6 +37,7 @@ npm run serve
 
 # GTK (node-gtk): install, build and run
 cd js/gtk
+npm install
 npm run build
 npm run start
 ```
