@@ -24,34 +24,34 @@ export class StateContext {
     private readonly pContext:PlatformContext
     private readonly sContext:StorageContext
 
-    private tlg.state: State
+    private state: State
     private stateID = StateID.ID_IGNORE
 
     constructor (ic:InternalContext, pc:PlatformContext, sc: StorageContext) {
         this.iContext = ic
         this.pContext = pc
         this.sContext = sc
-        this.tlg.state = new StateInit(ic, sc)
+        this.state = new StateInit(ic, sc)
         this.set(new StateID(StateID.ID_INIT).toReset())
     }
 
     /**
-     * change tlg.state as described in id
-     * @param {@class StateID} id - information on how to enter new tlg.state
+     * change state as described in id
+     * @param {@class StateID} id - information on how to enter new state
      */
     private set (id:StateID):void {
         if (id.id() !== StateID.ID_IGNORE) {
             this.stateID = id.id()
-            this.tlg.state = this.factory(id.id())
+            this.state = this.factory(id.id())
 
             if (id.resume()) {
-                // enter tlg.state by resume
+                // enter state by resume
                 console.log('StateContext::resume()')
-                this.tlg.state.resume(this.pContext)
+                this.state.resume(this.pContext)
             } else {
-                // enter tlg.state by reset (init)
+                // enter state by reset (init)
                 console.log('StateContext::init()')
-                this.set(this.tlg.state.init(this.pContext))
+                this.set(this.state.init(this.pContext))
             }
         }
     }
@@ -72,35 +72,35 @@ export class StateContext {
     }
 
     public moveLeft (c:PlatformContext):void {
-        this.set(this.tlg.state.moveLeft(c))
+        this.set(this.state.moveLeft(c))
     }
 
     public moveRight (c:PlatformContext):void {
-        this.set(this.tlg.state.moveRight(c))
+        this.set(this.state.moveRight(c))
     }
 
     public moveDown (c:PlatformContext):void {
-        this.set(this.tlg.state.moveDown(c))
+        this.set(this.state.moveDown(c))
     }
 
     public moveTurn (c:PlatformContext):void {
-        this.set(this.tlg.state.moveTurn(c))
+        this.set(this.state.moveTurn(c))
     }
 
     public togglePause (c:PlatformContext):void {
-        this.set(this.tlg.state.togglePause(c))
+        this.set(this.state.togglePause(c))
     }
 
     public startNewGame (c:PlatformContext):void {
-        this.set(this.tlg.state.startNewGame(c))
+        this.set(this.state.startNewGame(c))
     }
 
     public getTimerInterval ():number {
-        return this.tlg.state.getTimerInterval()
+        return this.state.getTimerInterval()
     }
 
     public setHighscoreName (c:PlatformContext, name:string) {
-        this.set(this.tlg.state.setHighscoreName(c, name))
+        this.set(this.state.setHighscoreName(c, name))
     }
 
     public getID ():number {
@@ -113,7 +113,7 @@ export class StateContext {
     }
 
     public writeState () {
-        this.tlg.state.writeState()
+        this.state.writeState()
         this.sContext.close()
     }
 }

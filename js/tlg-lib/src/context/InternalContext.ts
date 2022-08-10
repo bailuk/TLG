@@ -1,7 +1,7 @@
-import { MatrixWithShape } from '../tlg.matrix/MatrixWithShape'
-import { MatrixLineManipulator } from '../tlg.matrix/MatrixLineManipulator'
-import { Score } from '../tlg.score/Score'
-import { TlgRectangle } from '../tlg.matrix/TlgRectangle'
+import { MatrixWithShape } from '../matrix/MatrixWithShape'
+import { MatrixLineManipulator } from '../matrix/MatrixLineManipulator'
+import { Score } from '../score/Score'
+import { TlgRectangle } from '../matrix/TlgRectangle'
 import { PlatformContext } from './PlatformContext'
 import { StorageContext } from './StorageContext'
 
@@ -54,13 +54,13 @@ export class InternalContext {
         this.currentScore.writeState(s)
     }
 
-    public setStatusText (tlg.state:string):void {
+    public setStatusText (state:string):void {
         this.statusText = 'Score: ' +
             this.currentScore.getScore() +
             ' Level: ' +
             this.currentScore.getLevel() +
             ' | ' +
-            tlg.state
+            state
     }
 
     public getStatusText ():string {

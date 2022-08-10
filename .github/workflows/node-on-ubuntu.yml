@@ -18,6 +18,12 @@ jobs:
         with:
           node-version: 16
 
+      - name: Lib install
+        run: cd js/tlg-lib && npm ci
+
+      - name: Lib lint
+        run: cd js/tlg-lib && npm run lint
+
       - name: Browser install
         run: cd js/browser && npm ci
 
@@ -29,9 +35,6 @@ jobs:
 
       - name: GTK install
         run: cd js/gtk && npm ci
-
-      - name: GTK lint
-        run: cd js/gtk && npm run lint
 
       - name: GTK build
         run: cd js/gtk && npm run build

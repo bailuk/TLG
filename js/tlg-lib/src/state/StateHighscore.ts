@@ -1,7 +1,7 @@
 import { State } from './State'
 import { InternalContext } from '../context/InternalContext'
 import { PlatformContext } from '../context/PlatformContext'
-import { HighscoreList } from '../tlg.score/HighscoreList'
+import { HighscoreList } from '../score/HighscoreList'
 import { StateID } from './StateID'
 import { StorageContext } from '../context/StorageContext'
 

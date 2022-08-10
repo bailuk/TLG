@@ -1,5 +1,5 @@
-import { TlgRectangle } from '../tlg.matrix/TlgRectangle'
-import { TlgPoint } from '../tlg.matrix/TlgPoint'
+import { TlgRectangle } from '../matrix/TlgRectangle'
+import { TlgPoint } from '../matrix/TlgPoint'
 
 export abstract class PlatformContext {
     public drawRectangle (c:number, r:TlgRectangle) {

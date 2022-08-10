@@ -8,31 +8,31 @@ export class Score {
     public static readonly IDT_TIMER = 222
     public static readonly C_COLOR = 16
 
-    private tlg.score:number = 0
+    private score:number = 0
     private level:number = 1
 
     public readState (s:StorageContext):void {
-        this.tlg.score = s.readNumber()
+        this.score = s.readNumber()
         this.level = s.readNumber()
     }
 
     public writeState (s:StorageContext):void {
-        s.writeNumber(this.tlg.score)
+        s.writeNumber(this.score)
         s.writeNumber(this.level)
     }
 
-    public getScore ():number { return this.tlg.score }
+    public getScore ():number { return this.score }
     public getLevel ():number { return this.level }
-    public getTimerInterval ():number { return 1000 - (this.tlg.score / 100) }
+    public getTimerInterval ():number { return 1000 - (this.score / 100) }
 
     public addLines (l:number):void {
-        this.tlg.score = Math.round(this.tlg.score + (l * l) * 10)
-        this.level = Math.floor((this.tlg.score / 1000) + 1)
+        this.score = Math.round(this.score + (l * l) * 10)
+        this.level = Math.floor((this.score / 1000) + 1)
         if (this.level > Score.LEVEL_MAX) this.level = Score.LEVEL_MAX - 1
     }
 
     public reset ():void {
-        this.tlg.score = 0
+        this.score = 0
         this.level = 1
     }
 }

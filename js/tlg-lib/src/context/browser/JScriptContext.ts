@@ -1,5 +1,5 @@
-import { TlgPoint } from '../../tlg.matrix/TlgPoint'
-import { TlgRectangle } from '../../tlg.matrix/TlgRectangle'
+import { TlgPoint } from '../../matrix/TlgPoint'
+import { TlgRectangle } from '../../matrix/TlgRectangle'
 import { NonDrawingContext } from '../NonDrawingContext'
 
 export class JScriptContext extends NonDrawingContext {
