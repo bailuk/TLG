@@ -22,16 +22,16 @@ jobs:
         run: cd js/browser && npm ci
 
       - name: Browser lint
-        run: cd js/browser && npm lint
+        run: cd js/browser && npm run lint
 
       - name: Browser build
-        run: cd js/browser && npm build
+        run: cd js/browser && npm run build
 
       - name: GTK install
         run: cd js/gtk && npm ci
 
       - name: GTK lint
-        run: cd js/gtk && npm lint
+        run: cd js/gtk && npm run lint
 
       - name: GTK build
-        run: cd js/gtk && npm build
+        run: cd js/gtk && npm run build
