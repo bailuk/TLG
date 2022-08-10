@@ -1,21 +1,21 @@
 package view
 
-import context.GtkBaseContext
 import ch.bailu.gtk.gtk.*
 import ch.bailu.gtk.type.Str
 import config.CSS
 import config.Layout
 import config.Strings
 import config.Strings.appTitle
-import tlg.context.InternalContext
+import context.GtkBaseContext
 import control.Keyboard
 import control.TouchDrag
 import control.TouchTap
 import lib.extension.setMarkup
+import tlg.context.InternalContext
 import java.util.*
 
 class Window(app: Application) {
-    private val pContext = GtkBaseContext()
+    private val pContext = GtkBaseContext { updateStatusText() }
     private val iContext = InternalContext(pContext)
     private val timer = Timer().apply {
         schedule(Tick(), iContext.timerInterval.toLong())
@@ -23,11 +23,8 @@ class Window(app: Application) {
     private var running = true
 
     private val status = Label(Str.NULL)
-    private var statusVal = ""
     private val level = Label(Str.NULL)
-    private var levelVal = -1
     private val score = Label(Str.NULL)
-    private var scoreVal = -1
 
     private val canvasMain = CanvasMain(iContext)
     private val canvasPreview = CanvasPreview(iContext)
@@ -42,9 +39,7 @@ class Window(app: Application) {
             level.marginEnd = Layout.margin * 2
             topBox.marginTop = Layout.margin
             topBox.marginEnd = Layout.margin
-            //topBox.marginBottom = Layout.margin
             topBox.marginStart = Layout.margin
-            //bottomBox.marginTop = Layout.margin
             bottomBox.marginEnd = Layout.margin
             bottomBox.marginBottom = Layout.margin
             bottomBox.marginStart = Layout.margin
@@ -77,6 +72,7 @@ class Window(app: Application) {
 
             onShow {
                 println("window::onShow()")
+                updateStatusText()
             }
 
             CSS.addStyleProvider(this)
@@ -97,20 +93,11 @@ class Window(app: Application) {
     private fun update() {
         canvasMain.update()
         canvasPreview.update()
+    }
 
-        if (levelVal != iContext.level) {
-            levelVal = iContext.level
-            level.setMarkup("<b>Level:</b> $levelVal")
-        }
-
-        if (scoreVal != iContext.score) {
-            scoreVal = iContext.score
-            score.setMarkup("<b>Score:</b> $scoreVal")
-        }
-
-        if (statusVal != iContext.stateText) {
-            statusVal = iContext.stateText
-            status.setMarkup(statusVal)
-        }
+    private fun updateStatusText() {
+        level.setMarkup("<b>Level:</b> ${iContext.level}")
+        score.setMarkup("<b>Score:</b> ${iContext.score}")
+        status.setMarkup(iContext.toString())
     }
 }

@@ -4,9 +4,13 @@ import tlg.context.InternalContext
 import tlg.context.PlatformContext
 
 
-class StatePaused(c: InternalContext) : State(c) {
+class StatePaused(pContext: InternalContext) : State(pContext) {
+    override fun init(pContext: PlatformContext): State {
+        return this
+    }
+
     override fun togglePause(pContext: PlatformContext): State {
-        return StateRunning(context)
+        return StateRunning(iContext)
     }
 
     override val id = ID

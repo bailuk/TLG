@@ -10,7 +10,7 @@ import tlg.state.State
 import tlg.state.StateInit
 import java.io.IOException
 
-class InternalContext(c: PlatformContext) {
+class InternalContext(pContext: PlatformContext) {
     var currentScore: Score = Score()
     var previewMatrix: MatrixWithShape = MatrixWithShape(3,3)
     var mainMatrix: MatrixLineManipulator = MatrixLineManipulator(3,3)
@@ -19,42 +19,34 @@ class InternalContext(c: PlatformContext) {
     private var mainGeometry: TlgRectangle = TlgRectangle()
 
     // IMPORTANT: StateInit initializes previewMatrix and mainMatrix (order)
-    var state: State = StateInit(this).init(c)
+    private var state: State = StateInit(this).init(pContext)
 
-
-    @Synchronized
-    fun moveLeft(c: PlatformContext) {
-        state = state.moveLeft(c)
+    fun moveLeft(pContext: PlatformContext) {
+        setState(pContext, state.moveLeft(pContext))
     }
 
-    @Synchronized
-    fun moveRight(c: PlatformContext) {
-        state = state.moveRight(c)
+    fun moveRight(pContext: PlatformContext) {
+        setState(pContext, state.moveRight(pContext))
     }
 
-    @Synchronized
-    fun moveDown(c: PlatformContext) {
-        state = state.moveDown(c)
+    fun moveDown(pContext: PlatformContext) {
+        setState(pContext, state.moveDown(pContext))
     }
 
-    @Synchronized
-    fun moveTurn(c: PlatformContext) {
-        state = state.moveTurn(c)
+    fun moveTurn(pContext: PlatformContext) {
+        setState(pContext, state.moveTurn(pContext))
     }
 
-    @Synchronized
     fun toggleGrid() {
         mainMatrix.toggleGrid()
     }
 
-    @Synchronized
-    fun togglePause(c: PlatformContext) {
-        state = state.togglePause(c)
+    fun togglePause(pContext: PlatformContext) {
+        setState(pContext, state.togglePause(pContext))
     }
 
-    @Synchronized
-    fun startNewGame(c: PlatformContext) {
-        state = state.startNewGame(c)
+    fun startNewGame(pContext: PlatformContext) {
+        setState(pContext, state.startNewGame(pContext))
     }
 
     @Throws(IOException::class)
@@ -68,48 +60,42 @@ class InternalContext(c: PlatformContext) {
         output.close()
     }
 
-    @Synchronized
-    fun mainLayout(r: TlgRectangle) {
-        mainGeometry = r
+    fun mainLayout(rect: TlgRectangle) {
+        mainGeometry = rect
         mainMatrix.pixelGeometry = mainGeometry
     }
 
-    @Synchronized
-    fun previewLayout(r: TlgRectangle) {
-        previewGeometry = r
+    fun previewLayout(rect: TlgRectangle) {
+        previewGeometry = rect
         previewMatrix.pixelGeometry = previewGeometry
     }
 
-    @Synchronized
     fun updatePreview(pContext: PlatformContext) {
         previewMatrix.update(pContext)
     }
 
-    @Synchronized
     fun updateAllPreview(pContext: PlatformContext) {
         updateBackgroundPreview(pContext)
         previewMatrix.updateAll(pContext)
     }
 
-    @Synchronized
     fun updateMain(pContext: PlatformContext) {
         mainMatrix.update(pContext)
     }
 
-    @Synchronized
     fun updateAllMain(pContext: PlatformContext) {
         updateBackgroundMain(pContext)
         mainMatrix.updateAll(pContext)
     }
 
-    private fun updateBackgroundMain(gc: PlatformContext) {
-        gc.setDirtyRect(mainGeometry)
-        gc.drawFilledRectangle(gc.colorBackground(), mainGeometry)
+    private fun updateBackgroundMain(pContext: PlatformContext) {
+        pContext.setDirtyRect(mainGeometry)
+        pContext.drawFilledRectangle(pContext.colorBackground(), mainGeometry)
     }
 
-    private fun updateBackgroundPreview(gc: PlatformContext) {
-        gc.setDirtyRect(previewGeometry)
-        gc.drawFilledRectangle(gc.colorBackground(), previewGeometry)
+    private fun updateBackgroundPreview(pContext: PlatformContext) {
+        pContext.setDirtyRect(previewGeometry)
+        pContext.drawFilledRectangle(pContext.colorBackground(), previewGeometry)
     }
 
     val timerInterval: Int
@@ -117,10 +103,21 @@ class InternalContext(c: PlatformContext) {
 
     val id: Int
         get() = state.id
-    val stateText: String
-        get() = state.toString()
     val level: Int
         get() = currentScore.level
     val score: Int
         get() = currentScore.score
+
+    private fun setState(pContext: PlatformContext, state: State) {
+        if (this.state.id != state.id) {
+            this.state = state
+            pContext.onStatusUpdated(this)
+        } else {
+            this.state = state
+        }
+    }
+
+    override fun toString(): String {
+        return state.toString()
+    }
 }

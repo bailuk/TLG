@@ -4,10 +4,8 @@ import tlg.context.InternalContext
 import tlg.context.PlatformContext
 import tlg.score.HighScoreList
 
-abstract class State(val context: InternalContext) {
-    open fun init(pContext: PlatformContext): State {
-        return this
-    }
+abstract class State(val iContext: InternalContext) {
+    abstract fun init(pContext: PlatformContext): State
 
     open fun moveLeft(pContext: PlatformContext): State {
         return this
@@ -26,7 +24,7 @@ abstract class State(val context: InternalContext) {
     }
 
     fun startNewGame(pContext: PlatformContext): State {
-        return StateRunning(context).init(pContext)
+        return StateRunning(iContext).init(pContext)
     }
 
     open fun togglePause(pContext: PlatformContext): State {
@@ -37,27 +35,4 @@ abstract class State(val context: InternalContext) {
         get() = 500
 
     abstract val id: Int
-
-    companion object {
-        fun restoreContextFactory(iContext: InternalContext, id: Int): State {
-            return if (id == StateRunning.ID) {
-                StateRunning(iContext)
-            } else if (id == StatePaused.ID) {
-                StatePaused(iContext)
-            } else if (id == StateHighScore.ID) {
-                StateHighScore(iContext)
-            } else {
-                StateLocked(iContext)
-            }
-        }
-
-        fun gameOverStateFactory(iContext: InternalContext, pContext: PlatformContext): State {
-            val highScoreList = HighScoreList(pContext)
-            return if (highScoreList.haveNewHighScore(iContext.currentScore.score)) {
-                StateHighScore(iContext).init(pContext)
-            } else {
-                StateLocked(iContext).init(pContext)
-            }
-        }
-    }
 }

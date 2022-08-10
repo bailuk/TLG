@@ -13,7 +13,7 @@ import tlg.matrix.MatrixWithShape
 import tlg.score.Score
 import java.io.IOException
 
-class StateInit(c: InternalContext) : State(c) {
+class StateInit(pContext: InternalContext) : State(pContext) {
     override fun init(pContext: PlatformContext): State {
         return try {
             restore(pContext)
@@ -22,26 +22,33 @@ class StateInit(c: InternalContext) : State(c) {
         }
     }
 
-    private fun create(gc: PlatformContext): State {
-        context.previewMatrix = MatrixWithShape(PREVIEW_SIZE, PREVIEW_SIZE)
-        context.mainMatrix = MatrixLineManipulator(MATRIX_WIDTH, MATRIX_HEIGHT)
-        context.currentScore = Score()
-        val state: State = StateRunning(context)
-        state.init(gc)
-        return state
+    private fun create(pContext: PlatformContext): State {
+        iContext.previewMatrix = MatrixWithShape(PREVIEW_SIZE, PREVIEW_SIZE)
+        iContext.mainMatrix = MatrixLineManipulator(MATRIX_WIDTH, MATRIX_HEIGHT)
+        iContext.currentScore = Score()
+        return StateRunning(iContext).init(pContext)
     }
 
     @Throws(IOException::class)
-    private fun restore(gc: PlatformContext): State {
-        val input = gc.getInputStream(STATE_FILE)
+    private fun restore(pContext: PlatformContext): State {
+        val input = pContext.getInputStream(STATE_FILE)
         val version = ByteInteger.read(input)
         if (version != STATE_FILE_VERSION) throw IOException()
-        context.previewMatrix = MatrixWithShape(input)
-        context.mainMatrix = MatrixLineManipulator(input)
-        context.currentScore = Score(input)
-        val state = restoreContextFactory(context, ByteInteger.read(input))
+        iContext.previewMatrix = MatrixWithShape(input)
+        iContext.mainMatrix = MatrixLineManipulator(input)
+        iContext.currentScore = Score(input)
+        val state = restoreContextFactory(iContext, ByteInteger.read(input))
         input.close()
         return state
+    }
+
+    private fun restoreContextFactory(iContext: InternalContext, id: Int): State {
+        return when(id) {
+            StateRunning.ID -> StateRunning(iContext)
+            StatePaused.ID -> StatePaused(iContext)
+            StateHighScore.ID -> StateHighScore(iContext)
+            else -> StateLocked(iContext)
+        }
     }
 
     override val id =  ID

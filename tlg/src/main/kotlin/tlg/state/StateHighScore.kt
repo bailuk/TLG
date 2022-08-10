@@ -10,7 +10,6 @@ import java.util.*
 
 class StateHighScore(iContext: InternalContext) : State(iContext) {
     override fun init(pContext: PlatformContext): State {
-        context.state = this
         setHighScoreName(pContext, getDateTimeString())
         return this
     }
@@ -18,7 +17,7 @@ class StateHighScore(iContext: InternalContext) : State(iContext) {
     private fun setHighScoreName(pContext: PlatformContext, name: String) {
         if (name.isNotEmpty()) {
             val highScoreList = HighScoreList(pContext)
-            highScoreList.add(name, context.currentScore.score)
+            highScoreList.add(name, iContext.currentScore.score)
             try {
                 highScoreList.writeState(pContext)
             } catch (e: IOException) {
@@ -28,6 +27,7 @@ class StateHighScore(iContext: InternalContext) : State(iContext) {
     }
 
     private fun getDateTimeString() : String {
+        // IMPORTANT: java date formatting function supported by android
         return SimpleDateFormat().format(Date())
     }
 

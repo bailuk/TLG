@@ -2,6 +2,7 @@ package context
 
 import tlg.Configuration.SHAPE_PER_LEVEL
 import ch.bailu.gtk.gdk.RGBA
+import tlg.context.InternalContext
 import tlg.context.PlatformContext
 import tlg.geometry.TlgPoint
 import tlg.geometry.TlgRectangle
@@ -9,7 +10,7 @@ import tlg.lib.color.ARGB
 import tlg.lib.color.ColorInterface
 import tlg.lib.color.HSV
 
-open class GtkBaseContext : PlatformContext() {
+open class GtkBaseContext(private val cbStatusUpdated: (iContext: InternalContext)->Unit = {}) : PlatformContext() {
     companion object {
         private const val PALETTE_RESERVED = 5
         private const val PALETTE_SIZE = SHAPE_PER_LEVEL * 3 + PALETTE_RESERVED
@@ -84,5 +85,9 @@ open class GtkBaseContext : PlatformContext() {
 
     override fun getColor(i: Int): Int {
         return i
+    }
+
+    override fun onStatusUpdated(iContext: InternalContext) {
+        cbStatusUpdated(iContext)
     }
 }

@@ -42,7 +42,6 @@ abstract class PlatformContext {
         return BufferedOutputStream(FileOutputStream(file))
     }
 
-    open fun setDirtyRect(rect: TlgRectangle) {
-
-    }
+    open fun setDirtyRect(rect: TlgRectangle) {}
+    open fun onStatusUpdated(iContext: InternalContext) {}
 }

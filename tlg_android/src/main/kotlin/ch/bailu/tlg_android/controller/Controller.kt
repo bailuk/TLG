@@ -8,46 +8,34 @@ import ch.bailu.tlg_android.view.GameView
 import tlg.context.InternalContext
 
 class Controller(context: Context) {
-    private val tContext = AndroidBaseContext(context)
-
-    private val iContext = InternalContext(tContext)
+    private val pContext = AndroidBaseContext(context)
+    private val iContext = InternalContext(pContext)
 
     private val gameTimer = GameTimer(this)
 
-    val gameMainView = GameView(iContext, tContext)
-    val gamePreview = GamePreview(iContext, tContext)
+    val gameMainView = GameView(iContext, pContext)
+    val gamePreview = GamePreview(iContext, pContext)
 
     fun moveShape(e: Int) {
         when(e) {
-            MotionEventTranslator.KEY_LEFT -> iContext.moveLeft(tContext)
-            MotionEventTranslator.KEY_RIGHT -> iContext.moveRight(tContext)
-            MotionEventTranslator.KEY_DOWN -> iContext.moveDown(tContext)
-            MotionEventTranslator.KEY_UP -> iContext.moveTurn(tContext)
+            MotionEventTranslator.KEY_LEFT -> iContext.moveLeft(pContext)
+            MotionEventTranslator.KEY_RIGHT -> iContext.moveRight(pContext)
+            MotionEventTranslator.KEY_DOWN -> iContext.moveDown(pContext)
+            MotionEventTranslator.KEY_UP -> iContext.moveTurn(pContext)
         }
         gameMainView.update()
         gamePreview.update()
     }
 
-
-    @Synchronized
     fun newGame() {
-        iContext.startNewGame(tContext)
+        iContext.startNewGame(pContext)
         gameMainView.update()
         gamePreview.update()
         gameTimer.start()
     }
 
-    @Synchronized
-    fun pause() {
-        iContext.togglePause(tContext)
-        gameMainView.update()
-        gamePreview.update()
-    }
-
-
-    @Synchronized
     fun pauseOrResume() {
-        iContext.togglePause(tContext)
+        iContext.togglePause(pContext)
         gameMainView.update()
         gamePreview.update()
         gameTimer.start()
@@ -64,11 +52,10 @@ class Controller(context: Context) {
 
     fun onTouchEvent(event: MotionEvent) {
         gameMainView.onTouchEvent(event) { moveShape(it) }
-
     }
 
     fun onActivityPause() {
-        iContext.writeState(tContext)
+        iContext.writeState(pContext)
         gameTimer.stop()
     }
 
