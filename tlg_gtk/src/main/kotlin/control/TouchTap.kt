@@ -1,9 +1,8 @@
 package control
 
-import context.GtkBaseContext
-import ch.bailu.gtk.GTK
 import ch.bailu.gtk.gtk.DrawingArea
 import ch.bailu.gtk.gtk.GestureClick
+import context.GtkBaseContext
 import tlg.context.InternalContext
 
 class TouchTap(private val drawingArea: DrawingArea,
@@ -15,7 +14,7 @@ class TouchTap(private val drawingArea: DrawingArea,
     init {
         GestureClick().apply {
             drawingArea.addController(this)
-            onPressed { i, _, _ -> singleClick = GTK.IS(i) }
+            onPressed { i, _, _ -> singleClick = i == 1}
             onStopped { singleClick = false }
             onReleased { n_press: Int, x: Double, y: Double ->
                 if (n_press == 1 && singleClick) {

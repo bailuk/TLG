@@ -3,7 +3,6 @@ package lib.icons
 import ch.bailu.gtk.gdk.Paintable
 import ch.bailu.gtk.gdkpixbuf.Pixbuf
 import ch.bailu.gtk.gtk.Image
-import ch.bailu.gtk.bridge.Image as ImageBridge
 
 object IconMap {
     private data class IconId (val name: String, val size: Int)
@@ -24,7 +23,7 @@ object IconMap {
 
         return if (result == null) {
             val input = IconMap.javaClass.getResourceAsStream("/svg/${name}.svg")
-            result = ImageBridge.load(input, size, size)
+            result = ch.bailu.gtk.lib.bridge.Image.load(input, size, size)
             pixbufs[IconId(name, size)] = result
             result.ref()
             result

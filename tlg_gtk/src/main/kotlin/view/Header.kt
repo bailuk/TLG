@@ -1,17 +1,14 @@
 package view
 
-import ch.bailu.gtk.GTK
-import ch.bailu.gtk.gtk.Application
 import ch.bailu.gtk.gtk.Button
 import ch.bailu.gtk.gtk.HeaderBar
-import ch.bailu.gtk.gtk.Window
 import config.Strings
 import context.GtkBaseContext
 import tlg.context.InternalContext
 
-class Header(window: Window, app: Application, iContext: InternalContext, pContext: GtkBaseContext, update: ()->Unit) {
+class Header(iContext: InternalContext, pContext: GtkBaseContext, update: ()->Unit) {
     val headerBar = HeaderBar().apply {
-        showTitleButtons = GTK.TRUE
+        showTitleButtons = true
 
         packStart(Button().apply {
             label = Strings.pause
@@ -20,6 +17,6 @@ class Header(window: Window, app: Application, iContext: InternalContext, pConte
                 update()
             }
         })
-        packEnd(MainMenu(window, app, iContext, pContext, update).menuButton)
+        packEnd(MainMenu().menuButton)
     }
 }

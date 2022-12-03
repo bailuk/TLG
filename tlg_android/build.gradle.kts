@@ -11,7 +11,7 @@ android {
         minSdk = 14
         targetSdk = 29
         versionCode = 2
-        versionName = "v0.1.0"
+        versionName = "v0.1.1"
         applicationId = "ch.bailu.tlg_android"
     }
 

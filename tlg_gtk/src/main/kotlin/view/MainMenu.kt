@@ -1,38 +1,60 @@
 package view
 
+import ch.bailu.gtk.gio.Menu
 import ch.bailu.gtk.gtk.Application
 import ch.bailu.gtk.gtk.MenuButton
 import ch.bailu.gtk.gtk.Window
+import ch.bailu.gtk.lib.handler.action.ActionHandler
 import ch.bailu.gtk.type.Str
+import config.Keys
 import config.Strings
 import context.GtkBaseContext
-import lib.menu.Actions
-import lib.menu.MenuModelBuilder
 import tlg.context.InternalContext
 
-class MainMenu(window: Window, app: Application, iContext: InternalContext, pContext: GtkBaseContext, update: () -> Unit) {
-    private val actions = Actions(app)
+class MainMenu {
 
     val menuButton = MenuButton().apply {
         iconName = Str("open-menu-symbolic")
-        menuModel = MenuModelBuilder().apply {
-            label(Strings.newGame) {
+
+        menuModel = createMenu()
+
+    }
+
+    companion object {
+        private fun createMenu(): Menu {
+            val menu = Menu()
+
+            menu.append(Strings.newGame, Keys.NEW_GAME.toAppString())
+            menu.append(Strings.grid, Keys.GRID.toAppString())
+            menu.append(Strings.help, Keys.HELP.toAppString())
+            menu.append(Strings.highScore, Keys.HIGH_SCORE.toAppString())
+            menu.append(Strings.info, Keys.INFO.toAppString())
+            return menu
+        }
+
+        fun createActions(app: Application, window: Window, iContext: InternalContext, pContext: GtkBaseContext, update: () -> Unit) {
+
+            ActionHandler.get(app, Keys.NEW_GAME.toString()).onActivate { ->
                 iContext.startNewGame(pContext)
                 update()
             }
-            label(Strings.grid) {
+            ActionHandler.get(app, Keys.GRID.toString()).onActivate { ->
                 iContext.toggleGrid()
                 update()
             }
-            label(Strings.help) {
+            ActionHandler.get(app, Keys.HELP.toString()).onActivate { ->
                 HelpDialog(window)
             }
-            label(Strings.highScore) {
+
+            ActionHandler.get(app, Keys.HIGH_SCORE.toString()).onActivate { ->
                 HighScoreDialog(window, pContext)
             }
-            label(Strings.info) {
+
+            ActionHandler.get(app, Keys.INFO.toString()).onActivate { ->
                 About.show(window)
             }
-        }.create(actions)
+        }
     }
+
+
 }

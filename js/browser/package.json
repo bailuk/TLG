@@ -1,6 +1,6 @@
 {
   "name": "tlg",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tetris like game - NPM/TypeScript/Web Browser edition",
   "scripts": {
     "serve": "webpack-cli serve --mode development",

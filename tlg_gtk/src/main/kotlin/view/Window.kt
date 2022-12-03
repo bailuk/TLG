@@ -1,8 +1,9 @@
 package view
 
 import ch.bailu.gtk.gtk.*
+import ch.bailu.gtk.lib.bridge.CSS
 import ch.bailu.gtk.type.Str
-import config.CSS
+import config.Files
 import config.Layout
 import config.Strings
 import config.Strings.appTitle
@@ -10,7 +11,6 @@ import context.GtkBaseContext
 import control.Keyboard
 import control.TouchDrag
 import control.TouchTap
-import lib.extension.setMarkup
 import tlg.context.InternalContext
 import java.util.*
 
@@ -61,7 +61,9 @@ class Window(app: Application) {
 
             child = mainBox
             title =  appTitle
-            titlebar = Header(this, app, iContext, pContext) { update() }.headerBar
+            titlebar = Header(iContext, pContext) { update() }.headerBar
+
+            MainMenu.createActions(app, this, iContext, pContext) { update() }
             setDefaultSize(Layout.windowWidth, Layout.windowHeight)
 
             onDestroy {
@@ -75,7 +77,7 @@ class Window(app: Application) {
                 updateStatusText()
             }
 
-            CSS.addStyleProvider(this)
+            CSS.addProvider(this, Files.APP_CSS)
             show()
         }
     }

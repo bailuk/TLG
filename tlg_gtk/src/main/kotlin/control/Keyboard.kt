@@ -1,15 +1,14 @@
 package control
 
-import context.GtkBaseContext
-import ch.bailu.gtk.GTK
 import ch.bailu.gtk.gdk.GdkConstants
 import ch.bailu.gtk.gtk.EventControllerKey
+import context.GtkBaseContext
 import tlg.context.InternalContext
 
 class Keyboard(iContext: InternalContext, pContext: GtkBaseContext, updateView: () -> Unit) {
     val eventControllerKey = EventControllerKey().apply {
         onKeyPressed() { keyVal: Int, _, _ ->
-            var update = GTK.TRUE
+            var update = true
             val key = Key(keyVal)
 
             if (key.has(GdkConstants.KEY_N, GdkConstants.KEY_n)) {
@@ -38,10 +37,10 @@ class Keyboard(iContext: InternalContext, pContext: GtkBaseContext, updateView: 
             ) {
                 iContext.togglePause(pContext)
             } else {
-                update = GTK.FALSE
+                update = false
             }
 
-            if (GTK.IS(update)) {
+            if (update) {
                 updateView()
             }
             update

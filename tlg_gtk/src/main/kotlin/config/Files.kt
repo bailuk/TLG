@@ -1,5 +1,5 @@
 package config
 
 object Files {
-    const val appCss = "app.css"
+    const val APP_CSS = "/app.css"
 }
