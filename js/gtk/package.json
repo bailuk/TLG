@@ -7,7 +7,7 @@
     "start": "tsc --build && node dist/gtk/src/tlg-nodejs.js"
   },
   "dependencies": {
-    "node-gtk": "^0.11.0"
+    "node-gtk": "^0.14.0"
   },
   "devDependencies": {
     "ts-loader": "^9.3.1",
